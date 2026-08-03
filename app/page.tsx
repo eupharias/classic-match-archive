@@ -59,8 +59,9 @@ export default function Home() {
     const wins=data.matches.filter(m=>m.result==="Win").length;
     const avgDuration=data.matches.reduce((a,m)=>a+m.duration,0)/Math.max(1,data.matches.length);
     const tracked=data.performances.filter(p=>p.tracked);
-    const totalKda=tracked.reduce((a,p)=>a+kda(p),0)/Math.max(1,tracked.length);
-    return {wins,winRate:wins/data.matches.length,avgDuration,totalKda};
+    const combatTotals=tracked.reduce((totals,p)=>({kills:totals.kills+p.kills,deaths:totals.deaths+p.deaths,assists:totals.assists+p.assists}),{kills:0,deaths:0,assists:0});
+    const totalKda=(combatTotals.kills+combatTotals.assists)/Math.max(1,combatTotals.deaths);
+    return {wins,winRate:wins/data.matches.length,avgDuration,totalKda,trackedPerformances:tracked.length};
   },[data]);
 
   if(!data || !stats) return <main className="loading"><div className="crest">C</div><p>Loading the match archive…</p></main>;
@@ -101,7 +102,7 @@ export default function Home() {
           <Stat label="TOTAL MATCHES" value={String(data.matches.length)} detail={`${stats.wins} victories recorded`} />
           <Stat label="OVERALL WIN RATE" value={pct(stats.winRate)} detail={`${data.matches.length-stats.wins} hard-fought losses`} tone="gold" />
           <Stat label="AVERAGE DURATION" value={`${Math.floor(stats.avgDuration)}:${String(Math.round(stats.avgDuration%1*60)).padStart(2,'0')}`} detail="Across the full archive" />
-          <Stat label="AVERAGE KDA" value={num(stats.totalKda,2)} detail={`${data.performances.length} performances logged`} />
+          <Stat label="AVERAGE KDA" value={num(stats.totalKda,2)} detail={`${stats.trackedPerformances} performances logged`} />
         </section>
         <section className="dashboard-grid">
           <article className="panel side-panel"><div className="panel-head"><div><p>SIDE PERFORMANCE</p><h3>Blue vs. Purple</h3></div><span>All matches</span></div>
