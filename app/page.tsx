@@ -84,7 +84,7 @@ export default function Home() {
 
   return <div className="app-shell">
     <aside className="sidebar">
-      <div className="brand"><div className="brand-mark">C</div><div><b>CLASSIC</b><span>Match Archive</span></div></div>
+      <div className="brand"><div className="brand-mark"><img src="./rabadons-cat-favicon.png" alt="Deathcap cat"/></div><div><b>CLASSIC</b><span>Match Archive</span></div></div>
       <nav aria-label="Primary navigation">
         {([['overview','Overview','⌂'],['players','Players','♙'],['matches','Matches','◫'],['add','Log match','＋']] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
       </nav>
