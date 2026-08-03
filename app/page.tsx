@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { createClient, type User } from "@supabase/supabase-js";
 
 type Match = { id:number; date:string; groupSize:number; side:string; result:string; duration:number; notes:string };
 type Performance = { id:number; matchId:number; team:string; tracked:boolean; player:string; champion:string; role:string; kills:number; deaths:number; assists:number; cs:number; vision:number };
 type TrackerData = { matches:Match[]; performances:Performance[]; players:string[]; champions:string[]; roles:string[] };
 type Tab = "overview" | "players" | "matches" | "add";
+
+const supabase=createClient("https://vkxbjvjyfxkrfktdbmsu.supabase.co","sb_publishable_bGA7V1Di86IiVsmYErH3iA_zEnXNLGy");
 
 const kda = (p:Performance) => (p.kills + p.assists) / Math.max(1, p.deaths);
 const pct = (n:number) => `${Math.round(n * 100)}%`;
@@ -16,22 +19,35 @@ function Stat({label,value,detail,tone}:{label:string;value:string;detail:string
 }
 
 export default function Home() {
-  const [base, setBase] = useState<TrackerData|null>(null);
-  const [added, setAdded] = useState<{matches:Match[];performances:Performance[]}>({matches:[],performances:[]});
+  const [data, setData] = useState<TrackerData|null>(null);
+  const [user,setUser]=useState<User|null>(null);
+  const [authEmail,setAuthEmail]=useState("");
+  const [authMessage,setAuthMessage]=useState("");
   const [tab,setTab] = useState<Tab>("overview");
   const [player,setPlayer] = useState("Dane");
   const [query,setQuery] = useState("");
   const [resultFilter,setResultFilter] = useState("All");
   const [expanded,setExpanded] = useState<number|null>(null);
 
-  useEffect(() => {
-    fetch("./tracker-data.json").then(r=>r.json()).then((d:TrackerData)=>setBase(d));
-    const saved = localStorage.getItem("classic-tracker-additions");
-    if (saved) try { setAdded(JSON.parse(saved)); } catch {}
-  }, []);
-  useEffect(() => { localStorage.setItem("classic-tracker-additions", JSON.stringify(added)); }, [added]);
+  const loadData=async()=>{
+    const [m,p,pl,c,r]=await Promise.all([
+      supabase.from("matches").select("*").order("id"),
+      supabase.from("performances").select("*").order("id"),
+      supabase.from("players").select("name").order("name"),
+      supabase.from("champions").select("name").order("name"),
+      supabase.from("roles").select("name").order("name"),
+    ]);
+    const error=m.error||p.error||pl.error||c.error||r.error;
+    if(error){const fallback=await fetch("./tracker-data.json").then(x=>x.json());setData(fallback);return;}
+    setData({
+      matches:(m.data??[]).map(x=>({id:x.id,date:x.match_date,groupSize:x.friend_group_size,side:x.ally_side,result:x.result,duration:Number(x.duration_minutes),notes:x.notes??""})),
+      performances:(p.data??[]).map(x=>({id:x.id,matchId:x.match_id,team:x.team,tracked:x.tracked,player:x.player,champion:x.champion,role:x.role,kills:x.kills,deaths:x.deaths,assists:x.assists,cs:x.cs,vision:x.vision})),
+      players:(pl.data??[]).map(x=>x.name),champions:(c.data??[]).map(x=>x.name),roles:(r.data??[]).map(x=>x.name),
+    });
+  };
+  useEffect(()=>{loadData();supabase.auth.getUser().then(({data})=>setUser(data.user));const {data:listener}=supabase.auth.onAuthStateChange((_e,s)=>setUser(s?.user??null));return()=>listener.subscription.unsubscribe();},[]);
 
-  const data = useMemo(() => base ? {...base, matches:[...base.matches,...added.matches], performances:[...base.performances,...added.performances]} : null,[base,added]);
+  const sendMagicLink=async()=>{setAuthMessage("Sending…");const {error}=await supabase.auth.signInWithOtp({email:authEmail,options:{emailRedirectTo:"https://eupharias.github.io/classic-match-archive/"}});setAuthMessage(error?error.message:"Check your email for the sign-in link.")};
   const stats = useMemo(() => {
     if(!data) return null;
     const wins=data.matches.filter(m=>m.result==="Win").length;
@@ -63,7 +79,7 @@ export default function Home() {
       <nav aria-label="Primary navigation">
         {([['overview','Overview','⌂'],['players','Players','♙'],['matches','Matches','◫'],['add','Log match','＋']] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>setTab(id)}><i>{icon}</i>{label}</button>)}
       </nav>
-      <div className="sidebar-card"><span>ARCHIVE STATUS</span><b>{data.matches.length} matches logged</b><small>{added.matches.length ? `${added.matches.length} saved on this device` : "Workbook data synced"}</small></div>
+      <div className="sidebar-card">{user?<><span>SIGNED IN</span><b>{user.email}</b><small>{data.matches.length} shared matches</small><button className="auth-link" onClick={()=>supabase.auth.signOut()}>Sign out</button></>:<><span>CONTRIBUTOR ACCESS</span><b>Sign in to log matches</b><input aria-label="Email address" type="email" placeholder="you@example.com" value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/><button className="auth-link" disabled={!authEmail} onClick={sendMagicLink}>Email me a sign-in link</button>{authMessage&&<small>{authMessage}</small>}</>}</div>
       <button className="export" onClick={exportData}>⇩ Export archive</button>
     </aside>
 
@@ -98,19 +114,20 @@ export default function Home() {
         <div className="match-list">{filteredMatches.map(m=>{const roster=data.performances.filter(p=>p.matchId===m.id);return <article className={expanded===m.id?'expanded':''} key={m.id}><button className="match-summary" onClick={()=>setExpanded(expanded===m.id?null:m.id)}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</span></div><div><small>SIDE</small><b>{m.side}</b></div><div><small>DURATION</small><b>{m.duration.toFixed(1)} min</b></div><div><small>PARTY</small><b>{m.groupSize} player{m.groupSize===1?'':'s'}</b></div><i>{expanded===m.id?'−':'+'}</i></button>{expanded===m.id&&<div className="match-detail"><p>“{m.notes||'No notes were recorded for this match.'}”</p><div className="roster">{roster.map(p=><div key={p.id}><b>{p.player}</b><span>{p.champion} · {p.role}</span><strong>{p.kills}/{p.deaths}/{p.assists}</strong><small>{p.cs} CS · {p.vision} vision</small></div>)}</div></div>}</article>})}</div>
       </section>}
 
-      {tab==="add" && <AddMatch data={data} onSave={(m,ps)=>{setAdded(a=>({matches:[...a.matches,m],performances:[...a.performances,...ps]}));setTab('matches');setExpanded(m.id)}}/>}
+      {tab==="add" && (user?<AddMatch data={data} onSave={async(m,ps)=>{const {data:newId,error}=await supabase.rpc("create_match_with_performances",{match_data:{match_date:m.date,friend_group_size:m.groupSize,ally_side:m.side,result:m.result,duration_minutes:m.duration,notes:m.notes},performance_data:ps.map(({player,champion,role,kills,deaths,assists,cs,vision})=>({player,champion,role,kills,deaths,assists,cs,vision}))});if(error)throw error;await loadData();setTab('matches');setExpanded(Number(newId));}}/>:<section className="panel signin-gate"><div className="crest">C</div><p>CONTRIBUTOR ACCESS</p><h2>Sign in to log a match</h2><span>Use the email field in the sidebar. We’ll send you a secure magic link—no password needed.</span></section>)}
     </main>
   </div>;
 }
 
-function AddMatch({data,onSave}:{data:TrackerData,onSave:(m:Match,p:Performance[])=>void}){
+function AddMatch({data,onSave}:{data:TrackerData,onSave:(m:Match,p:Performance[])=>Promise<void>}){
   const nextId=Math.max(...data.matches.map(m=>m.id))+1;
   const [date,setDate]=useState(new Date().toISOString().slice(0,10)); const [side,setSide]=useState('Blue'); const [result,setResult]=useState('Win'); const [duration,setDuration]=useState('30'); const [notes,setNotes]=useState('');
   const blank=()=>({player:data.players[0],champion:data.champions[0],role:data.roles[0],kills:0,deaths:0,assists:0,cs:0,vision:0});
   const [rows,setRows]=useState([blank()]);
+  const [saving,setSaving]=useState(false); const [saveError,setSaveError]=useState("");
   const update=(i:number,key:string,value:string|number)=>setRows(rs=>rs.map((r,j)=>j===i?{...r,[key]:value}:r));
-  const submit=(e:React.FormEvent)=>{e.preventDefault();const match:Match={id:nextId,date,side,result,duration:Number(duration),groupSize:rows.length,notes};const ps=rows.map((r,i)=>({id:Date.now()+i,matchId:nextId,team:'Ally',tracked:true,...r}));onSave(match,ps)};
+  const submit=async(e:React.FormEvent)=>{e.preventDefault();setSaving(true);setSaveError("");const match:Match={id:nextId,date,side,result,duration:Number(duration),groupSize:rows.length,notes};const ps=rows.map((r,i)=>({id:Date.now()+i,matchId:nextId,team:'Ally',tracked:true,...r}));try{await onSave(match,ps)}catch(err){setSaveError(err instanceof Error?err.message:"The match could not be saved.");setSaving(false)}};
   return <form className="add-layout" onSubmit={submit}><section className="panel form-panel"><div className="step"><span>01</span><div><p>MATCH DETAILS</p><h3>Set the scene</h3></div></div><div className="form-grid"><label>Date<input type="date" required value={date} onChange={e=>setDate(e.target.value)}/></label><label>Ally side<select value={side} onChange={e=>setSide(e.target.value)}><option>Blue</option><option>Purple</option></select></label><label>Result<select value={result} onChange={e=>setResult(e.target.value)}><option>Win</option><option>Loss</option></select></label><label>Duration (minutes)<input min="1" max="120" type="number" value={duration} onChange={e=>setDuration(e.target.value)}/></label><label className="wide">Match notes<textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="What made this match memorable?"/></label></div></section>
     <section className="panel form-panel"><div className="step"><span>02</span><div><p>PARTY PERFORMANCE</p><h3>Build the roster</h3></div></div>{rows.map((r,i)=><div className="performance-form" key={i}><b>PLAYER {i+1}</b><label>Player<select value={r.player} onChange={e=>update(i,'player',e.target.value)}>{data.players.map(x=><option key={x}>{x}</option>)}</select></label><label>Champion<select value={r.champion} onChange={e=>update(i,'champion',e.target.value)}>{data.champions.map(x=><option key={x}>{x}</option>)}</select></label><label>Role<select value={r.role} onChange={e=>update(i,'role',e.target.value)}>{data.roles.map(x=><option key={x}>{x}</option>)}</select></label>{(['kills','deaths','assists','cs','vision'] as const).map(k=><label key={k}>{k.toUpperCase()}<input min="0" type="number" value={r[k]} onChange={e=>update(i,k,Number(e.target.value))}/></label>)}{rows.length>1&&<button type="button" className="remove" onClick={()=>setRows(rs=>rs.filter((_,j)=>j!==i))}>×</button>}</div>)}<button type="button" className="add-player" onClick={()=>setRows(rs=>[...rs,blank()])}>＋ Add another player</button></section>
-    <div className="save-bar"><div><span>MATCH #{nextId}</span><b>{rows.length} performance{rows.length===1?'':'s'} ready to save</b></div><button type="submit">Save to archive →</button></div></form>
+    <div className="save-bar"><div><span>MATCH #{nextId}</span><b>{saveError||`${rows.length} performance${rows.length===1?'':'s'} ready to save`}</b></div><button type="submit" disabled={saving}>{saving?'Saving…':'Save to archive →'}</button></div></form>
 }
