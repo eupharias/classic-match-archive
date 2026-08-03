@@ -87,7 +87,7 @@ export default function Home() {
       <header><div><p className="eyebrow">LEAGUE OF LEGENDS • CLASSIC ERA</p><h1>{tab==="overview"?"Command Center":tab==="players"?"Player Archive":tab==="matches"?"Match History":"Log a Match"}</h1></div><div className="season"><span>Season archive</span><b>Summer 2026</b></div></header>
 
       {tab==="overview" && <>
-        <section className="hero-card"><div><p>THE ARCHIVE</p><h2>Wreqelodeon’s Classic story,<br/><em>one match at a time.</em></h2><span>Performances, Metrics, and memorable moments from the Rift.</span></div><div className="hero-ring"><b>{pct(stats.winRate)}</b><span>WIN RATE</span></div></section>
+        <section className="hero-card"><div><p>THE ARCHIVE</p><h2>WREQELODEON’S Classic story,<br/><em>one match at a time.</em></h2><span>Performances, Metrics, and memorable moments from the Rift.</span></div><div className="hero-ring"><b>{pct(stats.winRate)}</b><span>WIN RATE</span></div></section>
         <section className="stats-grid">
           <Stat label="TOTAL MATCHES" value={String(data.matches.length)} detail={`${stats.wins} victories recorded`} />
           <Stat label="OVERALL WIN RATE" value={pct(stats.winRate)} detail={`${data.matches.length-stats.wins} hard-fought losses`} tone="gold" />
