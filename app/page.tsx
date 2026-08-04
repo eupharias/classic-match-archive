@@ -5,8 +5,9 @@ import { createClient, type User } from "@supabase/supabase-js";
 
 type Match = { id:number; date:string; groupSize:number; side:string; result:string; duration:number; notes:string };
 type Performance = { id:number; matchId:number; team:string; tracked:boolean; player:string; champion:string; role:string; kills:number; deaths:number; assists:number; cs:number; vision:number };
+type AuditEvent = { id:number; matchId:number; action:"created"|"edited"; actorEmail:string; changes:Record<string,{from:unknown;to:unknown}>; createdAt:string };
 type TrackerData = { matches:Match[]; performances:Performance[]; players:string[]; champions:string[]; roles:string[] };
-type Tab = "overview" | "players" | "roles" | "insights" | "matches" | "add";
+type Tab = "overview" | "players" | "roles" | "insights" | "matches" | "audit" | "add";
 
 const supabase=createClient("https://vkxbjvjyfxkrfktdbmsu.supabase.co","sb_publishable_bGA7V1Di86IiVsmYErH3iA_zEnXNLGy");
 
@@ -117,9 +118,15 @@ function InsightsArchive({data}:{data:TrackerData}) {
   </div>;
 }
 
+function AuditArchive({events,onOpenMatch}:{events:AuditEvent[];onOpenMatch:(id:number)=>void}) {
+  const displayValue=(value:unknown)=>{if(value===null||value===undefined||value==="")return "None";if(typeof value==="number")return String(value);return String(value).length>80?`${String(value).slice(0,77)}…`:String(value)};
+  return <section className="panel audit-panel"><div className="panel-head"><div><p>RECORD GOVERNANCE</p><h3>Match audit history</h3></div><span>{events.length} recorded change{events.length===1?'':'s'}</span></div><div className="audit-notice"><i>⌁</i><div><b>Authenticated contributor view</b><span>This history is recorded automatically by Supabase. Access can be restricted to selected roles when contributor roles are introduced.</span></div></div>{events.length?<div className="audit-list">{events.map(event=>{const changes=Object.entries(event.changes??{});return <article key={event.id}><div className={`audit-action ${event.action}`}><i>{event.action==="created"?'＋':'✎'}</i><span>{event.action==="created"?'PUBLISHED':'EDITED'}</span></div><div className="audit-body"><button type="button" onClick={()=>onOpenMatch(event.matchId)}>Match #{event.matchId}</button><p>{event.action==="created"?'A new match record was published.':changes.length?`${changes.length} match field${changes.length===1?' was':'s were'} changed.`:'The match record or player performances were updated.'}</p>{changes.length>0&&<div className="audit-changes">{changes.map(([field,change])=><span key={field}><b>{field}</b><em>{displayValue(change.from)}</em><i>→</i><strong>{displayValue(change.to)}</strong></span>)}</div>}</div><div className="audit-meta"><b>{event.actorEmail}</b><time dateTime={event.createdAt}>{new Date(event.createdAt).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})}</time></div></article>})}</div>:<div className="audit-empty"><b>No audited changes yet</b><span>New matches and future edits will appear here automatically.</span></div>}</section>;
+}
+
 export default function Home() {
   const [data, setData] = useState<TrackerData|null>(null);
   const [user,setUser]=useState<User|null>(null);
+  const [auditEvents,setAuditEvents]=useState<AuditEvent[]>([]);
   const [authEmail,setAuthEmail]=useState("");
   const [authMessage,setAuthMessage]=useState("");
   const [tab,setTab] = useState<Tab>("overview");
@@ -151,7 +158,8 @@ export default function Home() {
       players:(pl.data??[]).map(x=>x.name),champions:(c.data??[]).map(x=>x.name),roles:(r.data??[]).map(x=>x.name),
     });
   };
-  useEffect(()=>{loadData();supabase.auth.getUser().then(({data})=>setUser(data.user));const {data:listener}=supabase.auth.onAuthStateChange((_e,s)=>setUser(s?.user??null));return()=>listener.subscription.unsubscribe();},[]);
+  const loadAudit=async()=>{const {data:rows,error}=await supabase.from("match_audit_log").select("id,match_id,action,actor_email,changed_fields,created_at").order("created_at",{ascending:false});if(!error)setAuditEvents((rows??[]).map(row=>({id:row.id,matchId:row.match_id,action:row.action,actorEmail:row.actor_email,changes:row.changed_fields??{},createdAt:row.created_at})))};
+  useEffect(()=>{loadData();supabase.auth.getUser().then(({data})=>{setUser(data.user);if(data.user)loadAudit()});const {data:listener}=supabase.auth.onAuthStateChange((_e,s)=>{setUser(s?.user??null);if(s?.user)loadAudit();else setAuditEvents([])});return()=>listener.subscription.unsubscribe();},[]);
 
   const sendMagicLink=async()=>{setAuthMessage("Sending…");const {error}=await supabase.auth.signInWithOtp({email:authEmail,options:{emailRedirectTo:"https://eupharias.github.io/classic-match-archive/"}});setAuthMessage(error?error.message:"Check your email for the sign-in link.")};
   const stats = useMemo(() => {
@@ -199,14 +207,14 @@ export default function Home() {
     <aside className="sidebar">
       <div className="brand"><div className="brand-mark"><img src="./rabadons-cat-favicon.png" alt="Deathcap cat"/></div><div><b>CLASSIC</b><span>Match Archive</span></div></div>
       <nav aria-label="Primary navigation">
-        {([['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['insights','Insights','✦'],['matches','Matches','◫'],['add','Log match','＋']] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
+        {([['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['insights','Insights','✦'],['matches','Matches','◫'],...(user?[['audit','Audit','⌁']]:[]),['add','Log match','＋']] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
       </nav>
       <div className="sidebar-card">{user?<><span>SIGNED IN</span><b>{user.email}</b><small>{data.matches.length} shared matches</small><button className="auth-link" onClick={()=>supabase.auth.signOut()}>Sign out</button></>:<><span>CONTRIBUTOR ACCESS</span><b>Sign in to log matches</b><input aria-label="Email address" type="email" placeholder="you@example.com" value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/><button className="auth-link" disabled={!authEmail} onClick={sendMagicLink}>Email me a sign-in link</button>{authMessage&&<small>{authMessage}</small>}</>}</div>
       <button className="export" onClick={exportData}>⇩ Export archive</button>
     </aside>
 
     <main className="main">
-      <header><div><p className="eyebrow">LEAGUE OF LEGENDS • CLASSIC ERA</p><h1>{tab==="overview"?"Command Center":tab==="players"?"Player Archive":tab==="roles"?"Role Archive":tab==="insights"?"Archive Insights":tab==="matches"?"Match History":editingMatch?`Edit Match #${editingMatch}`:"Log a Match"}</h1></div><div className="season"><span>Season archive</span><b>Summer 2026</b></div></header>
+      <header><div><p className="eyebrow">LEAGUE OF LEGENDS • CLASSIC ERA</p><h1>{tab==="overview"?"Command Center":tab==="players"?"Player Archive":tab==="roles"?"Role Archive":tab==="insights"?"Archive Insights":tab==="matches"?"Match History":tab==="audit"?"Audit History":editingMatch?`Edit Match #${editingMatch}`:"Log a Match"}</h1></div><div className="season"><span>Season archive</span><b>Summer 2026</b></div></header>
 
       {tab==="overview" && <>
         <section className="hero-card"><div><p>THE ARCHIVE</p><h2>WREQELODEON’S Classic story,<br/><em>one match at a time.</em></h2><span>Performances, Metrics, and memorable moments from the Rift.</span></div><div className="hero-ring"><b>{pct(stats.winRate)}</b><span>WIN RATE</span></div></section>
@@ -243,7 +251,9 @@ export default function Home() {
         <div className="match-list">{filteredMatches.map(m=>{const roster=data.performances.filter(p=>p.matchId===m.id);return <article className={expanded===m.id?'expanded':''} key={m.id}><button className="match-summary" onClick={()=>setExpanded(expanded===m.id?null:m.id)}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</span></div><div><small>SIDE</small><b>{m.side}</b></div><div><small>DURATION</small><b>{durationInput(m.duration)}</b></div><div><small>PARTY</small><b>{m.groupSize} player{m.groupSize===1?'':'s'}</b></div><i>{expanded===m.id?'−':'+'}</i></button>{expanded===m.id&&<div className="match-detail"><div className="match-detail-head"><p>“{m.notes||'No notes were recorded for this match.'}”</p>{user&&<button onClick={()=>{setEditingMatch(m.id);setTab('add')}}>Edit match</button>}</div><div className="roster">{roster.map(p=><div key={p.id}><div className="roster-icons"><img className="champion-icon" src={championIcon(p.champion)} alt=""/><img className="roster-role-icon" src={roleIcon(p.role)} alt={`${p.role} role`}/></div><div className="roster-info"><b>{playerName(p.player)}</b><span>{p.champion} · {p.role}</span></div><strong>{p.kills}/{p.deaths}/{p.assists}</strong><small>{p.cs} CS · {p.vision} vision</small></div>)}</div></div>}</article>})}</div>
       </section>}
 
-      {tab==="add" && (user?<AddMatch data={data} initial={editingMatch?data.matches.find(m=>m.id===editingMatch):undefined} initialPerformances={editingMatch?data.performances.filter(p=>p.matchId===editingMatch):undefined} onCancel={editingMatch?()=>{setEditingMatch(null);setTab('matches')}:undefined} onSave={async(m,ps)=>{const payload={match_date:m.date,friend_group_size:m.groupSize,ally_side:m.side,result:m.result,duration_minutes:m.duration,notes:m.notes};const performances=ps.map(({player,champion,role,kills,deaths,assists,cs,vision})=>({player,champion,role,kills,deaths,assists,cs,vision}));const {data:savedId,error}=editingMatch?await supabase.rpc("update_match_with_performances",{target_match_id:editingMatch,match_data:payload,performance_data:performances}):await supabase.rpc("create_match_with_performances",{match_data:payload,performance_data:performances});if(error)throw error;await loadData();setEditingMatch(null);setTab('matches');setExpanded(Number(savedId));}}/>:<section className="panel signin-gate"><div className="crest">C</div><p>CONTRIBUTOR ACCESS</p><h2>Sign in to log a match</h2><span>We’ll send you a secure magic link—no password needed.</span><div className="gate-auth"><input aria-label="Email address" type="email" placeholder="you@example.com" value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/><button disabled={!authEmail} onClick={sendMagicLink}>Email me a sign-in link</button>{authMessage&&<small>{authMessage}</small>}</div></section>)}
+      {tab==="audit"&&user&&<AuditArchive events={auditEvents} onOpenMatch={id=>{setExpanded(id);setTab('matches')}}/>}
+
+      {tab==="add" && (user?<AddMatch data={data} initial={editingMatch?data.matches.find(m=>m.id===editingMatch):undefined} initialPerformances={editingMatch?data.performances.filter(p=>p.matchId===editingMatch):undefined} onCancel={editingMatch?()=>{setEditingMatch(null);setTab('matches')}:undefined} onSave={async(m,ps)=>{const payload={match_date:m.date,friend_group_size:m.groupSize,ally_side:m.side,result:m.result,duration_minutes:m.duration,notes:m.notes};const performances=ps.map(({player,champion,role,kills,deaths,assists,cs,vision})=>({player,champion,role,kills,deaths,assists,cs,vision}));const {data:savedId,error}=editingMatch?await supabase.rpc("update_match_with_performances",{target_match_id:editingMatch,match_data:payload,performance_data:performances}):await supabase.rpc("create_match_with_performances",{match_data:payload,performance_data:performances});if(error)throw error;await Promise.all([loadData(),loadAudit()]);setEditingMatch(null);setTab('matches');setExpanded(Number(savedId));}}/>:<section className="panel signin-gate"><div className="crest">C</div><p>CONTRIBUTOR ACCESS</p><h2>Sign in to log a match</h2><span>We’ll send you a secure magic link—no password needed.</span><div className="gate-auth"><input aria-label="Email address" type="email" placeholder="you@example.com" value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/><button disabled={!authEmail} onClick={sendMagicLink}>Email me a sign-in link</button>{authMessage&&<small>{authMessage}</small>}</div></section>)}
       <footer className="riot-notice">Classic Match Archive is not endorsed by Riot Games and does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</footer>
     </main>
   </div>;
