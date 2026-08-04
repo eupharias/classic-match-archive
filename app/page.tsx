@@ -6,7 +6,7 @@ import { createClient, type User } from "@supabase/supabase-js";
 type Match = { id:number; date:string; groupSize:number; side:string; result:string; duration:number; notes:string };
 type Performance = { id:number; matchId:number; team:string; tracked:boolean; player:string; champion:string; role:string; kills:number; deaths:number; assists:number; cs:number; vision:number };
 type TrackerData = { matches:Match[]; performances:Performance[]; players:string[]; champions:string[]; roles:string[] };
-type Tab = "overview" | "players" | "roles" | "matches" | "add";
+type Tab = "overview" | "players" | "roles" | "insights" | "matches" | "add";
 
 const supabase=createClient("https://vkxbjvjyfxkrfktdbmsu.supabase.co","sb_publishable_bGA7V1Di86IiVsmYErH3iA_zEnXNLGy");
 
@@ -53,6 +53,54 @@ function RolesArchive({data}:{data:TrackerData}) {
       {!rankings.length&&<div className="role-empty">No tracked performances have been recorded for this role.</div>}
     </section>
   </>;
+}
+
+function InsightsArchive({data}:{data:TrackerData}) {
+  const matches=[...data.matches].sort((a,b)=>a.id-b.id);
+  const tracked=data.performances.filter(p=>p.tracked);
+  const recent=matches.slice(-10);
+  const previous=matches.slice(-20,-10);
+  const recentIds=new Set(recent.map(m=>m.id));
+  const recentRows=tracked.filter(p=>recentIds.has(p.matchId));
+  const recentTotals=recentRows.reduce((a,p)=>({kills:a.kills+p.kills,deaths:a.deaths+p.deaths,assists:a.assists+p.assists}),{kills:0,deaths:0,assists:0});
+  const recentWins=recent.filter(m=>m.result==="Win").length;
+  const previousWins=previous.filter(m=>m.result==="Win").length;
+  const pairMap=new Map<string,{players:string[];games:number;wins:number}>();
+  matches.forEach(match=>{const players=[...new Set(tracked.filter(p=>p.matchId===match.id).map(p=>p.player))].sort();for(let i=0;i<players.length;i++)for(let j=i+1;j<players.length;j++){const key=`${players[i]}|${players[j]}`;const pair=pairMap.get(key)??{players:[players[i],players[j]],games:0,wins:0};pair.games++;pair.wins+=match.result==="Win"?1:0;pairMap.set(key,pair)}});
+  const pairs=[...pairMap.values()].filter(pair=>pair.games>=2).sort((a,b)=>b.wins/b.games-a.wins/a.games||b.games-a.games).slice(0,6);
+  const comboMap=new Map<string,Performance[]>();
+  tracked.forEach(p=>{const key=`${p.player}|${p.champion}`;comboMap.set(key,[...(comboMap.get(key)??[]),p])});
+  const combos=[...comboMap.entries()].map(([key,rows])=>{const [player,champion]=key.split('|');const wins=rows.filter(p=>data.matches.find(m=>m.id===p.matchId)?.result==="Win").length;return {player,champion,games:rows.length,winRate:wins/rows.length}}).sort((a,b)=>b.games-a.games).slice(0,14);
+  const maxComboGames=Math.max(1,...combos.map(c=>c.games));
+  const flexibility=data.players.map(player=>{const rows=tracked.filter(p=>p.player===player);const counts=data.roles.map(role=>({role,games:rows.filter(p=>p.role===role).length})).filter(x=>x.games);return {player,total:rows.length,counts}}).filter(x=>x.total).sort((a,b)=>b.counts.length-a.counts.length||b.total-a.total);
+  const sideStats=["Blue","Purple"].map(side=>{const rows=matches.filter(m=>m.side===side);return {label:`${side} side`,games:rows.length,wins:rows.filter(m=>m.result==="Win").length}});
+  const groupStats=[...new Set(matches.map(m=>m.groupSize))].sort((a,b)=>a-b).map(size=>{const rows=matches.filter(m=>m.groupSize===size);return {label:`${size} player${size===1?'':'s'}`,games:rows.length,wins:rows.filter(m=>m.result==="Win").length}});
+  const durationStats=[{label:"Under 25 min",test:(m:Match)=>m.duration<25},{label:"25–35 min",test:(m:Match)=>m.duration>=25&&m.duration<=35},{label:"Over 35 min",test:(m:Match)=>m.duration>35}].map(band=>{const rows=matches.filter(band.test);return {label:band.label,games:rows.length,wins:rows.filter(m=>m.result==="Win").length}});
+  const longest={Win:0,Loss:0};let runType="",runLength=0;matches.forEach(match=>{if(match.result===runType)runLength++;else{runType=match.result;runLength=1}longest[match.result as "Win"|"Loss"]=Math.max(longest[match.result as "Win"|"Loss"],runLength)});
+  const latestResult=matches.at(-1)?.result??"—";let currentStreak=0;for(let i=matches.length-1;i>=0&&matches[i].result===latestResult;i--)currentStreak++;
+  const ratedRows=tracked.map(p=>{const match=data.matches.find(m=>m.id===p.matchId);return {...p,csPerMinute:p.cs/Math.max(1,match?.duration??0),visionPerMinute:p.vision/Math.max(1,match?.duration??0),matchKda:kda(p)}});
+  const highest=(selector:(p:(typeof ratedRows)[number])=>number)=>[...ratedRows].sort((a,b)=>selector(b)-selector(a))[0];
+  const recordRows=[{label:"Most kills",row:highest(p=>p.kills),value:(p:(typeof ratedRows)[number])=>String(p.kills)},{label:"Most assists",row:highest(p=>p.assists),value:(p:(typeof ratedRows)[number])=>String(p.assists)},{label:"Highest KDA",row:highest(p=>p.matchKda),value:(p:(typeof ratedRows)[number])=>num(p.matchKda,2)},{label:"Highest CS / min",row:highest(p=>p.csPerMinute),value:(p:(typeof ratedRows)[number])=>num(p.csPerMinute,2)},{label:"Highest vision / min",row:highest(p=>p.visionPerMinute),value:(p:(typeof ratedRows)[number])=>num(p.visionPerMinute,2)}].filter(record=>record.row);
+  const insightBars=(rows:{label:string;games:number;wins:number}[])=><div className="insight-bars">{rows.map(row=><div key={row.label}><span>{row.label}<small>{row.games} matches</small></span><div><i style={{width:row.games?pct(row.wins/row.games):'0%'}}/></div><strong>{row.games?pct(row.wins/row.games):'—'}</strong></div>)}</div>;
+
+  return <div className="insights-archive">
+    <section className="insight-hero"><div><p>ARCHIVE INTELLIGENCE</p><h2>Patterns from the Rift</h2><span>Trends, partnerships, flexibility, and standout performances across the full archive.</span></div><div className="insight-hero-stats"><div><small>LAST 10 WIN RATE</small><b>{recent.length?pct(recentWins/recent.length):'—'}</b></div><div><small>LAST 10 KDA</small><b>{num((recentTotals.kills+recentTotals.assists)/Math.max(1,recentTotals.deaths),2)}</b></div><div><small>CURRENT STREAK</small><b>{currentStreak} {latestResult}</b></div></div></section>
+    <section className="insight-grid insight-top-grid">
+      <article className="panel insight-recent"><div className="panel-head"><div><p>RECENT FORM</p><h3>Last {recent.length} matches</h3></div><span>Compared with the previous {previous.length}</span></div><div className="form-strip">{recent.map(m=><span className={m.result.toLowerCase()} title={`Match #${m.id}: ${m.result}`} key={m.id}>{m.result[0]}</span>)}</div><div className="form-comparison"><div><span>Recent</span><b>{recent.length?pct(recentWins/recent.length):'—'}</b></div><i>vs.</i><div><span>Previous</span><b>{previous.length?pct(previousWins/previous.length):'—'}</b></div><strong className={recent.length&&previous.length&&recentWins/recent.length>=previousWins/previous.length?'up':'down'}>{recent.length&&previous.length?`${recentWins/recent.length>=previousWins/previous.length?'▲':'▼'} ${Math.abs(Math.round((recentWins/recent.length-previousWins/previous.length)*100))} pts`:'—'}</strong></div></article>
+      <article className="panel insight-synergy"><div className="panel-head"><div><p>PLAYER SYNERGY</p><h3>Strongest duos</h3></div><span>Minimum 2 matches</span></div><div className="synergy-list">{pairs.map((pair,index)=><div key={pair.players.join('|')}><span>{String(index+1).padStart(2,'0')}</span><b>{pair.players.join(' + ')}</b><small>{pair.games} together{pair.games<4?' · small sample':''}</small><strong>{pct(pair.wins/pair.games)}</strong></div>)}</div></article>
+    </section>
+    <section className="panel comfort-panel"><div className="panel-head"><div><p>COMFORT VS. SUCCESS</p><h3>Champion volume and win rate</h3></div><span>Bubble size reflects matches played</span></div><div className="comfort-chart"><div className="comfort-y"><span>100%</span><span>50%</span><span>0%</span></div><div className="comfort-plot">{combos.map(combo=><div className="comfort-dot" title={`${combo.player} · ${combo.champion}: ${combo.games} matches, ${pct(combo.winRate)} win rate`} style={{left:`${Math.max(5,combo.games/maxComboGames*92)}%`,bottom:`${Math.max(3,combo.winRate*90)}%`,width:`${18+combo.games/maxComboGames*22}px`,height:`${18+combo.games/maxComboGames*22}px`}} key={`${combo.player}-${combo.champion}`}><img src={championIcon(combo.champion)} alt=""/><span>{combo.player}</span></div>)}</div><div className="comfort-x">Fewer matches <span>Match volume →</span> More matches</div></div><div className="comfort-legend">{combos.slice(0,6).map(combo=><span key={`${combo.player}-${combo.champion}`}><img src={championIcon(combo.champion)} alt=""/>{combo.player} · {combo.champion}<b>{combo.games} / {pct(combo.winRate)}</b></span>)}</div></section>
+    <section className="panel flexibility-panel"><div className="panel-head"><div><p>ROLE FLEXIBILITY</p><h3>Player role distribution</h3></div><span>Matches across every played role</span></div><div className="flexibility-list">{flexibility.map(row=><div key={row.player}><b>{row.player}</b><span>{row.counts.length} roles · {row.total} matches</span><div>{row.counts.map(role=><i title={`${role.role}: ${role.games} matches`} style={{width:pct(role.games/row.total),background:roleColors[role.role]}} key={role.role}/>)}</div><small>{row.counts.map(role=><span key={role.role}><img src={roleIcon(role.role)} alt=""/>{role.role} {role.games}</span>)}</small></div>)}</div></section>
+    <section className="insight-grid insight-performance-grid">
+      <article className="panel"><div className="panel-head"><div><p>SIDE PERFORMANCE</p><h3>Blue vs. Purple</h3></div></div>{insightBars(sideStats)}</article>
+      <article className="panel"><div className="panel-head"><div><p>GROUP SIZE</p><h3>Party performance</h3></div></div>{insightBars(groupStats)}</article>
+      <article className="panel"><div className="panel-head"><div><p>MATCH LENGTH</p><h3>Duration trends</h3></div></div>{insightBars(durationStats)}</article>
+    </section>
+    <section className="insight-grid insight-bottom-grid">
+      <article className="panel streak-panel"><div className="panel-head"><div><p>STREAKS</p><h3>Momentum records</h3></div></div><div className="streak-grid"><div><small>CURRENT</small><b>{currentStreak}</b><span>{latestResult} streak</span></div><div><small>LONGEST WIN</small><b>{longest.Win}</b><span>matches</span></div><div><small>LONGEST LOSS</small><b>{longest.Loss}</b><span>matches</span></div></div></article>
+      <article className="panel records-panel"><div className="panel-head"><div><p>PERSONAL RECORDS</p><h3>Single-match standouts</h3></div><span>Tracked performances</span></div><div className="records-grid">{recordRows.map(record=>{const row=record.row!;return <div key={record.label}><small>{record.label}</small><b>{record.value(row)}</b><span><img src={championIcon(row.champion)} alt=""/>{row.player} · {row.champion}</span><em>Match #{row.matchId}</em></div>})}</div></article>
+    </section>
+  </div>;
 }
 
 export default function Home() {
@@ -132,14 +180,14 @@ export default function Home() {
     <aside className="sidebar">
       <div className="brand"><div className="brand-mark"><img src="./rabadons-cat-favicon.png" alt="Deathcap cat"/></div><div><b>CLASSIC</b><span>Match Archive</span></div></div>
       <nav aria-label="Primary navigation">
-        {([['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['matches','Matches','◫'],['add','Log match','＋']] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
+        {([['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['insights','Insights','✦'],['matches','Matches','◫'],['add','Log match','＋']] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
       </nav>
       <div className="sidebar-card">{user?<><span>SIGNED IN</span><b>{user.email}</b><small>{data.matches.length} shared matches</small><button className="auth-link" onClick={()=>supabase.auth.signOut()}>Sign out</button></>:<><span>CONTRIBUTOR ACCESS</span><b>Sign in to log matches</b><input aria-label="Email address" type="email" placeholder="you@example.com" value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/><button className="auth-link" disabled={!authEmail} onClick={sendMagicLink}>Email me a sign-in link</button>{authMessage&&<small>{authMessage}</small>}</>}</div>
       <button className="export" onClick={exportData}>⇩ Export archive</button>
     </aside>
 
     <main className="main">
-      <header><div><p className="eyebrow">LEAGUE OF LEGENDS • CLASSIC ERA</p><h1>{tab==="overview"?"Command Center":tab==="players"?"Player Archive":tab==="roles"?"Role Archive":tab==="matches"?"Match History":editingMatch?`Edit Match #${editingMatch}`:"Log a Match"}</h1></div><div className="season"><span>Season archive</span><b>Summer 2026</b></div></header>
+      <header><div><p className="eyebrow">LEAGUE OF LEGENDS • CLASSIC ERA</p><h1>{tab==="overview"?"Command Center":tab==="players"?"Player Archive":tab==="roles"?"Role Archive":tab==="insights"?"Archive Insights":tab==="matches"?"Match History":editingMatch?`Edit Match #${editingMatch}`:"Log a Match"}</h1></div><div className="season"><span>Season archive</span><b>Summer 2026</b></div></header>
 
       {tab==="overview" && <>
         <section className="hero-card"><div><p>THE ARCHIVE</p><h2>WREQELODEON’S Classic story,<br/><em>one match at a time.</em></h2><span>Performances, Metrics, and memorable moments from the Rift.</span></div><div className="hero-ring"><b>{pct(stats.winRate)}</b><span>WIN RATE</span></div></section>
@@ -168,6 +216,8 @@ export default function Home() {
       </>}
 
       {tab==="roles"&&<RolesArchive data={data}/>}
+
+      {tab==="insights"&&<InsightsArchive data={data}/>}
 
       {tab==="matches" && <section className="panel matches-panel"><div className="match-tools"><label><span>⌕</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search matches or notes…"/></label><div className="match-filters"><details className="player-filter"><summary>{playerFilters.length?`${playerFilters.length} player${playerFilters.length===1?'':'s'} selected`:'All players'}<i>▾</i></summary><div className="player-filter-menu"><div><b>PLAYERS PRESENT</b>{playerFilters.length>0&&<button type="button" onClick={()=>setPlayerFilters([])}>Clear</button>}</div>{data.players.map(name=><label key={name}><input type="checkbox" checked={playerFilters.includes(name)} onChange={()=>setPlayerFilters(current=>current.includes(name)?current.filter(x=>x!==name):[...current,name])}/><span>{name}</span></label>)}</div></details><div className="result-buttons">{['All','Win','Loss'].map(x=><button className={resultFilter===x?'active':''} onClick={()=>setResultFilter(x)} key={x}>{x}</button>)}</div></div></div>
         <div className="match-list">{filteredMatches.map(m=>{const roster=data.performances.filter(p=>p.matchId===m.id);return <article className={expanded===m.id?'expanded':''} key={m.id}><button className="match-summary" onClick={()=>setExpanded(expanded===m.id?null:m.id)}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</span></div><div><small>SIDE</small><b>{m.side}</b></div><div><small>DURATION</small><b>{durationInput(m.duration)}</b></div><div><small>PARTY</small><b>{m.groupSize} player{m.groupSize===1?'':'s'}</b></div><i>{expanded===m.id?'−':'+'}</i></button>{expanded===m.id&&<div className="match-detail"><div className="match-detail-head"><p>“{m.notes||'No notes were recorded for this match.'}”</p>{user&&<button onClick={()=>{setEditingMatch(m.id);setTab('add')}}>Edit match</button>}</div><div className="roster">{roster.map(p=><div key={p.id}><div className="roster-icons"><img className="champion-icon" src={championIcon(p.champion)} alt=""/><img className="roster-role-icon" src={roleIcon(p.role)} alt={`${p.role} role`}/></div><div className="roster-info"><b>{p.player}</b><span>{p.champion} · {p.role}</span></div><strong>{p.kills}/{p.deaths}/{p.assists}</strong><small>{p.cs} CS · {p.vision} vision</small></div>)}</div></div>}</article>})}</div>
