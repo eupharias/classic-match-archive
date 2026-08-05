@@ -208,7 +208,7 @@ export default function Home() {
     const favorite=Object.entries(championCounts).sort((a,b)=>b[1]-a[1])[0];
     const totals=rows.reduce((acc,p)=>({kills:acc.kills+p.kills,deaths:acc.deaths+p.deaths,assists:acc.assists+p.assists,cs:acc.cs+p.cs,vision:acc.vision+p.vision,minutes:acc.minutes+(data.matches.find(m=>m.id===p.matchId)?.duration??0)}),{kills:0,deaths:0,assists:0,cs:0,vision:0,minutes:0});
     return {role,games:rows.length,wins,favorite:favorite?.[0]??'—',favoriteGames:favorite?.[1]??0,csPerMinute:totals.cs/Math.max(1,totals.minutes),visionPerMinute:totals.vision/Math.max(1,totals.minutes),totalKda:(totals.kills+totals.assists)/Math.max(1,totals.deaths)};
-  });
+  }).sort((a,b)=>b.games-a.games||a.role.localeCompare(b.role));
   const selectedRoleRows=selectedRole?[...playerRows.filter(p=>p.role===selectedRole)].sort((a,b)=>b.matchId-a.matchId):[];
   const playerTotals=playerRows.reduce((acc,p)=>({kills:acc.kills+p.kills,deaths:acc.deaths+p.deaths,assists:acc.assists+p.assists}),{kills:0,deaths:0,assists:0});
   const mainRole=playerRows.length?Object.entries(playerRows.reduce((a,p)=>(a[p.role]=(a[p.role]||0)+1,a),{} as Record<string,number>)).sort((a,b)=>b[1]-a[1])[0][0]:null;
