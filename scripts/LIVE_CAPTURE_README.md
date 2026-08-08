@@ -10,7 +10,7 @@ The newest capture is also copied to:
 
 `Documents\League Classic Match Captures\match.json`
 
-Use **Log match → Choose match.json** on the website to load the capture as an editable draft. Always compare CS and vision with the post-game scoreboard before publishing because the live endpoint can differ slightly from the final scoreboard.
+Use **Log a Match → Choose match.json** on the website to load the capture as an editable draft. Every JSON upload is sent to **Review** and must be approved by a Moderator or Administrator before it appears in the archive. Always compare CS and vision with the post-game scoreboard before approval because the live endpoint can differ slightly from the final scoreboard.
 
 ## Player mapping
 
