@@ -16,7 +16,7 @@ begin
   if exists(select 1 from public.matches where game_id=requested_game_id) then
     raise exception 'Game ID % already exists in the archive',requested_game_id;
   end if;
-  if exists(select 1 from public.pending_match_submissions where status='pending' and match_data->>'game_id'=requested_game_id) then
+  if exists(select 1 from public.pending_match_submissions p where p.status='pending' and p.match_data->>'game_id'=requested_game_id) then
     raise exception 'Game ID % is already awaiting review',requested_game_id;
   end if;
   insert into public.pending_match_submissions(submitted_by,submitter_email,match_data,performance_data,capture_metadata,external_capture_id,status)
