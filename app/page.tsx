@@ -310,7 +310,7 @@ export default function Home() {
             {['Blue','Purple'].map(side=>{const ms=groupData.matches.filter(m=>m.side===side),wr=ms.length?ms.filter(m=>m.result==='Win').length/ms.length:0;return <div className="side-row" key={side}><div className={`side-icon ${side.toLowerCase()}`}>{side[0]}</div><div><b>{side} Side</b><span>{ms.length} matches</span></div><div className="bar"><i style={{width:pct(wr)}}/></div><strong>{ms.length?pct(wr):'—'}</strong></div>})}
           </article>
           <article className="panel recent"><div className="panel-head"><div><p>RECENT GAMES</p><h3>Latest from the Rift</h3></div><button onClick={()=>setTab('matches')}>View all →</button></div>
-            {groupData.matches.slice(-5).reverse().map(m=><button className="recent-row" key={m.id} onClick={()=>{setExpanded(m.id);setTab('matches')}}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})} · {m.side} side · {m.duration.toFixed(1)} min</span></div><small>{m.notes||'No notes'}</small><i>›</i></button>)}
+            {data.matches.slice(-5).reverse().map(m=><button className="recent-row" key={m.id} onClick={()=>{setExpanded(m.id);setTab('matches')}}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})} · {m.groupSize===1?'Solo':`${m.groupSize}-player group`} · {m.side} side · {m.duration.toFixed(1)} min</span></div><small>{m.notes||'No notes'}</small><i>›</i></button>)}
           </article>
         </section>
       </>}
