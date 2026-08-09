@@ -7,7 +7,9 @@ param(
 $ErrorActionPreference = 'Stop'
 $installRoot = Join-Path $env:LOCALAPPDATA 'LeagueClassicMatchRecorder'
 $sourceWatcher = Join-Path $PSScriptRoot 'watch-live-classic.ps1'
-if (-not (Test-Path -LiteralPath $sourceWatcher)) { throw 'The recorder package is incomplete.' }
+$sourceTray = Join-Path $PSScriptRoot 'tray-host.ps1'
+$sourceUninstaller = Join-Path $PSScriptRoot 'Uninstall.ps1'
+if (-not (Test-Path -LiteralPath $sourceWatcher) -or -not (Test-Path -LiteralPath $sourceTray) -or -not (Test-Path -LiteralPath $sourceUninstaller)) { throw 'The recorder package is incomplete.' }
 
 if (-not $GamerTag) { $GamerTag = Read-Host 'Enter your League Gamer Tag (the name shown in game)' }
 if (-not $ArchiveName) { $ArchiveName = Read-Host 'Enter your player name in the Match Archive' }
@@ -15,8 +17,15 @@ $GamerTag = $GamerTag.Trim()
 $ArchiveName = $ArchiveName.Trim()
 if (-not $GamerTag -or -not $ArchiveName) { throw 'Both Gamer Tag and Archive player name are required.' }
 
+$existingProcesses = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue | Where-Object {
+  $_.ProcessId -ne $PID -and ($_.CommandLine -like "*$installRoot*watch-live-classic.ps1*" -or $_.CommandLine -like "*$installRoot*tray-host.ps1*")
+}
+foreach ($process in $existingProcesses) { Stop-Process -Id $process.ProcessId -Force -ErrorAction SilentlyContinue }
+
 New-Item -ItemType Directory -Force -Path $installRoot | Out-Null
 Copy-Item -LiteralPath $sourceWatcher -Destination (Join-Path $installRoot 'watch-live-classic.ps1') -Force
+Copy-Item -LiteralPath $sourceTray -Destination (Join-Path $installRoot 'tray-host.ps1') -Force
+Copy-Item -LiteralPath $sourceUninstaller -Destination (Join-Path $installRoot 'Uninstall.ps1') -Force
 $config = [ordered]@{
   primaryRiotIdGameName = $GamerTag
   players = [ordered]@{ $GamerTag = $ArchiveName }
@@ -28,13 +37,13 @@ $shortcutPath = Join-Path $startup 'League Classic Match Recorder.lnk'
 $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = (Get-Command powershell.exe).Source
-$shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$(Join-Path $installRoot 'watch-live-classic.ps1')`""
+$shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$(Join-Path $installRoot 'tray-host.ps1')`""
 $shortcut.WorkingDirectory = $installRoot
-$shortcut.Description = 'Creates uploadable match.json files from League Classic PvP matches.'
+$shortcut.Description = 'Runs the WREQ Classic Match Recorder in the Windows tray.'
 $shortcut.Save()
 
 if (-not $NoStart) {
-  Start-Process powershell.exe -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-WindowStyle','Hidden','-File',(Join-Path $installRoot 'watch-live-classic.ps1')) -WindowStyle Hidden
+  Start-Process powershell.exe -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-WindowStyle','Hidden','-File',(Join-Path $installRoot 'tray-host.ps1')) -WindowStyle Hidden
 }
 
 Write-Host ''
@@ -42,4 +51,4 @@ Write-Host 'League Classic Match Recorder is installed.' -ForegroundColor Green
 Write-Host "Configured: $GamerTag -> $ArchiveName"
 Write-Host "Match files: $(Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'League Classic Match Captures')"
 Write-Host 'The recorder will start automatically when you sign in to Windows.'
-
+Write-Host 'Look for its icon in the Windows notification area. Right-click it for controls.'
