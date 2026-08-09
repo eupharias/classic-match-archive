@@ -2,7 +2,8 @@ LEAGUE CLASSIC MATCH RECORDER — WINDOWS
 
 WHAT IT DOES
 Automatically watches League Classic 5v5 PvP matches and creates an uploadable
-match.json after the match ends. AI matches are ignored. The generated file is
+match.json after the match ends, including each tracked player's final inventory.
+AI matches are ignored. The generated file is
 marked for moderator review because live-client CS and vision can differ slightly
 from the post-game scoreboard.
 
@@ -33,4 +34,3 @@ IMPORTANT
 
 UNINSTALL
 Double-click Uninstall.cmd. Captured match files in Documents are preserved.
-

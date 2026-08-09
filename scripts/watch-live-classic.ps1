@@ -88,6 +88,14 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
       assists = [int]$_.scores.assists
       cs = [int][math]::Round([double]$_.scores.creepScore)
       vision = [int][math]::Round([double]$_.scores.wardScore)
+      items = @($_.items | Where-Object { [int]$_.itemID -gt 0 -and [int]$_.slot -ge 0 -and [int]$_.slot -le 6 } | ForEach-Object {
+        [ordered]@{
+          item_id = [int]$_.itemID
+          slot = [int]$_.slot
+          quantity = [math]::Max(1,[int]$_.count)
+          captured_name = [string]$_.displayName
+        }
+      })
     }
   })
   $participants = @($players | ForEach-Object {
@@ -106,7 +114,7 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
     }
   })
   $document = [ordered]@{
-    schema_version = 2
+    schema_version = 3
     match_data = [ordered]@{
       game_id = $LeagueGameId
       match_date = $StartedAt.ToString('yyyy-MM-dd')
@@ -128,6 +136,7 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
       game_id_source = if ($LeagueGameId) { 'League Client gameflow session' } else { 'Unavailable — enter manually before upload' }
       captured_at = (Get-Date).ToString('o')
       requires_review = $true
+      final_inventory_captured = $true
       warnings = @('Live Client CS and vision may differ slightly from the post-game scoreboard. Review before publishing.')
     }
     participants = $participants

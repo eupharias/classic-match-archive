@@ -3,13 +3,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient, type User } from "@supabase/supabase-js";
 import CollectionsArchive from "./collections";
+import classicItemCatalog from "./data/classic-items.json";
 
 type Match = { id:number; gameId:string; date:string; groupSize:number; side:string; result:string; duration:number; notes:string; createdBy?:string|null };
-type Performance = { id:number; matchId:number; team:string; tracked:boolean; player:string; champion:string; role:string; kills:number; deaths:number; assists:number; cs:number; vision:number };
+type FinalItem = { itemId:number; slot:number; quantity:number; capturedName?:string|null };
+type Performance = { id:number; matchId:number; team:string; tracked:boolean; player:string; champion:string; role:string; kills:number; deaths:number; assists:number; cs:number; vision:number; items:FinalItem[] };
 type AuditEvent = { id:number; matchId:number; action:"created"|"edited"|"deleted"|"restored"; actorEmail:string; changes:Record<string,{from:unknown;to:unknown}>; createdAt:string };
 type UserRole = "administrator"|"moderator"|"user";
 type UserProfile = { userId:string; email:string; role:UserRole };
-type PendingSubmission = { id:number; submittedBy:string; submitterEmail:string; matchData:{game_id:string;match_date:string;friend_group_size:number;ally_side:string;result:string;duration_minutes:number;notes?:string}; performanceData:Array<{player:string;champion:string;role:string;kills:number;deaths:number;assists:number;cs:number;vision:number}>; captureMetadata:Record<string,unknown>; createdAt:string };
+type PendingSubmission = { id:number; submittedBy:string; submitterEmail:string; matchData:{game_id:string;match_date:string;friend_group_size:number;ally_side:string;result:string;duration_minutes:number;notes?:string}; performanceData:Array<{player:string;champion:string;role:string;kills:number;deaths:number;assists:number;cs:number;vision:number;items?:Array<{item_id:number;slot:number;quantity:number;captured_name?:string}>}>; captureMetadata:Record<string,unknown>; createdAt:string };
 type FeedbackStatus = "Backlog"|"Accepted"|"Declined"|"In Progress"|"Review Pending"|"Complete"|"DELETED";
 type FeedbackItem = { id:number; subject:string; context:string; status:FeedbackStatus; submittedBy:string; submitterEmail:string; createdAt:string; updatedAt:string };
 type TrackerData = { matches:Match[]; performances:Performance[]; players:string[]; champions:string[]; roles:string[] };
@@ -25,6 +27,8 @@ const durationInput = (minutes:number) => { const total=Math.round(minutes*60); 
 const roleColors:Record<string,string>={Top:'#d89b43',Jungle:'#45a56a',Mid:'#5c92d8',Bot:'#a76bd1',Support:'#d56575'};
 const championIcon=(name:string)=>`./champions/${name.toLowerCase().replace(/[^a-z0-9]/g,'')}.png`;
 const roleIcon=(role:string)=>`./roles/${role.toLowerCase()}.svg`;
+const classicItems=classicItemCatalog.data as Record<string,{name:string;description?:string;plaintext?:string;gold:{total:number;sell:number};stats?:Record<string,number>;tags?:string[]}>;
+const classicItemIcon=(itemId:number)=>`https://ddragon.leagueoflegends.com/cdn/${classicItemCatalog.version}/img/item/${itemId}.png`;
 const gamerTags:Record<string,string>={Austin:"sweetberryW","Blake D.":"Retrax","Blake G.":"Kelando",Dane:"Bishop",Jake:"Rook",Kaleb:"Tokoyami",Rachel:"Amicias",Steven:"Knada",Zach:"Valabrax"};
 const playerName=(name:string)=>gamerTags[name]??name;
 const scopedTrackerData=(data:TrackerData,predicate:(match:Match)=>boolean):TrackerData=>{const matches=data.matches.filter(predicate);const matchIds=new Set(matches.map(match=>match.id));return {...data,matches,performances:data.performances.filter(row=>matchIds.has(row.matchId))}};
@@ -42,6 +46,11 @@ function calculateRoleRatings(data:TrackerData,role:string) {
 
 function RoleLabel({role}:{role:string}) {
   return <span className="role-label"><img src={roleIcon(role)} alt=""/>{role}</span>;
+}
+
+function FinalInventory({items}:{items:FinalItem[]}) {
+  if(!items.length)return <div className="final-inventory empty"><span>Final inventory not recorded</span></div>;
+  return <div className="final-inventory" aria-label="Final inventory">{[...items].sort((a,b)=>a.slot-b.slot).map(entry=>{const item=classicItems[String(entry.itemId)];const name=item?.name??entry.capturedName??`Item ${entry.itemId}`;return <button type="button" className="inventory-item" aria-label={`${name}, final inventory slot ${entry.slot+1}`} key={`${entry.slot}-${entry.itemId}`}><img src={classicItemIcon(entry.itemId)} alt=""/>{entry.quantity>1&&<b>{entry.quantity}</b>}<span className="item-hover-card" role="tooltip"><header><img src={classicItemIcon(entry.itemId)} alt=""/><span><strong>{name}</strong><small>ITEM #{entry.itemId} · SLOT {entry.slot+1}</small></span>{item&&<em>{item.gold.total.toLocaleString()}g</em>}</header>{item?.description?<div dangerouslySetInnerHTML={{__html:item.description}}/>:<p>Classic item details are not available in this Data Dragon catalog.</p>}{item&&<footer><span>SELL {item.gold.sell.toLocaleString()}g</span>{item.tags?.slice(0,3).map(tag=><span key={tag}>{tag}</span>)}</footer>}</span></button>})}</div>;
 }
 
 function Stat({label,value,detail,tone}:{label:string;value:string;detail:string;tone?:string}) {
@@ -238,9 +247,10 @@ export default function Home() {
   const [sideMatchPage,setSideMatchPage] = useState(0);
 
   const loadData=async()=>{
-    const [m,p,pl,c,r]=await Promise.all([
+    const [m,p,pi,pl,c,r]=await Promise.all([
       supabase.from("matches").select("*").is("deleted_at",null).order("id"),
       supabase.from("performances").select("*").order("id"),
+      supabase.from("performance_items").select("performance_id,item_id,slot,quantity,captured_name").order("slot"),
       supabase.from("players").select("name").order("name"),
       supabase.from("champions").select("name").order("name"),
       supabase.from("roles").select("name").order("name"),
@@ -249,7 +259,7 @@ export default function Home() {
     if(error){const fallback=await fetch("./tracker-data.json").then(x=>x.json());setData(fallback);return;}
     setData({
       matches:(m.data??[]).map(x=>({id:x.id,gameId:x.game_id??"",date:x.match_date,groupSize:x.friend_group_size,side:x.ally_side,result:x.result,duration:Number(x.duration_minutes),notes:x.notes??"",createdBy:x.created_by})),
-      performances:(p.data??[]).map(x=>({id:x.id,matchId:x.match_id,team:x.team,tracked:x.tracked,player:x.player,champion:x.champion,role:x.role,kills:x.kills,deaths:x.deaths,assists:x.assists,cs:x.cs,vision:x.vision})),
+      performances:(p.data??[]).map(x=>({id:x.id,matchId:x.match_id,team:x.team,tracked:x.tracked,player:x.player,champion:x.champion,role:x.role,kills:x.kills,deaths:x.deaths,assists:x.assists,cs:x.cs,vision:x.vision,items:(pi.data??[]).filter(item=>item.performance_id===x.id).map(item=>({itemId:item.item_id,slot:item.slot,quantity:item.quantity,capturedName:item.captured_name}))})),
       players:(pl.data??[]).map(x=>x.name),champions:(c.data??[]).map(x=>x.name),roles:(r.data??[]).map(x=>x.name),
     });
   };
@@ -311,7 +321,7 @@ export default function Home() {
   const isAdmin=canModerate;
   const feedbackLaneStatuses:FeedbackStatus[]=[...(showDeclined?["Declined" as FeedbackStatus]:[]),"Backlog","Accepted","In Progress","Review Pending","Complete"];
   const pendingInitialMatch=reviewingSubmission?{id:0,gameId:reviewingSubmission.matchData.game_id??"",date:reviewingSubmission.matchData.match_date,groupSize:Number(reviewingSubmission.matchData.friend_group_size),side:reviewingSubmission.matchData.ally_side,result:reviewingSubmission.matchData.result,duration:Number(reviewingSubmission.matchData.duration_minutes),notes:reviewingSubmission.matchData.notes??""}:undefined;
-  const pendingInitialPerformances=reviewingSubmission?reviewingSubmission.performanceData.map((p,index)=>({id:index+1,matchId:0,team:'Ally',tracked:true,...p} as Performance)):undefined;
+  const pendingInitialPerformances=reviewingSubmission?reviewingSubmission.performanceData.map((p,index)=>({id:index+1,matchId:0,team:'Ally',tracked:true,...p,items:(p.items??[]).map(item=>({itemId:item.item_id,slot:item.slot,quantity:item.quantity,capturedName:item.captured_name}))} as Performance)):undefined;
   const deleteMatch=async(match:Match)=>{if(!window.confirm(`Delete Match #${match.id}? It will disappear from the archive but Moderators and Administrators can restore it later.`))return;const {error}=await supabase.rpc("soft_delete_match",{target_match_id:match.id});if(error){window.alert(error.message);return}setExpanded(null);await Promise.all([loadData(),canModerate?loadAudit():Promise.resolve(),canModerate?loadDeletedMatches():Promise.resolve()])};
   const restoreMatch=async(matchId:number)=>{const {error}=await supabase.rpc("restore_match",{target_match_id:matchId});if(error){window.alert(error.message);return}await Promise.all([loadData(),loadAudit(),loadDeletedMatches()])};
   const clearFeedback=()=>{setFeedbackSubject("");setFeedbackContext("");setFeedbackStatus("")};
@@ -374,7 +384,14 @@ export default function Home() {
       {tab==="insights"&&<InsightsArchive data={groupData} lifetimeData={data} onOpenMatch={openAndFocusMatch}/>}
 
       {tab==="matches" && <section className="panel matches-panel"><div className="match-tools"><label><span>⌕</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search matches or notes…"/></label><div className="match-filters"><details className="player-filter"><summary>{playerFilters.length?`${playerFilters.length} player${playerFilters.length===1?'':'s'} selected`:'All players'}<i>▾</i></summary><div className="player-filter-menu"><div><b>PLAYERS PRESENT</b>{playerFilters.length>0&&<button type="button" onClick={()=>setPlayerFilters([])}>Clear</button>}</div>{data.players.map(name=><label key={name}><input type="checkbox" checked={playerFilters.includes(name)} onChange={()=>setPlayerFilters(current=>current.includes(name)?current.filter(x=>x!==name):[...current,name])}/><span>{playerName(name)}</span></label>)}</div></details><div className="result-buttons">{['All','Win','Loss'].map(x=><button className={resultFilter===x?'active':''} onClick={()=>setResultFilter(x)} key={x}>{x}</button>)}</div></div></div>
-        <div className="match-list">{filteredMatches.map(m=>{const roster=data.performances.filter(p=>p.matchId===m.id);const canManage=!!user&&(isAdmin||m.createdBy===user.id);return <article className={expanded===m.id?'expanded':''} key={m.id}><button className="match-summary" onClick={()=>setExpanded(expanded===m.id?null:m.id)}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</span><span>GAME ID · {m.gameId||'Legacy record'}</span></div><div><small>SIDE</small><b>{m.side}</b></div><div><small>DURATION</small><b>{durationInput(m.duration)}</b></div><div><small>PARTY</small><b>{m.groupSize} player{m.groupSize===1?'':'s'}</b></div><i>{expanded===m.id?'−':'+'}</i></button>{expanded===m.id&&<div className="match-detail"><div className="match-detail-head"><p>“{m.notes||'No notes were recorded for this match.'}”</p>{canManage&&<div className="match-record-actions"><button onClick={()=>{setEditingMatch(m.id);setTab('add')}}>Edit match</button><button className="delete-match" onClick={()=>deleteMatch(m)}>Delete match</button></div>}</div><div className="roster">{roster.map(p=><div key={p.id}><div className="roster-icons"><img className="champion-icon" src={championIcon(p.champion)} alt=""/><img className="roster-role-icon" src={roleIcon(p.role)} alt={`${p.role} role`}/></div><div className="roster-info"><b>{playerName(p.player)}</b><span>{p.champion} · {p.role}</span></div><strong>{p.kills}/{p.deaths}/{p.assists}</strong><small>{p.cs} CS · {p.vision} vision</small></div>)}</div></div>}</article>})}</div>
+        <div className="match-list">{filteredMatches.map(m=>{
+          const roster=data.performances.filter(p=>p.matchId===m.id);
+          const canManage=!!user&&(isAdmin||m.createdBy===user.id);
+          return <article className={expanded===m.id?'expanded':''} key={m.id}>
+            <button className="match-summary" onClick={()=>setExpanded(expanded===m.id?null:m.id)}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</span><span>GAME ID · {m.gameId||'Legacy record'}</span></div><div><small>SIDE</small><b>{m.side}</b></div><div><small>DURATION</small><b>{durationInput(m.duration)}</b></div><div><small>PARTY</small><b>{m.groupSize} player{m.groupSize===1?'':'s'}</b></div><i>{expanded===m.id?'−':'+'}</i></button>
+            {expanded===m.id&&<div className="match-detail"><div className="match-detail-head"><p>“{m.notes||'No notes were recorded for this match.'}”</p>{canManage&&<div className="match-record-actions"><button onClick={()=>{setEditingMatch(m.id);setTab('add')}}>Edit match</button><button className="delete-match" onClick={()=>deleteMatch(m)}>Delete match</button></div>}</div><div className="roster">{roster.map(p=><div key={p.id}><div className="roster-icons"><img className="champion-icon" src={championIcon(p.champion)} alt=""/><img className="roster-role-icon" src={roleIcon(p.role)} alt={`${p.role} role`}/></div><div className="roster-info"><b>{playerName(p.player)}</b><span>{p.champion} · {p.role}</span></div><strong>{p.kills}/{p.deaths}/{p.assists}</strong><FinalInventory items={p.items??[]}/><small>{p.cs} CS · {p.vision} vision</small></div>)}</div></div>}
+          </article>;
+        })}</div>
       </section>}
 
       {tab==="feedback"&&<section className="panel feedback-panel"><div className="panel-head"><div><p>COMMUNITY DEVELOPMENT</p><h3>Feature roadmap</h3></div></div><div className="feedback-tabs" role="tablist" aria-label="Roadmap sections"><button type="button" role="tab" aria-selected={feedbackView==="submit"} className={feedbackView==="submit"?'active':''} onClick={()=>setFeedbackView("submit")}>Request Something</button><button type="button" role="tab" aria-selected={feedbackView==="requests"} className={feedbackView==="requests"?'active':''} onClick={()=>setFeedbackView("requests")}>Feature Board</button></div>{feedbackView==="submit"?(user?<form onSubmit={e=>{e.preventDefault();submitFeedback()}}><label><span>Subject</span><input type="text" maxLength={100} required value={feedbackSubject} onChange={e=>{setFeedbackSubject(e.target.value);setFeedbackStatus("")}}/><small>{feedbackSubject.length} / 100</small></label><label><span>Context</span><textarea maxLength={1000} required rows={9} value={feedbackContext} onChange={e=>{setFeedbackContext(e.target.value);setFeedbackStatus("")}}/><small>{feedbackContext.length} / 1000</small></label><div className="feedback-actions"><button type="submit" disabled={feedbackSubmitting||!feedbackSubject.trim()||!feedbackContext.trim()}>{feedbackSubmitting?'Submitting…':'Submit'}</button><button type="button" onClick={clearFeedback}>Cancel</button></div>{feedbackStatus&&<p className="feedback-status" role="status">{feedbackStatus}</p>}</form>:<div className="feedback-auth"><b>Sign in to submit feedback</b><span>Authentication is required so each submission can be associated with its contributor.</span></div>):user?<div className="feedback-board-wrap"><div className="feedback-board-head"><div><b>REQUEST BOARD</b><span>{feedbackItems.length} submitted item{feedbackItems.length===1?'':'s'}</span></div><div className="feedback-board-controls"><button type="button" aria-pressed={showDeclined} onClick={()=>setShowDeclined(value=>!value)}>{showDeclined?'Hide declined':'Show declined'}</button>{canModerate&&<small>Drag cards between lanes or use the status menu.</small>}</div></div>{feedbackLoading?<div className="feedback-board-empty">Loading requests…</div>:<div className="feedback-board">{feedbackLaneStatuses.map(status=>{const items=feedbackItems.filter(item=>item.status===status);return <section className={`feedback-lane status-${status.toLowerCase().replaceAll(' ','-')}`} key={status} onDragOver={e=>{if(canModerate)e.preventDefault()}} onDrop={e=>{if(!canModerate)return;e.preventDefault();const id=Number(e.dataTransfer.getData("text/feedback-id"));if(id)updateFeedbackStatus(id,status)}}><header><b>{status}</b><span>{items.length}</span></header><div>{items.map(item=><article draggable={canModerate} onDragStart={e=>e.dataTransfer.setData("text/feedback-id",String(item.id))} key={item.id}><h4>{item.subject}</h4><p>{item.context}</p><footer><span><b>{item.submitterEmail}</b><time dateTime={item.createdAt}>{new Date(item.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</time></span>{canModerate&&<select aria-label={`Status for ${item.subject}`} value={item.status} onChange={e=>updateFeedbackStatus(item.id,e.target.value as FeedbackStatus)}>{(["Backlog","Accepted","Declined","In Progress","Review Pending","Complete","DELETED"] as FeedbackStatus[]).map(option=><option value={option} key={option}>{option}</option>)}</select>}</footer></article>)}</div></section>})}</div>}</div>:<div className="feedback-auth"><b>Sign in to view requests</b><span>Authentication is required to view submitted feedback and its current status.</span></div>}</section>}
@@ -394,19 +411,19 @@ export default function Home() {
 function AddMatch({data,initial,initialPerformances,onSave,onCancel}:{data:TrackerData,initial?:Match,initialPerformances?:Performance[],onSave:(m:Match,p:Performance[],capture?:{id:string,metadata:Record<string,unknown>})=>Promise<void>,onCancel?:()=>void}){
   const nextId=initial?.id??Math.max(...data.matches.map(m=>m.id))+1;
   const [gameId,setGameId]=useState(initial?.gameId??''); const [date,setDate]=useState(initial?.date??new Date().toISOString().slice(0,10)); const [side,setSide]=useState(initial?.side??'Blue'); const [result,setResult]=useState(initial?.result??'Win'); const [duration,setDuration]=useState(initial?durationInput(initial.duration):'0:30:00'); const [notes,setNotes]=useState(initial?.notes??'');
-  const blank=()=>({player:data.players[0],champion:data.champions[0],role:data.roles[0],kills:0,deaths:0,assists:0,cs:0,vision:0});
-  const [rows,setRows]=useState(initialPerformances?.length?initialPerformances.map(({player,champion,role,kills,deaths,assists,cs,vision})=>({player,champion,role,kills,deaths,assists,cs,vision})):[blank()]);
+  const blank=()=>({player:data.players[0],champion:data.champions[0],role:data.roles[0],kills:0,deaths:0,assists:0,cs:0,vision:0,items:[] as FinalItem[]});
+  const [rows,setRows]=useState(initialPerformances?.length?initialPerformances.map(({player,champion,role,kills,deaths,assists,cs,vision,items})=>({player,champion,role,kills,deaths,assists,cs,vision,items:items??[]})):[blank()]);
   const [saving,setSaving]=useState(false); const [saveError,setSaveError]=useState(""); const [importMessage,setImportMessage]=useState(""); const [importedCapture,setImportedCapture]=useState<{id:string,metadata:Record<string,unknown>}|undefined>();
   const update=(i:number,key:string,value:string|number)=>setRows(rs=>rs.map((r,j)=>j===i?{...r,[key]:value}:r));
   const latestMatch=[...data.matches].filter(m=>m.id!==initial?.id).sort((a,b)=>b.id-a.id)[0];
   const latestRoster=latestMatch?data.performances.filter(p=>p.matchId===latestMatch.id&&p.tracked):[];
-  const loadLastRoster=()=>setRows(latestRoster.map(({player,champion,role})=>({player,champion,role,kills:0,deaths:0,assists:0,cs:0,vision:0})));
+  const loadLastRoster=()=>setRows(latestRoster.map(({player,champion,role})=>({player,champion,role,kills:0,deaths:0,assists:0,cs:0,vision:0,items:[] as FinalItem[]})));
   const clearStats=()=>setRows(current=>current.map(row=>({...row,kills:0,deaths:0,assists:0,cs:0,vision:0})));
   const importMatchJson=async(file:File)=>{
     setImportMessage("");setImportedCapture(undefined);
     try{
       const document=JSON.parse(await file.text());
-      if(document.schema_version!==2)throw new Error("This match.json version is not supported. Capture a new match with the updated recorder.");
+      if(![2,3].includes(document.schema_version))throw new Error("This match.json version is not supported. Capture a new match with the updated recorder.");
       if(document.capture_metadata?.all_participants_human===false||document.participants?.some((participant:{is_bot?:boolean})=>participant.is_bot))throw new Error("AI matches cannot be imported.");
       const match=document.match_data;const imported=Array.isArray(document.performance_data)?document.performance_data:[];
       if(!match||!imported.length)throw new Error("The file does not contain a match and tracked player performances.");
@@ -421,10 +438,11 @@ function AddMatch({data,initial,initialPerformances,onSave,onCancel}:{data:Track
         if(!player)throw new Error(`Unknown archive player: ${submittedPlayer}`);
         if(!data.champions.includes(champion))throw new Error(`Unknown champion: ${champion}. Add it to the champion catalog first.`);
         if(!data.roles.includes(role))throw new Error(`Unknown role: ${role}`);
-        return {player,champion,role,kills:Number(row.kills)||0,deaths:Number(row.deaths)||0,assists:Number(row.assists)||0,cs:Number(row.cs)||0,vision:Number(row.vision)||0};
+        const items=Array.isArray(row.items)?row.items.map((entry:Record<string,unknown>)=>({itemId:Number(entry.item_id),slot:Number(entry.slot),quantity:Math.max(1,Number(entry.quantity)||1),capturedName:String(entry.captured_name??'')})).filter((entry:FinalItem)=>entry.itemId>0&&entry.slot>=0&&entry.slot<=6):[];
+        return {player,champion,role,kills:Number(row.kills)||0,deaths:Number(row.deaths)||0,assists:Number(row.assists)||0,cs:Number(row.cs)||0,vision:Number(row.vision)||0,items};
       });
       setGameId(importedGameId);setDate(String(match.match_date));setSide(String(match.ally_side));setResult(String(match.result));setDuration(durationInput(Number(match.duration_minutes)));setNotes(String(match.notes??''));setRows(normalized);
-      setImportedCapture({id:String(document.capture_metadata?.capture_id??`game-${importedGameId}`),metadata:{...(document.capture_metadata??{}),upload_source:'match.json'}});
+      setImportedCapture({id:String(document.capture_metadata?.capture_id??`game-${importedGameId}`),metadata:{...(document.capture_metadata??{}),upload_source:'match.json',final_inventories:normalized.map((row:{player:string;champion:string;items:FinalItem[]})=>({player:row.player,champion:row.champion,items:row.items.map((item:FinalItem)=>({item_id:item.itemId,slot:item.slot,quantity:item.quantity,captured_name:item.capturedName}))}))}});
       setImportMessage(`Loaded ${normalized.length} player performance${normalized.length===1?'':'s'} from ${file.name}. This upload will be sent to Review.`);
     }catch(error){setImportMessage(error instanceof Error?error.message:"The selected match.json could not be read.")}
   };
