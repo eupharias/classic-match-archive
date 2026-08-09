@@ -1,0 +1,128 @@
+@media (min-width:701px) {
+  .app-shell {
+    grid-template-columns:88px minmax(0,1fr);
+    transition:grid-template-columns .34s cubic-bezier(.22,.75,.24,1);
+  }
+
+  .app-shell:has(.sidebar:hover),
+  .app-shell:has(.sidebar:focus-within) {
+    grid-template-columns:248px minmax(0,1fr);
+  }
+
+  .sidebar {
+    z-index:9;
+    min-width:0;
+    overflow:hidden;
+    padding:28px 14px;
+    transition:padding .34s cubic-bezier(.22,.75,.24,1);
+  }
+
+  .app-shell:has(.sidebar:hover) .sidebar,
+  .app-shell:has(.sidebar:focus-within) .sidebar {
+    padding:28px 20px;
+  }
+
+  .sidebar .brand {
+    width:60px;
+    gap:12px;
+    margin:0 0 44px;
+    transition:width .34s cubic-bezier(.22,.75,.24,1),
+      margin .34s cubic-bezier(.22,.75,.24,1);
+  }
+
+  .app-shell:has(.sidebar:hover) .brand,
+  .app-shell:has(.sidebar:focus-within) .brand {
+    width:208px;
+    margin:0 8px 44px;
+  }
+
+  .sidebar .brand>div:last-child {
+    display:flex!important;
+    width:0;
+    opacity:0;
+    overflow:hidden;
+    white-space:nowrap;
+    transform:translateX(-8px);
+    transition:width .24s ease,opacity .2s ease,transform .24s ease;
+  }
+
+  .app-shell:has(.sidebar:hover) .brand>div:last-child,
+  .app-shell:has(.sidebar:focus-within) .brand>div:last-child {
+    width:140px;
+    opacity:1;
+    transform:none;
+    transition-delay:.08s;
+  }
+
+  .app-shell .sidebar nav button {
+    width:100%;
+    min-width:0;
+    justify-content:center;
+    gap:0;
+    padding:13px 10px;
+    font-size:0!important;
+    white-space:nowrap;
+    transition:gap .24s ease,padding .24s ease,
+      background-color .15s,color .15s,font-size .12s ease;
+  }
+
+  .app-shell:has(.sidebar:hover) .sidebar nav button,
+  .app-shell:has(.sidebar:focus-within) .sidebar nav button {
+    justify-content:flex-start;
+    gap:14px;
+    padding:13px 15px;
+    font-size:12px!important;
+    transition-delay:.06s;
+  }
+
+  .sidebar nav button i {
+    flex:0 0 20px;
+  }
+
+  .app-shell .sidebar-card,
+  .app-shell .export {
+    display:flex;
+    visibility:hidden;
+    opacity:0;
+    max-height:0;
+    padding-top:0;
+    padding-bottom:0;
+    margin-top:0;
+    overflow:hidden;
+    pointer-events:none;
+    transform:translateX(-10px);
+    border-color:transparent;
+    background:transparent;
+    transition:opacity .16s ease,transform .2s ease,max-height .24s ease,
+      padding .24s ease,margin .24s ease,border-color .16s ease,
+      background-color .16s ease,visibility 0s linear .24s;
+  }
+
+  .app-shell:has(.sidebar:hover) .sidebar-card,
+  .app-shell:has(.sidebar:focus-within) .sidebar-card,
+  .app-shell:has(.sidebar:hover) .export,
+  .app-shell:has(.sidebar:focus-within) .export {
+    visibility:visible;
+    opacity:1;
+    max-height:220px;
+    pointer-events:auto;
+    transform:none;
+    border-color:var(--line);
+    background:var(--panel);
+    transition-delay:.06s;
+  }
+
+  .app-shell:has(.sidebar:hover) .sidebar-card,
+  .app-shell:has(.sidebar:focus-within) .sidebar-card {
+    padding:16px;
+    margin-top:auto;
+  }
+
+  .app-shell:has(.sidebar:hover) .export,
+  .app-shell:has(.sidebar:focus-within) .export {
+    padding:13px 15px;
+    margin-top:10px;
+    border-color:var(--gold);
+    background:transparent;
+  }
+}
