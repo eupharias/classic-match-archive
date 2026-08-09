@@ -30,7 +30,8 @@ const championIcon=(name:string)=>`./champions/${name.toLowerCase().replace(/[^a
 const roleIcon=(role:string)=>`./roles/${role.toLowerCase()}.svg`;
 const classicItems=classicItemCatalog.data as Record<string,{name:string;description?:string;plaintext?:string;gold:{total:number;sell:number;purchasable?:boolean};stats?:Record<string,number>;tags?:string[]}>;
 const classicItemIcon=(itemId:number)=>`https://ddragon.leagueoflegends.com/cdn/${classicItemCatalog.version}/img/item/${itemId}.png`;
-const classicInventoryOptions=Object.entries(classicItems).filter(([,item])=>item.gold.purchasable!==false&&item.gold.total>=0).map(([id,item])=>({id:Number(id),name:item.name,cost:item.gold.total})).sort((a,b)=>a.name.localeCompare(b.name)||a.id-b.id);
+const transformedInventoryItemIds=new Set([773160]); // Feral Flare transforms from Wriggle's Lantern and is not directly purchasable.
+const classicInventoryOptions=Object.entries(classicItems).filter(([id,item])=>(item.gold.purchasable!==false||transformedInventoryItemIds.has(Number(id)))&&item.gold.total>=0).map(([id,item])=>({id:Number(id),name:item.name,cost:item.gold.total})).sort((a,b)=>a.name.localeCompare(b.name)||a.id-b.id);
 const gamerTags:Record<string,string>={Austin:"sweetberryW","Blake D.":"Retrax","Blake G.":"Kelando",Dane:"Bishop",Jake:"Rook",Kaleb:"Tokoyami",Rachel:"Amicias",Steven:"Knada",Zach:"Valabrax"};
 const playerName=(name:string)=>gamerTags[name]??name;
 const serializePerformances=(performances:Performance[])=>performances.map(({player,champion,role,kills,deaths,assists,cs,vision,items})=>({player,champion,role,kills,deaths,assists,cs,vision,items:(items??[]).map(item=>({item_id:item.itemId,slot:item.slot,quantity:item.quantity,captured_name:item.capturedName??classicItems[String(item.itemId)]?.name??null}))}));
