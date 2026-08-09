@@ -10,7 +10,7 @@ The newest capture is also copied to:
 
 `Documents\League Classic Match Captures\match.json`
 
-Use **Log a Match → Choose match.json** on the website to load the capture as an editable draft. Every JSON upload is sent to **Review** and must be approved by a Moderator or Administrator before it appears in the archive. The recorder includes each recognized player's final seven-slot inventory. Always compare CS and vision with the post-game scoreboard before approval because the live endpoint can differ slightly from the final scoreboard.
+Use **Log a Match → Choose match.json** on the website to load the capture as an editable draft. Every JSON upload is sent to **Review** and must be approved by a Moderator or Administrator before it appears in the archive. The recorder reads final seven-slot inventories from the League Client's completed-match record, falling back to the final live snapshot if necessary. Always compare CS and vision with the post-game scoreboard before approval because the live endpoint can differ slightly from the final scoreboard.
 
 ## Player mapping
 

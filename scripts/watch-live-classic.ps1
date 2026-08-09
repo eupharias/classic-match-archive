@@ -50,7 +50,53 @@ function Get-LeagueGameId {
   return $null
 }
 
-function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId) {
+function Get-LeaguePostGame([string]$LeagueGameId) {
+  if (-not $LeagueGameId) { return $null }
+  try {
+    $client = Get-CimInstance Win32_Process -Filter "Name = 'LeagueClientUx.exe'" -ErrorAction Stop | Select-Object -First 1
+    if (-not $client) { return $null }
+    $portMatch = [regex]::Match([string]$client.CommandLine, '--app-port=([0-9]+)')
+    $tokenMatch = [regex]::Match([string]$client.CommandLine, '--remoting-auth-token=([^\s"]+)')
+    if (-not $portMatch.Success -or -not $tokenMatch.Success) { return $null }
+    $raw = & curl.exe -k -sS --max-time 5 -u "riot:$($tokenMatch.Groups[1].Value)" "https://127.0.0.1:$($portMatch.Groups[1].Value)/lol-match-history/v1/games/$LeagueGameId" 2>$null
+    if ($LASTEXITCODE -ne 0 -or -not $raw) { return $null }
+    $record = $raw | ConvertFrom-Json
+    if ([string]$record.gameId -eq $LeagueGameId -and @($record.participants).Count) {
+      $itemNames = @{}
+      $itemRaw = & curl.exe -k -sS --max-time 5 -u "riot:$($tokenMatch.Groups[1].Value)" "https://127.0.0.1:$($portMatch.Groups[1].Value)/lol-game-data/assets/v1/items.json" 2>$null
+      if ($LASTEXITCODE -eq 0 -and $itemRaw) {
+        @($itemRaw | ConvertFrom-Json) | ForEach-Object { $itemNames[[int]$_.id] = [string]$_.name }
+      }
+      $record | Add-Member -NotePropertyName capturedItemNames -NotePropertyValue $itemNames -Force
+      return $record
+    }
+  } catch { return $null }
+  return $null
+}
+
+function Get-FinalInventory($LivePlayer, $PostGame) {
+  $inventory = @()
+  if ($PostGame) {
+    $identity = @($PostGame.participantIdentities | Where-Object { $_.player.gameName -ieq [string]$LivePlayer.riotIdGameName }) | Select-Object -First 1
+    $participant = if ($identity) { @($PostGame.participants | Where-Object { $_.participantId -eq $identity.participantId }) | Select-Object -First 1 } else { $null }
+    if ($participant) {
+      foreach ($slot in 0..6) {
+        $field = "item$slot"
+        $itemId = [int]$participant.stats.$field
+        if ($itemId -gt 0) { $inventory += [ordered]@{ item_id=$itemId; slot=$slot; quantity=1; captured_name=[string]$PostGame.capturedItemNames[$itemId] } }
+      }
+    }
+  }
+  if ($inventory.Count) { return @($inventory) }
+  $liveItems = @($LivePlayer.items)
+  for ($index=0; $index -lt $liveItems.Count -and $index -le 6; $index++) {
+    $liveItem = $liveItems[$index]
+    if ([int]$liveItem.itemID -gt 0) { $inventory += [ordered]@{ item_id=[int]$liveItem.itemID; slot=$index; quantity=[math]::Max(1,[int]$liveItem.count); captured_name=[string]$liveItem.displayName } }
+  }
+  return @($inventory)
+}
+
+function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId, $PostGame) {
   $players = @($Snapshot.allPlayers)
   $gameEnd = @($Snapshot.events.Events | Where-Object EventName -eq 'GameEnd') | Select-Object -Last 1
   $captureId = $StartedAt.ToString('yyyyMMdd-HHmmss')
@@ -88,14 +134,7 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
       assists = [int]$_.scores.assists
       cs = [int][math]::Round([double]$_.scores.creepScore)
       vision = [int][math]::Round([double]$_.scores.wardScore)
-      items = @($_.items | Where-Object { [int]$_.itemID -gt 0 -and [int]$_.slot -ge 0 -and [int]$_.slot -le 6 } | ForEach-Object {
-        [ordered]@{
-          item_id = [int]$_.itemID
-          slot = [int]$_.slot
-          quantity = [math]::Max(1,[int]$_.count)
-          captured_name = [string]$_.displayName
-        }
-      })
+      items = @(Get-FinalInventory $_ $PostGame)
     }
   })
   $participants = @($players | ForEach-Object {
@@ -111,6 +150,7 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
       assists = [int]$_.scores.assists
       cs = [int][math]::Round([double]$_.scores.creepScore)
       vision = [math]::Round([double]$_.scores.wardScore, 2)
+      items = @(Get-FinalInventory $_ $PostGame)
     }
   })
   $document = [ordered]@{
@@ -136,7 +176,8 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
       game_id_source = if ($LeagueGameId) { 'League Client gameflow session' } else { 'Unavailable — enter manually before upload' }
       captured_at = (Get-Date).ToString('o')
       requires_review = $true
-      final_inventory_captured = $true
+      final_inventory_captured = @($performances | Where-Object { @($_.items).Count -gt 0 }).Count -eq $performances.Count
+      final_inventory_source = if ($PostGame) { 'League Client match history' } else { 'Live Client snapshot fallback' }
       warnings = @('Live Client CS and vision may differ slightly from the post-game scoreboard. Review before publishing.')
     }
     participants = $participants
@@ -151,7 +192,8 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
 
 if ($SnapshotPath) {
   $snapshot = Get-Content -Raw -LiteralPath $SnapshotPath | ConvertFrom-Json
-  Export-MatchJson $snapshot (Get-Item -LiteralPath $SnapshotPath).LastWriteTime $GameId | Out-Null
+  $postGame = Get-LeaguePostGame $GameId
+  Export-MatchJson $snapshot (Get-Item -LiteralPath $SnapshotPath).LastWriteTime $GameId $postGame | Out-Null
   exit 0
 }
 
@@ -179,7 +221,16 @@ do {
     } else { $failures++ }
   }
 
-  try { $created = Export-MatchJson $last $startedAt $leagueGameId } catch { Write-RecorderLog "Capture failed: $($_.Exception.Message)" }
+  $postGame = $null
+  if ($leagueGameId) {
+    foreach ($attempt in 1..15) {
+      $postGame = Get-LeaguePostGame $leagueGameId
+      if ($postGame) { break }
+      Start-Sleep -Seconds 2
+    }
+  }
+  if ($postGame) { Write-RecorderLog "Post-game record loaded; final item slots will be included." } else { Write-RecorderLog "Post-game record unavailable; using any inventory exposed by the final live snapshot." }
+  try { $created = Export-MatchJson $last $startedAt $leagueGameId $postGame } catch { Write-RecorderLog "Capture failed: $($_.Exception.Message)" }
   if ($Once) { break }
   while (Get-LiveSnapshot) { Start-Sleep -Seconds 4 }
   Start-Sleep -Seconds 4

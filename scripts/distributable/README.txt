@@ -3,6 +3,7 @@ LEAGUE CLASSIC MATCH RECORDER — WINDOWS
 WHAT IT DOES
 Automatically watches League Classic 5v5 PvP matches and creates an uploadable
 match.json after the match ends, including each tracked player's final inventory.
+Final item slots are read from the League Client's completed-match record.
 AI matches are ignored. The generated file is
 marked for moderator review because live-client CS and vision can differ slightly
 from the post-game scoreboard.
