@@ -12,7 +12,8 @@
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
-    "data:classic-items": "node scripts/update-classic-items.mjs"
+    "data:classic-items": "node scripts/update-classic-items.mjs",
+    "data:classic-champions": "node scripts/update-classic-champions.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.111.0",

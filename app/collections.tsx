@@ -2,6 +2,18 @@
 
 import { useMemo, useState } from "react";
 import catalog from "./data/classic-items.json";
+import championCatalog from "./data/classic-champions.json";
+
+type ArchiveData={matches:Array<{id:number;groupSize:number;result:string;duration:number}>;performances:Array<{matchId:number;tracked:boolean;player:string;champion:string;role:string;kills:number;deaths:number;assists:number;cs:number;vision:number;items?:Array<{itemId:number;quantity:number}>}>};
+type ChampionRecord={
+  id:string;key:string;name:string;title:string;image:{full:string};
+  skins:Array<{id:string;num:number;name:string;chromas:boolean;parentSkin?:number}>;
+  lore:string;blurb:string;allytips:string[];enemytips:string[];tags:string[];partype:string;
+  info:Record<string,number>;stats:Record<string,number>;
+  spells:Array<{id:string;name:string;description:string;tooltip:string;maxrank:number;cooldownBurn:string;costBurn:string;rangeBurn:string;resource:string;image:{full:string}}>;
+  passive:{name:string;description:string;image:{full:string}};
+};
+type ChampionSort="player"|"matches"|"winRate"|"kills"|"deaths"|"assists"|"kda"|"cs"|"vision";
 
 type ItemRecord = {
   name:string;
@@ -33,8 +45,59 @@ const prettyStat=(key:string,value:number)=>`${percentStats.has(key)?`${Math.rou
 const category=(item:ItemRecord)=>!item.gold.purchasable?"Unavailable":item.tags?.includes("Consumable")?"Consumables":item.tags?.includes("Boots")?"Boots":item.depth&&item.depth>=3?"Completed":item.from?.length?"Upgrades":"Components";
 const categoryOrder=["All","Completed","Components","Upgrades","Boots","Consumables","Unavailable"];
 
-export default function CollectionsArchive() {
-  const [collection]=useState("items");
+const champions=Object.values(championCatalog.data as Record<string,ChampionRecord>).sort((a,b)=>a.name.localeCompare(b.name));
+const championPortrait=(champion:ChampionRecord)=>`https://ddragon.leagueoflegends.com/cdn/${championCatalog.version}/img/mode/classic/champion/${champion.image.full}`;
+const championAsset=(group:"spell"|"passive",file:string)=>`https://ddragon.leagueoflegends.com/cdn/${championCatalog.version}/img/mode/classic/${group}/${file}`;
+const playerLabels:Record<string,string>={Austin:"sweetberryW","Blake D.":"Retrax","Blake G.":"Kelando",Dane:"Bishop",Jake:"Rook",Kaleb:"Tokoyami",Rachel:"Amicias",Steven:"Knada",Zach:"Valabrax"};
+const statNames:Record<string,string>={hp:"Health",hpperlevel:"Health / level",mp:"Resource",mpperlevel:"Resource / level",movespeed:"Move speed",armor:"Armor",armorperlevel:"Armor / level",spellblock:"Magic resist",spellblockperlevel:"Magic resist / level",attackrange:"Attack range",hpregen:"Health regen",hpregenperlevel:"Health regen / level",mpregen:"Resource regen",mpregenperlevel:"Resource regen / level",crit:"Critical chance",critperlevel:"Critical / level",attackdamage:"Attack damage",attackdamageperlevel:"Attack damage / level",attackspeed:"Attack speed",attackspeedperlevel:"Attack speed / level"};
+
+function ChampionsCollection({archive}:{archive:ArchiveData}) {
+  const [query,setQuery]=useState("");
+  const [tag,setTag]=useState("All classes");
+  const [resource,setResource]=useState("All resources");
+  const [selectedId,setSelectedId]=useState(champions[0].id);
+  const [role,setRole]=useState("All roles");
+  const [sort,setSort]=useState<{column:ChampionSort;direction:1|-1}>({column:"matches",direction:-1});
+  const classOptions=["All classes",...Array.from(new Set(champions.flatMap(champion=>champion.tags))).sort()];
+  const resourceOptions=["All resources",...Array.from(new Set(champions.map(champion=>champion.partype))).sort()];
+  const filtered=champions.filter(champion=>(!query||`${champion.name} ${champion.title} ${champion.blurb}`.toLowerCase().includes(query.toLowerCase()))&&(tag==="All classes"||champion.tags.includes(tag))&&(resource==="All resources"||champion.partype===resource));
+  const selected=champions.find(champion=>champion.id===selectedId)??filtered[0]??champions[0];
+  const groupMatches=archive.matches.filter(match=>match.groupSize>=2);
+  const groupMatchIds=new Set(groupMatches.map(match=>match.id));
+  const championRows=archive.performances.filter(row=>row.tracked&&row.champion===selected.name&&groupMatchIds.has(row.matchId));
+  const roles=Array.from(new Set(championRows.map(row=>row.role))).sort();
+  const tableRows=Array.from(new Set(championRows.filter(row=>role==="All roles"||row.role===role).map(row=>row.player))).map(player=>{
+    const rows=championRows.filter(row=>row.player===player&&(role==="All roles"||row.role===role));
+    const matches=rows.length;const wins=rows.filter(row=>groupMatches.find(match=>match.id===row.matchId)?.result==="Win").length;
+    const totals=rows.reduce((all,row)=>({kills:all.kills+row.kills,deaths:all.deaths+row.deaths,assists:all.assists+row.assists,cs:all.cs+row.cs,vision:all.vision+row.vision,minutes:all.minutes+(groupMatches.find(match=>match.id===row.matchId)?.duration??0)}),{kills:0,deaths:0,assists:0,cs:0,vision:0,minutes:0});
+    return {player,matches,winRate:wins/Math.max(1,matches),kills:totals.kills/matches,deaths:totals.deaths/matches,assists:totals.assists/matches,kda:(totals.kills+totals.assists)/Math.max(1,totals.deaths),cs:totals.cs/Math.max(1,totals.minutes),vision:totals.vision/Math.max(1,totals.minutes)};
+  }).sort((a,b)=>{const av=sort.column==="player"?(playerLabels[a.player]??a.player).toLowerCase():a[sort.column];const bv=sort.column==="player"?(playerLabels[b.player]??b.player).toLowerCase():b[sort.column];return (typeof av==="string"?av.localeCompare(String(bv)):av-Number(bv))*sort.direction});
+  const setColumn=(column:ChampionSort)=>setSort(current=>({column,direction:current.column===column?(current.direction===-1?1:-1):column==="player"?1:-1}));
+  const championMatches=Array.from(new Set(championRows.map(row=>row.matchId)));
+  const championWins=championMatches.filter(id=>groupMatches.find(match=>match.id===id)?.result==="Win").length;
+  const itemCounts=new Map<number,number>();championRows.forEach(row=>row.items?.forEach(entry=>itemCounts.set(entry.itemId,(itemCounts.get(entry.itemId)??0)+entry.quantity)));
+  const topItems=[...itemCounts.entries()].sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const roleCounts=roles.map(name=>({name,count:championRows.filter(row=>row.role===name).length})).sort((a,b)=>b.count-a.count);
+  const Heading=({column,label}:{column:ChampionSort;label:string})=><button type="button" onClick={()=>setColumn(column)}>{label}<i>{sort.column===column?(sort.direction===-1?'▼':'▲'):'↕'}</i></button>;
+
+  return <section className="panel collection-panel champion-collection">
+    <div className="panel-head collection-heading"><div><p>COLLECTIONS · CHAMPIONS</p><h3>League Classic Roster</h3></div><div><span>DATA DRAGON</span><b>Patch {championCatalog.version}</b><small>{championCatalog.championCount} complete champion records</small></div></div>
+    <div className="collection-intro"><p>Explore Riot’s mode-specific League Classic roster, including Classic differences, lore, base and growth stats, abilities, rank scaling, artwork metadata, and skins—paired with this archive’s group-match history.</p><span>Last synchronized {new Date(championCatalog.generatedAt).toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</span></div>
+    <div className="item-controls champion-controls"><label><span>SEARCH THE ROSTER</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Champion, title, or Classic difference"/></label><label><span>CLASS</span><select value={tag} onChange={event=>setTag(event.target.value)}>{classOptions.map(value=><option key={value}>{value}</option>)}</select></label><label><span>RESOURCE</span><select value={resource} onChange={event=>setResource(event.target.value)}>{resourceOptions.map(value=><option key={value}>{value}</option>)}</select></label><div className="item-result-count"><b>{filtered.length}</b><span>champions shown</span></div></div>
+    <div className="champion-browser"><div className="champion-roster-grid">{filtered.map(champion=><button type="button" className={selected.id===champion.id?"selected":""} onClick={()=>{setSelectedId(champion.id);setRole("All roles")}} key={champion.id}><img src={championPortrait(champion)} alt=""/><span><b>{champion.name}</b><small>{champion.title}</small></span><i>{champion.tags.join(" · ")}</i></button>)}</div>
+    <article className="champion-profile"><header><img src={championPortrait(selected)} alt={`${selected.name} portrait`}/><div><p>{selected.tags.join(" · ")} · {selected.partype}</p><h4>{selected.name}</h4><b>{selected.title}</b><span>{selected.lore}</span></div></header><section className="classic-differences"><p>WHAT’S DIFFERENT IN CLASSIC</p><div dangerouslySetInnerHTML={{__html:selected.blurb||"No mode-specific differences supplied."}}/></section><div className="champion-rating-grid">{Object.entries(selected.info).map(([name,value])=><div key={name}><span>{name}</span><b>{value}/10</b><i><em style={{width:`${value*10}%`}}/></i></div>)}</div></article></div>
+    <div className="champion-reference-grid"><section><div className="champion-section-head"><p>BASE ATTRIBUTES</p><h4>Statistics and growth</h4></div><div className="champion-stat-grid">{Object.entries(selected.stats).map(([name,value])=><div key={name}><span>{statNames[name]??name}</span><b>{Number(value).toLocaleString()}</b></div>)}</div></section><section><div className="champion-section-head"><p>ABILITY KIT</p><h4>Passive and spells</h4></div><div className="ability-list"><article><img src={championAsset("passive",selected.passive.image.full)} alt=""/><div><small>PASSIVE</small><b>{selected.passive.name}</b><p>{selected.passive.description}</p></div></article>{selected.spells.map((spell,index)=><article key={spell.id}><img src={championAsset("spell",spell.image.full)} alt=""/><div><small>{["Q","W","E","R"][index]} · {spell.maxrank} RANKS</small><b>{spell.name}</b><p>{spell.description}</p><dl><span><dt>Cooldown</dt><dd>{spell.cooldownBurn}s</dd></span><span><dt>Cost</dt><dd>{spell.costBurn||"None"}</dd></span><span><dt>Range</dt><dd>{spell.rangeBurn}</dd></span></dl></div></article>)}</div></section></div>
+    <section className="champion-skins"><div className="champion-section-head"><p>SKIN CATALOG</p><h4>{selected.skins.length} supplied records</h4></div><div>{selected.skins.map(skin=><span key={skin.id}><b>{skin.name}</b><small>#{skin.num}{skin.parentSkin!==undefined?` · Variant of #${skin.parentSkin}`:""}{skin.chromas?" · Chromas":""}</small></span>)}</div></section>
+    <section className="champion-archive-stats"><div className="champion-section-head"><p>ARCHIVE STATISTICS</p><h4>{selected.name} in WREQ group matches</h4></div><div className="champion-archive-kpis"><div><span>MATCHES</span><b>{championMatches.length}</b></div><div><span>WIN RATE</span><b>{championMatches.length?`${Math.round(championWins/championMatches.length*100)}%`:"—"}</b></div><div><span>PLAYERS</span><b>{new Set(championRows.map(row=>row.player)).size}</b></div><div><span>ROLE DISTRIBUTION</span><b>{roleCounts.map(entry=>`${entry.name} ${entry.count}`).join(" · ")||"—"}</b></div></div>{topItems.length>0&&<div className="champion-top-items"><span>MOST RECORDED FINAL ITEMS</span><div>{topItems.map(([id,count])=>{const item=(catalog.data as Record<string,ItemRecord>)[String(id)];return <span key={id}><img src={imageUrl(String(id))} alt=""/><b>{item?.name??`Item ${id}`}</b><small>{count} recorded</small></span>})}</div></div>}
+      <div className="champion-player-table-head"><div><b>PLAYER PERFORMANCE</b><span>Click any column to sort</span></div><label>ROLE<select value={role} onChange={event=>setRole(event.target.value)}><option>All roles</option>{roles.map(value=><option key={value}>{value}</option>)}</select></label></div>
+      <div className="champion-player-table"><div className="champion-player-heading"><span>#</span><Heading column="player" label="PLAYER"/><Heading column="matches" label="MATCHES"/><Heading column="winRate" label="WIN RATE"/><Heading column="kills" label="AVG KILLS"/><Heading column="deaths" label="AVG DEATHS"/><Heading column="assists" label="AVG ASSISTS"/><Heading column="kda" label="KDA"/><Heading column="cs" label="CS / MIN"/><Heading column="vision" label="VISION / MIN"/></div>{tableRows.map((row,index)=><div className="champion-player-row" key={row.player}><span>{String(index+1).padStart(2,"0")}</span><b>{playerLabels[row.player]??row.player}</b><strong>{row.matches}</strong><strong>{Math.round(row.winRate*100)}%</strong><strong>{row.kills.toFixed(2)}</strong><strong>{row.deaths.toFixed(2)}</strong><strong>{row.assists.toFixed(2)}</strong><strong>{row.kda.toFixed(2)}</strong><strong>{row.cs.toFixed(2)}</strong><strong>{row.vision.toFixed(2)}</strong></div>)}{!tableRows.length&&<div className="champion-table-empty">No archived group performances match this champion and role.</div>}</div>
+    </section>
+    <a className="item-source-link champion-source-link" href={championCatalog.sourceUrl} target="_blank" rel="noreferrer">View official League Classic champion source ↗</a>
+  </section>;
+}
+
+export default function CollectionsArchive({data}:{data:ArchiveData}) {
+  const [collection,setCollection]=useState<"champions"|"items">("champions");
   const [query,setQuery]=useState("");
   const [itemCategory,setItemCategory]=useState("All");
   const [tag,setTag]=useState("All tags");
@@ -52,9 +115,10 @@ export default function CollectionsArchive() {
 
   return <section className="collections-archive">
     <div className="collection-tabs" role="tablist" aria-label="Collection categories">
-      <button type="button" role="tab" aria-selected={collection==="items"} className="active"><i>◆</i><span><b>Items</b><small>{catalog.itemCount} records</small></span></button>
+      <button type="button" role="tab" aria-selected={collection==="champions"} className={collection==="champions"?"active":""} onClick={()=>setCollection("champions")}><i>♛</i><span><b>Champions</b><small>{championCatalog.championCount} records</small></span></button>
+      <button type="button" role="tab" aria-selected={collection==="items"} className={collection==="items"?"active":""} onClick={()=>setCollection("items")}><i>◆</i><span><b>Items</b><small>{catalog.itemCount} records</small></span></button>
     </div>
-    <section className="panel collection-panel">
+    {collection==="champions"?<ChampionsCollection archive={data}/>:<section className="panel collection-panel">
       <div className="panel-head collection-heading"><div><p>COLLECTIONS · ITEMS</p><h3>League Classic Armory</h3></div><div><span>DATA DRAGON</span><b>Patch {catalog.version}</b><small>{catalog.itemCount} complete source records</small></div></div>
       <div className="collection-intro"><p>Explore Riot’s current League Classic item catalog. Every source field is retained, including artwork, recipes, costs, statistics, tags, availability, sprite data, effects, and internal metadata.</p><span>Last synchronized {new Date(catalog.generatedAt).toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</span></div>
       <div className="item-controls">
@@ -76,6 +140,6 @@ export default function CollectionsArchive() {
           <a className="item-source-link" href={catalog.sourceUrl} target="_blank" rel="noreferrer">View official Data Dragon source ↗</a>
         </aside>
       </div>
-    </section>
+    </section>}
   </section>;
 }
