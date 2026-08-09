@@ -1,8 +1,4 @@
-param(
-  [string]$GamerTag,
-  [string]$ArchiveName,
-  [switch]$NoStart
-)
+param([switch]$NoStart)
 
 $ErrorActionPreference = 'Stop'
 $installRoot = Join-Path $env:LOCALAPPDATA 'LeagueClassicMatchRecorder'
@@ -10,12 +6,6 @@ $sourceWatcher = Join-Path $PSScriptRoot 'watch-live-classic.ps1'
 $sourceTray = Join-Path $PSScriptRoot 'tray-host.ps1'
 $sourceUninstaller = Join-Path $PSScriptRoot 'Uninstall.ps1'
 if (-not (Test-Path -LiteralPath $sourceWatcher) -or -not (Test-Path -LiteralPath $sourceTray) -or -not (Test-Path -LiteralPath $sourceUninstaller)) { throw 'The recorder package is incomplete.' }
-
-if (-not $GamerTag) { $GamerTag = Read-Host 'Enter your League Gamer Tag (the name shown in game)' }
-if (-not $ArchiveName) { $ArchiveName = Read-Host 'Enter your player name in the Match Archive' }
-$GamerTag = $GamerTag.Trim()
-$ArchiveName = $ArchiveName.Trim()
-if (-not $GamerTag -or -not $ArchiveName) { throw 'Both Gamer Tag and Archive player name are required.' }
 
 $existingProcesses = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue | Where-Object {
   $_.ProcessId -ne $PID -and ($_.CommandLine -like "*$installRoot*watch-live-classic.ps1*" -or $_.CommandLine -like "*$installRoot*tray-host.ps1*")
@@ -27,8 +17,17 @@ Copy-Item -LiteralPath $sourceWatcher -Destination (Join-Path $installRoot 'watc
 Copy-Item -LiteralPath $sourceTray -Destination (Join-Path $installRoot 'tray-host.ps1') -Force
 Copy-Item -LiteralPath $sourceUninstaller -Destination (Join-Path $installRoot 'Uninstall.ps1') -Force
 $config = [ordered]@{
-  primaryRiotIdGameName = $GamerTag
-  players = [ordered]@{ $GamerTag = $ArchiveName }
+  players = [ordered]@{
+    sweetberryW = 'Austin'
+    Retrax = 'Blake D.'
+    Kelando = 'Blake G.'
+    Bishop = 'Dane'
+    Rook = 'Jake'
+    Tokoyami = 'Kaleb'
+    Amicias = 'Rachel'
+    Knada = 'Steven'
+    Valabrax = 'Zach'
+  }
 }
 $config | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $installRoot 'live-capture.config.json') -Encoding UTF8
 
@@ -48,7 +47,7 @@ if (-not $NoStart) {
 
 Write-Host ''
 Write-Host 'League Classic Match Recorder is installed.' -ForegroundColor Green
-Write-Host "Configured: $GamerTag -> $ArchiveName"
+Write-Host 'Configured to recognize all nine Match Archive players.'
 Write-Host "Match files: $(Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'League Classic Match Captures')"
 Write-Host 'The recorder will start automatically when you sign in to Windows.'
 Write-Host 'Look for its icon in the Windows notification area. Right-click it for controls.'

@@ -10,8 +10,9 @@ from the post-game scoreboard.
 INSTALL
 1. Extract the entire ZIP to a folder.
 2. Double-click Install.cmd.
-3. Enter your League Gamer Tag exactly as it appears in game.
-4. Enter your player name as it appears in the Match Archive.
+
+No player configuration is required. The recorder recognizes all nine Match
+Archive Gamer Tags automatically.
 
 The recorder appears in the Windows notification area and starts automatically
 with Windows. Windows PowerShell 5.1 and curl.exe are included with current Windows
