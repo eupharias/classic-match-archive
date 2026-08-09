@@ -232,6 +232,9 @@ export default function Home() {
   const [feedbackItems,setFeedbackItems] = useState<FeedbackItem[]>([]);
   const [feedbackLoading,setFeedbackLoading] = useState(false);
   const [showDeclined,setShowDeclined] = useState(false);
+  const [selectedSide,setSelectedSide] = useState<string|null>(null);
+  const [showAllSideMatches,setShowAllSideMatches] = useState(false);
+  const [sideMatchPage,setSideMatchPage] = useState(0);
 
   const loadData=async()=>{
     const [m,p,pl,c,r]=await Promise.all([
@@ -296,6 +299,9 @@ export default function Home() {
   const mainRole=playerRows.length?Object.entries(playerRows.reduce((a,p)=>(a[p.role]=(a[p.role]||0)+1,a),{} as Record<string,number>)).sort((a,b)=>b[1]-a[1])[0][0]:null;
   let pieCursor=0;const rolePie=playerRoleStats.filter(r=>r.games>0).map(r=>{const start=pieCursor/Math.max(1,playerRows.length)*100;pieCursor+=r.games;const end=pieCursor/Math.max(1,playerRows.length)*100;return `${roleColors[r.role]??'#8ca0ad'} ${start}% ${end}%`}).join(',');
   const filteredMatches=data.matches.filter(m=>(resultFilter==="All"||m.result===resultFilter) && (`${m.id} ${m.notes} ${m.date}`).toLowerCase().includes(query.toLowerCase()) && playerFilters.every(name=>data.performances.some(p=>p.matchId===m.id&&p.player===name))).sort((a,b)=>b.id-a.id);
+  const selectedSideMatches=selectedSide?[...groupData.matches.filter(match=>match.side===selectedSide)].sort((a,b)=>b.id-a.id):[];
+  const sideMatchPageCount=Math.ceil(selectedSideMatches.length/10);
+  const visibleSideMatches=showAllSideMatches?selectedSideMatches.slice(sideMatchPage*10,sideMatchPage*10+10):selectedSideMatches.slice(0,5);
   const openAndFocusMatch=(id:number)=>{setQuery("");setResultFilter("All");setPlayerFilters([]);setExpanded(id);setTab("matches");requestAnimationFrame(()=>requestAnimationFrame(()=>{const summary=[...document.querySelectorAll<HTMLButtonElement>(".match-summary")].find(button=>button.textContent?.includes(`Match #${id}`));summary?.closest("article")?.scrollIntoView({behavior:"smooth",block:"center"});summary?.focus({preventScroll:true})}))};
   const currentProfile=profiles.find(profile=>profile.userId===user?.id);
   const canManageRoles=currentProfile?.role==="administrator";
@@ -339,12 +345,13 @@ export default function Home() {
         </section>
         <section className="dashboard-grid">
           <article className="panel side-panel"><div className="panel-head"><div><p>SIDE PERFORMANCE</p><h3>Blue vs. Purple</h3></div><span>Group games</span></div>
-            {['Blue','Purple'].map(side=>{const ms=groupData.matches.filter(m=>m.side===side),wr=ms.length?ms.filter(m=>m.result==='Win').length/ms.length:0;return <div className="side-row" key={side}><div className={`side-icon ${side.toLowerCase()}`}>{side[0]}</div><div><b>{side} Side</b><span>{ms.length} matches</span></div><div className="bar"><i style={{width:pct(wr)}}/></div><strong>{ms.length?pct(wr):'—'}</strong></div>})}
+            {['Blue','Purple'].map(side=>{const ms=groupData.matches.filter(m=>m.side===side),wr=ms.length?ms.filter(m=>m.result==='Win').length/ms.length:0,isOpen=selectedSide===side;return <button type="button" className={`side-row ${isOpen?'selected':''}`} aria-expanded={isOpen} key={side} onClick={()=>{setSelectedSide(isOpen?null:side);setShowAllSideMatches(false);setSideMatchPage(0)}}><div className={`side-icon ${side.toLowerCase()}`}>{side[0]}</div><div><b>{side} Side</b><span>{ms.length} matches</span></div><div className="bar"><i style={{width:pct(wr)}}/></div><strong>{ms.length?pct(wr):'—'}</strong><i>{isOpen?'−':'+'}</i></button>})}
           </article>
           <article className="panel recent"><div className="panel-head"><div><p>RECENT GAMES</p><h3>Latest from the Rift</h3></div><button onClick={()=>setTab('matches')}>View all →</button></div>
             {data.matches.slice(-5).reverse().map(m=><button className="recent-row" key={m.id} onClick={()=>{setExpanded(m.id);setTab('matches')}}><span className={`result ${m.result.toLowerCase()}`}>{m.result[0]}</span><div><b>Match #{m.id}</b><span>{new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})} · {m.groupSize===1?'Solo':`${m.groupSize}-player group`} · {m.side} side · {m.duration.toFixed(1)} min</span></div><small>{m.notes||'No notes'}</small><i>›</i></button>)}
           </article>
         </section>
+        {selectedSide&&<section className="panel side-match-panel"><div className="panel-head"><div><p>SIDE MATCH HISTORY</p><h3>{selectedSide} Side · {showAllSideMatches?`All ${selectedSideMatches.length} matches`:`Latest ${Math.min(5,selectedSideMatches.length)} matches`}</h3></div><div className="side-history-actions">{selectedSideMatches.length>5&&<button type="button" onClick={()=>{setShowAllSideMatches(value=>!value);setSideMatchPage(0)}}>{showAllSideMatches?'Show latest 5':'View all matches'}</button>}<button type="button" onClick={()=>{setSelectedSide(null);setShowAllSideMatches(false);setSideMatchPage(0)}}>Close ×</button></div></div><div className="side-match-list">{visibleSideMatches.map(match=>{const roster=data.performances.filter(row=>row.matchId===match.id&&row.tracked);return <button type="button" key={match.id} onClick={()=>openAndFocusMatch(match.id)}><span className={`result ${match.result.toLowerCase()}`}>{match.result[0]}</span><div><b>Match #{match.id}</b><small>{new Date(match.date+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</small></div><div><small>PARTY</small><b>{match.groupSize} players</b></div><div><small>DURATION</small><b>{durationInput(match.duration)}</b></div><div><small>PLAYERS</small><b>{roster.map(row=>playerName(row.player)).join(', ')||'—'}</b></div><i>›</i></button>})}</div>{showAllSideMatches&&sideMatchPageCount>1&&<div className="player-match-pagination"><button type="button" disabled={sideMatchPage===0} onClick={()=>setSideMatchPage(page=>Math.max(0,page-1))}>← Previous</button><span>Page {sideMatchPage+1} of {sideMatchPageCount}</span><button type="button" disabled={sideMatchPage>=sideMatchPageCount-1} onClick={()=>setSideMatchPage(page=>Math.min(sideMatchPageCount-1,page+1))}>Next →</button></div>}</section>}
       </>}
 
       {tab==="players" && <>
