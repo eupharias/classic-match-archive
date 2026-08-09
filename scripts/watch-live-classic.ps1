@@ -63,14 +63,24 @@ function Get-LeaguePostGame([string]$LeagueGameId) {
     $record = $raw | ConvertFrom-Json
     if ([string]$record.gameId -eq $LeagueGameId -and @($record.participants).Count) {
       $itemNames = @{}
-      $itemRaw = & curl.exe -k -sS --max-time 5 -u "riot:$($tokenMatch.Groups[1].Value)" "https://127.0.0.1:$($portMatch.Groups[1].Value)/lol-game-data/assets/v1/items.json" 2>$null
-      if ($LASTEXITCODE -eq 0 -and $itemRaw) {
-        @($itemRaw | ConvertFrom-Json) | ForEach-Object { $itemNames[[int]$_.id] = [string]$_.name }
+      try {
+        $itemRaw = & curl.exe -k -sS --max-time 5 -u "riot:$($tokenMatch.Groups[1].Value)" "https://127.0.0.1:$($portMatch.Groups[1].Value)/lol-game-data/assets/v1/items.json" 2>$null
+        if ($LASTEXITCODE -eq 0 -and $itemRaw) {
+          foreach ($item in @($itemRaw | ConvertFrom-Json)) {
+            $parsedId = 0
+            if ([int]::TryParse([string]$item.id,[ref]$parsedId)) { $itemNames[$parsedId] = [string]$item.name }
+          }
+        }
+      } catch {
+        Write-RecorderLog "Item names were unavailable for post-game record ${LeagueGameId}; item IDs will still be captured."
       }
       $record | Add-Member -NotePropertyName capturedItemNames -NotePropertyValue $itemNames -Force
-      return $record
+      return ,$record
     }
-  } catch { return $null }
+  } catch {
+    Write-RecorderLog "Post-game lookup failed for ${LeagueGameId}: $($_.Exception.Message)"
+    return $null
+  }
   return $null
 }
 
@@ -94,6 +104,41 @@ function Get-FinalInventory($LivePlayer, $PostGame) {
     if ([int]$liveItem.itemID -gt 0) { $inventory += [ordered]@{ item_id=[int]$liveItem.itemID; slot=$index; quantity=[math]::Max(1,[int]$liveItem.count); captured_name=[string]$liveItem.displayName } }
   }
   return @($inventory)
+}
+
+function Repair-LatestInventory {
+  $latestPath = Join-Path $OutputRoot 'match.json'
+  if (-not (Test-Path -LiteralPath $latestPath)) { return }
+  try {
+    $document = Get-Content -Raw -LiteralPath $latestPath | ConvertFrom-Json
+    $performances = @($document.performance_data)
+    if (-not $performances.Count -or @($performances | Where-Object { @($_.items | Where-Object { $null -ne $_ }).Count -gt 0 }).Count) { return }
+    $postGame = $null
+    foreach ($attempt in 1..5) {
+      $postGame = Get-LeaguePostGame ([string]$document.match_data.game_id)
+      if ($postGame) { break }
+      Start-Sleep -Seconds 2
+    }
+    if (-not $postGame) {
+      Write-RecorderLog "Latest capture inventory repair deferred: post-game record $($document.match_data.game_id) is not currently available."
+      return
+    }
+    foreach ($performance in $performances) {
+      $lookup = [pscustomobject]@{ riotIdGameName=[string]$performance.gamer_tag; items=@() }
+      $performance | Add-Member -NotePropertyName items -NotePropertyValue @(Get-FinalInventory $lookup $postGame) -Force
+    }
+    foreach ($participant in @($document.participants)) {
+      $lookup = [pscustomobject]@{ riotIdGameName=[string]$participant.gamer_tag; items=@() }
+      $participant | Add-Member -NotePropertyName items -NotePropertyValue @(Get-FinalInventory $lookup $postGame) -Force
+    }
+    $document.capture_metadata | Add-Member -NotePropertyName final_inventory_captured -NotePropertyValue (@($performances | Where-Object { @($_.items | Where-Object { $null -ne $_ }).Count -gt 0 }).Count -eq $performances.Count) -Force
+    $document.capture_metadata | Add-Member -NotePropertyName final_inventory_source -NotePropertyValue 'League Client match history (automatic repair)' -Force
+    $json = $document | ConvertTo-Json -Depth 10
+    [System.IO.File]::WriteAllText($latestPath,$json,$utf8)
+    $datedPath = Join-Path (Join-Path $OutputRoot ([string]$document.capture_metadata.capture_id)) 'match.json'
+    if (Test-Path -LiteralPath (Split-Path -Parent $datedPath)) { [System.IO.File]::WriteAllText($datedPath,$json,$utf8) }
+    Write-RecorderLog "MATCH_REPAIRED $latestPath (final inventories restored from post-game history)"
+  } catch { Write-RecorderLog "Latest capture inventory repair failed: $($_.Exception.Message)" }
 }
 
 function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId, $PostGame) {
@@ -176,7 +221,7 @@ function Export-MatchJson($Snapshot, [datetime]$StartedAt, [string]$LeagueGameId
       game_id_source = if ($LeagueGameId) { 'League Client gameflow session' } else { 'Unavailable — enter manually before upload' }
       captured_at = (Get-Date).ToString('o')
       requires_review = $true
-      final_inventory_captured = @($performances | Where-Object { @($_.items).Count -gt 0 }).Count -eq $performances.Count
+      final_inventory_captured = @($performances | Where-Object { @($_.items | Where-Object { $null -ne $_ }).Count -gt 0 }).Count -eq $performances.Count
       final_inventory_source = if ($PostGame) { 'League Client match history' } else { 'Live Client snapshot fallback' }
       warnings = @('Live Client CS and vision may differ slightly from the post-game scoreboard. Review before publishing.')
     }
@@ -198,6 +243,7 @@ if ($SnapshotPath) {
 }
 
 Write-RecorderLog "Recorder started. Waiting for Classic 5v5 PvP matches. Output: $OutputRoot"
+Repair-LatestInventory
 do {
   $first = $null
   while (-not $first) {

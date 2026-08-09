@@ -8,7 +8,7 @@ $sourceUninstaller = Join-Path $PSScriptRoot 'Uninstall.ps1'
 if (-not (Test-Path -LiteralPath $sourceWatcher) -or -not (Test-Path -LiteralPath $sourceTray) -or -not (Test-Path -LiteralPath $sourceUninstaller)) { throw 'The recorder package is incomplete.' }
 
 $existingProcesses = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue | Where-Object {
-  $_.ProcessId -ne $PID -and ($_.CommandLine -like "*$installRoot*watch-live-classic.ps1*" -or $_.CommandLine -like "*$installRoot*tray-host.ps1*")
+  $_.ProcessId -ne $PID -and ($_.CommandLine -match '-File\s+[^\r\n]*watch-live-classic\.ps1' -or $_.CommandLine -like "*$installRoot*tray-host.ps1*")
 }
 foreach ($process in $existingProcesses) { Stop-Process -Id $process.ProcessId -Force -ErrorAction SilentlyContinue }
 
