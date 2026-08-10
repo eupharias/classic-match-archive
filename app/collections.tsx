@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import catalog from "./data/classic-items.json";
 import championCatalog from "./data/classic-champions.json";
 
@@ -50,8 +50,34 @@ const championPortrait=(champion:ChampionRecord)=>`https://ddragon.leagueoflegen
 const championAsset=(group:"spell"|"passive",file:string)=>`https://ddragon.leagueoflegends.com/cdn/${championCatalog.version}/img/mode/classic/${group}/${file}`;
 const playerLabels:Record<string,string>={Austin:"sweetberryW","Blake D.":"Retrax","Blake G.":"Kelando",Dane:"Bishop",Jake:"Rook",Kaleb:"Tokoyami",Rachel:"Amicias",Steven:"Knada",Zach:"Valabrax"};
 const statNames:Record<string,string>={hp:"Health",hpperlevel:"Health / level",mp:"Resource",mpperlevel:"Resource / level",movespeed:"Move speed",armor:"Armor",armorperlevel:"Armor / level",spellblock:"Magic resist",spellblockperlevel:"Magic resist / level",attackrange:"Attack range",hpregen:"Health regen",hpregenperlevel:"Health regen / level",mpregen:"Resource regen",mpregenperlevel:"Resource regen / level",crit:"Critical chance",critperlevel:"Critical / level",attackdamage:"Attack damage",attackdamageperlevel:"Attack damage / level",attackspeed:"Attack speed",attackspeedperlevel:"Attack speed / level"};
+const championStatKeys=["hp","hpperlevel","mp","mpperlevel","movespeed","armor","armorperlevel","spellblock","spellblockperlevel","attackrange","hpregen","hpregenperlevel","mpregen","mpregenperlevel","crit","critperlevel","attackdamage","attackdamageperlevel","attackspeed","attackspeedperlevel"] as const;
+type ChampionStatKey=typeof championStatKeys[number];
+
+function ChampionComparisons(){
+  const classes=Array.from(new Set(champions.flatMap(champion=>champion.tags))).sort();
+  const [selectedClasses,setSelectedClasses]=useState<string[]>([]);
+  const [visibleStats,setVisibleStats]=useState<ChampionStatKey[]>([...championStatKeys]);
+  const [settingsOpen,setSettingsOpen]=useState(false);
+  const [sort,setSort]=useState<{column:"name"|ChampionStatKey;direction:1|-1}>({column:"name",direction:1});
+  const filtered=champions.filter(champion=>!selectedClasses.length||champion.tags.some(tag=>selectedClasses.includes(tag))).sort((a,b)=>{const av=sort.column==="name"?a.name.toLowerCase():Number(a.stats[sort.column]??0);const bv=sort.column==="name"?b.name.toLowerCase():Number(b.stats[sort.column]??0);return (typeof av==="string"?av.localeCompare(String(bv)):av-Number(bv))*sort.direction});
+  const toggleClass=(value:string)=>setSelectedClasses(current=>current.includes(value)?current.filter(item=>item!==value):[...current,value]);
+  const toggleStat=(value:ChampionStatKey)=>setVisibleStats(current=>current.includes(value)?current.filter(item=>item!==value):[...current,value]);
+  const setColumn=(column:"name"|ChampionStatKey)=>setSort(current=>({column,direction:current.column===column?(current.direction===1?-1:1):column==="name"?1:-1}));
+  const arrow=(column:"name"|ChampionStatKey)=>sort.column===column?(sort.direction===1?"▲":"▼"):"↕";
+  return <section className="champion-comparisons">
+    <div className="comparison-controls"><div><span>FILTER BY CLASS · OR LOGIC</span><div className="comparison-class-filters">{classes.map(value=><button type="button" className={selectedClasses.includes(value)?"active":""} aria-pressed={selectedClasses.includes(value)} onClick={()=>toggleClass(value)} key={value}>{value}</button>)}{selectedClasses.length>0&&<button type="button" className="clear" onClick={()=>setSelectedClasses([])}>Clear</button>}</div></div><b>{filtered.length} champions</b></div>
+    <div className="comparison-table-wrap">
+      <div className="comparison-settings"><button type="button" aria-label="Configure comparison columns" aria-expanded={settingsOpen} onClick={()=>setSettingsOpen(value=>!value)}>⚙</button>{settingsOpen&&<aside><header><b>TABLE COLUMNS</b><button type="button" onClick={()=>setSettingsOpen(false)}>×</button></header><p>Select the statistics to display.</p><div>{championStatKeys.map(key=><label key={key}><input type="checkbox" checked={visibleStats.includes(key)} onChange={()=>toggleStat(key)}/><span>{statNames[key]}</span></label>)}</div><footer><button type="button" onClick={()=>setVisibleStats([...championStatKeys])}>Show all</button><button type="button" onClick={()=>setVisibleStats([])}>Hide all stats</button></footer></aside>}</div>
+      <div className="comparison-table" style={{"--comparison-columns":`42px 230px 150px ${visibleStats.map(()=>"minmax(118px,1fr)").join(" ")}`} as CSSProperties}>
+        <div className="comparison-heading"><span className="gear-space"/><button type="button" onClick={()=>setColumn("name")}>CHAMPION <i>{arrow("name")}</i></button><span>CLASS</span>{visibleStats.map(key=><button type="button" onClick={()=>setColumn(key)} key={key}>{statNames[key].toUpperCase()} <i>{arrow(key)}</i></button>)}</div>
+        {filtered.map(champion=><div className="comparison-row" key={champion.id}><span/><div className="comparison-champion"><img src={championPortrait(champion)} alt=""/><b>{champion.name}</b></div><span>{champion.tags.join(" · ")}</span>{visibleStats.map(key=><strong key={key}>{Number(champion.stats[key]??0).toLocaleString(undefined,{maximumFractionDigits:3})}</strong>)}</div>)}
+      </div>
+    </div>
+  </section>
+}
 
 function ChampionsCollection({archive}:{archive:ArchiveData}) {
+  const [championView,setChampionView]=useState<"details"|"comparisons">("details");
   const [query,setQuery]=useState("");
   const [tag,setTag]=useState("All classes");
   const [resource,setResource]=useState("All resources");
@@ -83,6 +109,8 @@ function ChampionsCollection({archive}:{archive:ArchiveData}) {
   return <section className="panel collection-panel champion-collection">
     <div className="panel-head collection-heading"><div><p>COLLECTIONS · CHAMPIONS</p><h3>League Classic Roster</h3></div><div><span>DATA DRAGON</span><b>Patch {championCatalog.version}</b><small>{championCatalog.championCount} complete champion records</small></div></div>
     <div className="collection-intro"><p>Explore Riot’s mode-specific League Classic roster, including Classic differences, lore, base and growth stats, abilities, rank scaling, artwork metadata, and skins—paired with this archive’s group-match history.</p><span>Last synchronized {new Date(championCatalog.generatedAt).toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</span></div>
+    <div className="champion-subtabs" role="tablist" aria-label="Champion collection views"><button type="button" role="tab" aria-selected={championView==="details"} className={championView==="details"?"active":""} onClick={()=>setChampionView("details")}>Champion Details</button><button type="button" role="tab" aria-selected={championView==="comparisons"} className={championView==="comparisons"?"active":""} onClick={()=>setChampionView("comparisons")}>Comparisons</button></div>
+    {championView==="comparisons"?<ChampionComparisons/>:<>
     <div className="item-controls champion-controls"><label><span>SEARCH THE ROSTER</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Champion, title, or Classic difference"/></label><label><span>CLASS</span><select value={tag} onChange={event=>setTag(event.target.value)}>{classOptions.map(value=><option key={value}>{value}</option>)}</select></label><label><span>RESOURCE</span><select value={resource} onChange={event=>setResource(event.target.value)}>{resourceOptions.map(value=><option key={value}>{value}</option>)}</select></label><div className="item-result-count"><b>{filtered.length}</b><span>champions shown</span></div></div>
     <div className="champion-browser"><div className="champion-roster-grid">{filtered.map(champion=><button type="button" className={selected.id===champion.id?"selected":""} onClick={()=>{setSelectedId(champion.id);setRole("All roles")}} key={champion.id}><img src={championPortrait(champion)} alt=""/><span><b>{champion.name}</b><small>{champion.title}</small></span><i>{champion.tags.join(" · ")}</i></button>)}</div>
     <article className="champion-profile"><header><img src={championPortrait(selected)} alt={`${selected.name} portrait`}/><div><p>{selected.tags.join(" · ")} · {selected.partype}</p><h4>{selected.name}</h4><b>{selected.title}</b><span>{selected.lore}</span></div></header><section className="classic-differences"><p>WHAT’S DIFFERENT IN CLASSIC</p><div dangerouslySetInnerHTML={{__html:selected.blurb||"No mode-specific differences supplied."}}/></section><div className="champion-rating-grid">{Object.entries(selected.info).map(([name,value])=><div key={name}><span>{name}</span><b>{value}/10</b><i><em style={{width:`${value*10}%`}}/></i></div>)}</div></article></div>
@@ -93,6 +121,7 @@ function ChampionsCollection({archive}:{archive:ArchiveData}) {
       <div className="champion-player-table"><div className="champion-player-heading"><span>#</span><Heading column="player" label="PLAYER"/><Heading column="matches" label="MATCHES"/><Heading column="winRate" label="WIN RATE"/><Heading column="kills" label="AVG KILLS"/><Heading column="deaths" label="AVG DEATHS"/><Heading column="assists" label="AVG ASSISTS"/><Heading column="kda" label="KDA"/><Heading column="cs" label="CS / MIN"/><Heading column="vision" label="VISION / MIN"/></div>{tableRows.map((row,index)=><div className="champion-player-row" key={row.player}><span>{String(index+1).padStart(2,"0")}</span><b>{playerLabels[row.player]??row.player}</b><strong>{row.matches}</strong><strong>{Math.round(row.winRate*100)}%</strong><strong>{row.kills.toFixed(2)}</strong><strong>{row.deaths.toFixed(2)}</strong><strong>{row.assists.toFixed(2)}</strong><strong>{row.kda.toFixed(2)}</strong><strong>{row.cs.toFixed(2)}</strong><strong>{row.vision.toFixed(2)}</strong></div>)}{!tableRows.length&&<div className="champion-table-empty">No archived group performances match this champion and role.</div>}</div>
     </section>
     <a className="item-source-link champion-source-link" href={championCatalog.sourceUrl} target="_blank" rel="noreferrer">View official League Classic champion source ↗</a>
+    </>}
   </section>;
 }
 
