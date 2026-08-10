@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient, type User } from "@supabase/supabase-js";
 import CollectionsArchive from "./collections";
 import classicItemCatalog from "./data/classic-items.json";
+import {CommunityVoice,Roadmap} from "./community";
 
 type Match = { id:number; gameId:string; date:string; groupSize:number; side:string; result:string; duration:number; notes:string; createdBy?:string|null };
 type FinalItem = { itemId:number; slot:number; quantity:number; capturedName?:string|null };
@@ -16,7 +17,7 @@ type PendingSubmission = { id:number; submittedBy:string; submitterEmail:string;
 type FeedbackStatus = "Backlog"|"Accepted"|"Declined"|"In Progress"|"Review Pending"|"Complete"|"DELETED";
 type FeedbackItem = { id:number; subject:string; context:string; status:FeedbackStatus; submittedBy:string; submitterEmail:string; createdAt:string; updatedAt:string };
 type TrackerData = { matches:Match[]; performances:Performance[]; players:string[]; champions:string[]; roles:string[] };
-type Tab = "overview" | "players" | "roles" | "insights" | "matches" | "collections" | "feedback" | "review" | "audit" | "accounts" | "add";
+type Tab = "overview" | "players" | "roles" | "insights" | "matches" | "collections" | "community" | "roadmap" | "feedback" | "review" | "audit" | "accounts" | "add";
 type PlayerMatchScope = "group" | "solo" | "all";
 
 const supabase=createClient("https://vkxbjvjyfxkrfktdbmsu.supabase.co","sb_publishable_bGA7V1Di86IiVsmYErH3iA_zEnXNLGy");
@@ -245,6 +246,7 @@ export default function Home() {
   const [playerFilters,setPlayerFilters] = useState<string[]>([]);
   const [expanded,setExpanded] = useState<number|null>(null);
   const [editingMatch,setEditingMatch] = useState<number|null>(null);
+  const [roadmapRefresh,setRoadmapRefresh] = useState(0);
   const [feedbackSubject,setFeedbackSubject] = useState("");
   const [feedbackContext,setFeedbackContext] = useState("");
   const [feedbackStatus,setFeedbackStatus] = useState("");
@@ -252,8 +254,8 @@ export default function Home() {
   const [feedbackView,setFeedbackView] = useState<"submit"|"requests">("submit");
   const [feedbackItems,setFeedbackItems] = useState<FeedbackItem[]>([]);
   const [feedbackLoading,setFeedbackLoading] = useState(false);
-  const [accountDirectory,setAccountDirectory] = useState<AccountIdentity[]>([]);
   const [showDeclined,setShowDeclined] = useState(false);
+  const [accountDirectory,setAccountDirectory] = useState<AccountIdentity[]>([]);
   const [selectedSide,setSelectedSide] = useState<string|null>(null);
   const [showAllSideMatches,setShowAllSideMatches] = useState(false);
   const [sideMatchPage,setSideMatchPage] = useState(0);
@@ -352,13 +354,13 @@ export default function Home() {
     <aside className="sidebar">
       <div className="brand"><div className="brand-mark"><img src="./rabadons-cat-favicon.png" alt="Deathcap cat"/></div><div><b>WREQ</b><span>Classic Journey</span></div></div>
       <nav aria-label="Primary navigation">
-        {([['add','Log a Match','＋'],['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['insights','Insights','✦'],['matches','Matches','◫'],['collections','Collections','◆'],['feedback','Roadmap','⚑'],...(canModerate?[['review',`Review${pendingSubmissions.length?` (${pendingSubmissions.length})`:''}`,'!'],['audit','Audit','⌁'],['accounts','Accounts','⚙']]:[])] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);if(id==='review')setReviewingSubmission(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
+        {([['add','Log a Match','＋'],['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['insights','Insights','✦'],['matches','Matches','◫'],['collections','Collections','◆'],['community','Community Voice','◉'],['roadmap','Roadmap','⚑'],...(canModerate?[['review',`Review${pendingSubmissions.length?` (${pendingSubmissions.length})`:''}`,'!'],['audit','Audit','⌁'],['accounts','Accounts','⚙']]:[])] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);if(id==='review')setReviewingSubmission(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
       </nav>
       <button className="export" onClick={exportData}>⇩ Export archive</button>
     </aside>
 
     <main className="main">
-      <header><div><p className="eyebrow">LEAGUE OF LEGENDS • CLASSIC ERA</p><h1>{tab==="overview"?"Command Center":tab==="players"?"Player Archive":tab==="roles"?"Role Archive":tab==="insights"?"Archive Insights":tab==="matches"?"Match History":tab==="collections"?"Collections":tab==="feedback"?"Roadmap":tab==="review"?(reviewingSubmission?"Review Captured Match":"Review"):tab==="audit"?"Audit History":tab==="accounts"?"Account Management":editingMatch?`Edit Match #${editingMatch}`:"Log a Match"}</h1></div><div className="header-account-area"><div className="season"><span>Season archive</span><b>Summer 2026</b></div><div className="account-summary">{user?<><span>SIGNED IN · {currentProfile?.role?.toUpperCase()??'USER'}</span><b>{user.email}</b><small>{canModerate?'Archive moderation access':'Personal match management'} · {data.matches.length} shared matches</small><button className="auth-link" onClick={()=>supabase.auth.signOut()}>Sign out</button></>:<><span>CONTRIBUTOR ACCESS</span><b>Sign in to log matches</b><input aria-label="Email address" type="email" placeholder="you@example.com" value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/><button className="auth-link" disabled={!authEmail} onClick={sendMagicLink}>Email me a sign-in link</button>{authMessage&&<small>{authMessage}</small>}</>}</div></div></header>
+      <header><div><p className="eyebrow">LEAGUE OF LEGENDS • CLASSIC ERA</p><h1>{tab==="overview"?"Command Center":tab==="players"?"Player Archive":tab==="roles"?"Role Archive":tab==="insights"?"Archive Insights":tab==="matches"?"Match History":tab==="collections"?"Collections":tab==="community"?"Community Voice":tab==="roadmap"||tab==="feedback"?"Roadmap":tab==="review"?(reviewingSubmission?"Review Captured Match":"Review"):tab==="audit"?"Audit History":tab==="accounts"?"Account Management":editingMatch?`Edit Match #${editingMatch}`:"Log a Match"}</h1></div><div className="header-account-area"><div className="season"><span>Season archive</span><b>Summer 2026</b></div><div className="account-summary">{user?<><span>SIGNED IN · {currentProfile?.role?.toUpperCase()??'USER'}</span><b>{user.email}</b><small>{canModerate?'Archive moderation access':'Personal match management'} · {data.matches.length} shared matches</small><button className="auth-link" onClick={()=>supabase.auth.signOut()}>Sign out</button></>:<><span>CONTRIBUTOR ACCESS</span><b>Sign in to log matches</b><input aria-label="Email address" type="email" placeholder="you@example.com" value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/><button className="auth-link" disabled={!authEmail} onClick={sendMagicLink}>Email me a sign-in link</button>{authMessage&&<small>{authMessage}</small>}</>}</div></div></header>
 
       {tab==="overview" && <>
         <section className="hero-card"><div><p>THE ARCHIVE</p><h2>WREQELODEON’S Classic story,<br/><em>one match at a time.</em></h2><span>Performances, Metrics, and memorable moments from the Rift.</span></div><div className="hero-ring"><b>{pct(stats.winRate)}</b><span>WIN RATE</span></div></section>
@@ -392,6 +394,10 @@ export default function Home() {
       </>}
 
       {tab==="collections"&&<CollectionsArchive data={data}/>}
+
+      {tab==="community"&&<CommunityVoice user={user} canModerate={canModerate} onWorkCreated={()=>setRoadmapRefresh(value=>value+1)}/>}
+
+      {tab==="roadmap"&&<Roadmap user={user} canModerate={canModerate} refreshKey={roadmapRefresh}/>}
 
       {tab==="roles"&&<RolesArchive data={groupData} onOpenChampion={openPlayerChampion}/>}
 
