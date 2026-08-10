@@ -6,16 +6,16 @@ import "./collections.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://example.com"),
   title: "Wreqelodeon's League Classic Match Archive",
-  description: "Performances, metrics, and memorable moments from the Rift.",
+  description: "Match histories, player performances, and memorable moments from the Classic Rift.",
   openGraph: {
     title: "Wreqelodeon's League Classic Match Archive",
-    description: "Performances, metrics, and memorable moments from the Rift.",
+    description: "Match histories, player performances, and memorable moments from the Classic Rift.",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Wreqelodeon's League Classic Match Archive",
-    description: "Performances, metrics, and memorable moments from the Rift.",
+    description: "Match histories, player performances, and memorable moments from the Classic Rift.",
     images: ["/og.png"],
   },
 };
