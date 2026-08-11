@@ -50,6 +50,7 @@ const championPortrait=(champion:ChampionRecord)=>`https://ddragon.leagueoflegen
 const championAsset=(group:"spell"|"passive",file:string)=>`https://ddragon.leagueoflegends.com/cdn/${championCatalog.version}/img/mode/classic/${group}/${file}`;
 const playerLabels:Record<string,string>={Austin:"sweetberryW","Blake D.":"Retrax","Blake G.":"Kelando",Dane:"Bishop",Jake:"Rook",Kaleb:"Tokoyami",Rachel:"Amicias",Steven:"Knada",Zach:"Valabrax"};
 const statNames:Record<string,string>={hp:"Health",hpperlevel:"Health / level",mp:"Resource",mpperlevel:"Resource / level",movespeed:"Move speed",armor:"Armor",armorperlevel:"Armor / level",spellblock:"Magic resist",spellblockperlevel:"Magic resist / level",attackrange:"Attack range",hpregen:"Health regen",hpregenperlevel:"Health regen / level",mpregen:"Resource regen",mpregenperlevel:"Resource regen / level",crit:"Critical chance",critperlevel:"Critical / level",attackdamage:"Attack damage",attackdamageperlevel:"Attack damage / level",attackspeed:"Attack speed",attackspeedperlevel:"Attack speed / level"};
+const archiveChampionName=(name:string)=>name==="Nunu & Willump"?"Nunu":name;
 const championStatKeys=["hp","hpperlevel","mp","mpperlevel","movespeed","armor","armorperlevel","spellblock","spellblockperlevel","attackrange","hpregen","hpregenperlevel","mpregen","mpregenperlevel","crit","critperlevel","attackdamage","attackdamageperlevel","attackspeed","attackspeedperlevel"] as const;
 type ChampionStatKey=typeof championStatKeys[number];
 
@@ -90,7 +91,7 @@ function ChampionsCollection({archive}:{archive:ArchiveData}) {
   const selected=champions.find(champion=>champion.id===selectedId)??filtered[0]??champions[0];
   const groupMatches=archive.matches.filter(match=>match.groupSize>=2);
   const groupMatchIds=new Set(groupMatches.map(match=>match.id));
-  const championRows=archive.performances.filter(row=>row.tracked&&row.champion===selected.name&&groupMatchIds.has(row.matchId));
+  const championRows=archive.performances.filter(row=>row.tracked&&row.champion===archiveChampionName(selected.name)&&groupMatchIds.has(row.matchId));
   const roles=Array.from(new Set(championRows.map(row=>row.role))).sort();
   const tableRows=Array.from(new Set(championRows.filter(row=>role==="All roles"||row.role===role).map(row=>row.player))).map(player=>{
     const rows=championRows.filter(row=>row.player===player&&(role==="All roles"||row.role===role));

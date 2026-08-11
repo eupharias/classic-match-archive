@@ -28,6 +28,8 @@ const num = (n:number, digits=1) => Number.isFinite(n) ? n.toFixed(digits) : "â€
 const durationInput = (minutes:number) => { const total=Math.round(minutes*60); return `${Math.floor(total/3600)}:${String(Math.floor(total%3600/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`; };
 const roleColors:Record<string,string>={Top:'#d89b43',Jungle:'#45a56a',Mid:'#5c92d8',Bot:'#a76bd1',Support:'#d56575'};
 const championIcon=(name:string)=>`./champions/${name.toLowerCase().replace(/[^a-z0-9]/g,'')}.png`;
+const championImportAliases:Record<string,string>={"nunu & willump":"Nunu","nunu and willump":"Nunu"};
+const importedChampionName=(submitted:string,champions:string[])=>{const trimmed=submitted.trim();const alias=championImportAliases[trimmed.toLowerCase()]??trimmed;return champions.find(candidate=>candidate.localeCompare(alias,undefined,{sensitivity:"accent"})===0)};
 const roleIcon=(role:string)=>`./roles/${role.toLowerCase()}.svg`;
 const classicItems=classicItemCatalog.data as Record<string,{name:string;description?:string;plaintext?:string;gold:{total:number;sell:number;purchasable?:boolean};stats?:Record<string,number>;tags?:string[]}>;
 const classicItemIcon=(itemId:number)=>`https://ddragon.leagueoflegends.com/cdn/${classicItemCatalog.version}/img/item/${itemId}.png`;
@@ -454,9 +456,9 @@ function AddMatch({data,initial,initialPerformances,onSave,onCancel}:{data:Track
       const normalized=imported.map((row:Record<string,unknown>)=>{
         const submittedPlayer=String(row.player??'').trim();
         const player=data.players.find(candidate=>candidate.localeCompare(submittedPlayer,undefined,{sensitivity:'accent'})===0||playerName(candidate).localeCompare(submittedPlayer,undefined,{sensitivity:'accent'})===0);
-        const champion=String(row.champion??'');const role=String(row.role??'');
+        const submittedChampion=String(row.champion??'').trim();const champion=importedChampionName(submittedChampion,data.champions);const role=String(row.role??'');
         if(!player)throw new Error(`Unknown archive player: ${submittedPlayer}`);
-        if(!data.champions.includes(champion))throw new Error(`Unknown champion: ${champion}. Add it to the champion catalog first.`);
+        if(!champion)throw new Error(`Unknown champion: ${submittedChampion}. Add it to the champion catalog first.`);
         if(!data.roles.includes(role))throw new Error(`Unknown role: ${role}`);
         const items=Array.isArray(row.items)?row.items.map((entry:Record<string,unknown>)=>({itemId:Number(entry.item_id),slot:Number(entry.slot),quantity:Math.max(1,Number(entry.quantity)||1),capturedName:String(entry.captured_name??'')})).filter((entry:FinalItem)=>entry.itemId>0&&entry.slot>=0&&entry.slot<=6):[];
         return {player,champion,role,kills:Number(row.kills)||0,deaths:Number(row.deaths)||0,assists:Number(row.assists)||0,cs:Number(row.cs)||0,vision:Number(row.vision)||0,items};
