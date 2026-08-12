@@ -64,6 +64,7 @@
 
   .app-shell .sidebar nav button {
     width:100%;
+    min-height:52px;
     min-width:0;
     justify-content:center;
     gap:0;
@@ -84,7 +85,14 @@
   }
 
   .sidebar nav button i {
-    flex:0 0 20px;
+    flex:0 0 28px;
+    width:28px;
+    height:28px;
+    display:grid;
+    place-items:center;
+    font-size:23px!important;
+    line-height:1;
+    color:currentColor;
   }
 
   .app-shell .export {
