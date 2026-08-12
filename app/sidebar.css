@@ -62,6 +62,16 @@
     transition-delay:.08s;
   }
 
+  .sidebar nav {
+    width:60px;
+    transition:width .34s cubic-bezier(.22,.75,.24,1);
+  }
+
+  .app-shell:has(.sidebar:hover) .sidebar nav,
+  .app-shell:has(.sidebar:focus-within) .sidebar nav {
+    width:208px;
+  }
+
   .app-shell .sidebar nav button {
     width:100%;
     min-height:52px;
