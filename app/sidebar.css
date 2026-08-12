@@ -69,10 +69,10 @@
     justify-content:center;
     gap:0;
     padding:13px 10px;
-    font-size:0!important;
+    font-size:12px!important;
     white-space:nowrap;
     transition:gap .24s ease,padding .24s ease,
-      background-color .15s,color .15s,font-size .12s ease;
+      background-color .15s,color .15s;
   }
 
   .app-shell:has(.sidebar:hover) .sidebar nav button,
@@ -93,6 +93,24 @@
     font-size:23px!important;
     line-height:1;
     color:currentColor;
+  }
+
+  .sidebar nav button>span {
+    display:block;
+    max-width:0;
+    opacity:0;
+    overflow:hidden;
+    transform:translateX(-8px);
+    transition:max-width .3s cubic-bezier(.22,.75,.24,1),
+      opacity .18s ease,transform .3s ease;
+  }
+
+  .app-shell:has(.sidebar:hover) .sidebar nav button>span,
+  .app-shell:has(.sidebar:focus-within) .sidebar nav button>span {
+    max-width:170px;
+    opacity:1;
+    transform:none;
+    transition-delay:.06s;
   }
 
   .app-shell .export {

@@ -356,7 +356,7 @@ export default function Home() {
     <aside className="sidebar">
       <div className="brand"><div className="brand-mark"><img src="./rabadons-cat-favicon.png" alt="Deathcap cat"/></div><div><b>WREQ</b><span>Classic Journey</span></div></div>
       <nav aria-label="Primary navigation">
-        {([['add','Log a Match','＋'],['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['insights','Insights','✦'],['matches','Matches','◫'],['collections','Collections','◆'],['community','Community Voice','◉'],['roadmap','Roadmap','⚑'],...(canModerate?[['review',`Review${pendingSubmissions.length?` (${pendingSubmissions.length})`:''}`,'!'],['audit','Audit','⌁'],['accounts','Accounts','⚙']]:[])] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);if(id==='review')setReviewingSubmission(null);setTab(id)}}><i>{icon}</i>{label}</button>)}
+        {([['add','Log a Match','＋'],['overview','Overview','⌂'],['players','Players','♙'],['roles','Roles','◇'],['insights','Insights','✦'],['matches','Matches','◫'],['collections','Collections','◆'],['community','Community Voice','◉'],['roadmap','Roadmap','⚑'],...(canModerate?[['review',`Review${pendingSubmissions.length?` (${pendingSubmissions.length})`:''}`,'!'],['audit','Audit','⌁'],['accounts','Accounts','⚙']]:[])] as [Tab,string,string][]).map(([id,label,icon])=><button key={id} className={tab===id?'active':''} onClick={()=>{if(id==='add')setEditingMatch(null);if(id==='review')setReviewingSubmission(null);setTab(id)}}><i aria-hidden="true">{icon}</i><span>{label}</span></button>)}
       </nav>
       <button className="export" onClick={exportData}>⇩ Export archive</button>
     </aside>
