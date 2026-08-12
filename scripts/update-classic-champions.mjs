@@ -1,6 +1,7 @@
 import { writeFile } from "node:fs/promises";
 
-const version=process.argv[2]??"16.15.1";
+const versions=await fetch("https://ddragon.leagueoflegends.com/api/versions.json").then(response=>{if(!response.ok)throw new Error(`Could not load Data Dragon versions (${response.status})`);return response.json()});
+const version=process.argv[2]??versions[0];
 const root=`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/mode/classic`;
 const sourceUrl=`${root}/champion.json`;
 const summary=await fetch(sourceUrl).then(response=>{if(!response.ok)throw new Error(`Champion summary failed: ${response.status}`);return response.json()});

@@ -1,8 +1,8 @@
 {
-  "version": "16.15.1",
-  "generatedAt": "2026-08-09T17:40:50.165Z",
-  "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/mode/classic/champion.json",
-  "championCount": 60,
+  "version": "16.16.1",
+  "generatedAt": "2026-08-12T21:04:32.263Z",
+  "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.16.1/data/en_US/mode/classic/champion.json",
+  "championCount": 63,
   "data": {
     "Jade_Ahri": {
       "id": "Jade_Ahri",
@@ -830,6 +830,784 @@
       },
       "recommended": []
     },
+    "Jade_Akali": {
+      "id": "Jade_Akali",
+      "key": "60084",
+      "name": "Akali",
+      "title": "The Fist of Shadow",
+      "image": {
+        "full": "Jade_Akali.png",
+        "sprite": "champion0.png",
+        "group": "champion",
+        "x": 48,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "skins": [
+        {
+          "id": "60084000",
+          "num": 0,
+          "name": "default",
+          "chromas": false
+        },
+        {
+          "id": "60084002",
+          "num": 2,
+          "name": "Infernal Akali",
+          "chromas": false
+        },
+        {
+          "id": "60084005",
+          "num": 5,
+          "name": "Blood Moon Akali",
+          "chromas": false
+        },
+        {
+          "id": "60084061",
+          "num": 61,
+          "name": "Star Guardian Akali",
+          "chromas": false
+        },
+        {
+          "id": "60084062",
+          "num": 62,
+          "name": "Star Guardian Akali (Ruby)",
+          "chromas": false,
+          "parentSkin": 61
+        },
+        {
+          "id": "60084063",
+          "num": 63,
+          "name": "Star Guardian Akali (Catseye)",
+          "chromas": false,
+          "parentSkin": 61
+        },
+        {
+          "id": "60084064",
+          "num": 64,
+          "name": "Star Guardian Akali (Turquoise)",
+          "chromas": false,
+          "parentSkin": 61
+        },
+        {
+          "id": "60084065",
+          "num": 65,
+          "name": "Star Guardian Akali (Emerald)",
+          "chromas": false,
+          "parentSkin": 61
+        },
+        {
+          "id": "60084066",
+          "num": 66,
+          "name": "Star Guardian Akali (Rose Quartz)",
+          "chromas": false,
+          "parentSkin": 61
+        },
+        {
+          "id": "60084067",
+          "num": 67,
+          "name": "Star Guardian Akali (Brilliant)",
+          "chromas": false,
+          "parentSkin": 61
+        },
+        {
+          "id": "60084070",
+          "num": 70,
+          "name": "Coven Akali",
+          "chromas": false
+        },
+        {
+          "id": "60084071",
+          "num": 71,
+          "name": "Prestige Coven Akali",
+          "chromas": false
+        },
+        {
+          "id": "60084072",
+          "num": 72,
+          "name": "Coven Akali (Ruby)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084073",
+          "num": 73,
+          "name": "Coven Akali (Catseye)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084074",
+          "num": 74,
+          "name": "Coven Akali (Sapphire)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084075",
+          "num": 75,
+          "name": "Coven Akali (Emerald)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084076",
+          "num": 76,
+          "name": "Coven Akali (Amethyst)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084077",
+          "num": 77,
+          "name": "Coven Akali (Tanzanite)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084078",
+          "num": 78,
+          "name": "Coven Akali (Turquoise)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084079",
+          "num": 79,
+          "name": "Coven Akali (Rose Quartz)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084080",
+          "num": 80,
+          "name": "Coven Akali (Destined)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084081",
+          "num": 81,
+          "name": "Coven Akali (Profane)",
+          "chromas": false,
+          "parentSkin": 70
+        },
+        {
+          "id": "60084301",
+          "num": 301,
+          "name": "Classic Akali",
+          "chromas": false
+        },
+        {
+          "id": "60084302",
+          "num": 302,
+          "name": "Classic Akali (Stinger)",
+          "chromas": false,
+          "parentSkin": 301
+        }
+      ],
+      "lore": "- Akali's Passive provides bonuses based on bonus Attack Damage and Ability Power\\n- Akali's Q is a targetted ability \\n- Akali's E does AOE damage around her\\n- Akali's R is a targetted dash",
+      "blurb": "- Akali's Passive provides bonuses based on bonus Attack Damage and Ability Power\\n- Akali's Q is a targetted ability \\n- Akali's E does AOE damage around her\\n- Akali's R is a targetted dash",
+      "allytips": [],
+      "enemytips": [],
+      "tags": [
+        "Assassin"
+      ],
+      "partype": "Energy",
+      "info": {
+        "attack": 5,
+        "defense": 3,
+        "magic": 8,
+        "difficulty": 7
+      },
+      "stats": {
+        "hp": 530,
+        "hpperlevel": 85,
+        "mp": 200,
+        "mpperlevel": 0,
+        "movespeed": 350,
+        "armor": 20,
+        "armorperlevel": 3.5,
+        "spellblock": 31.25,
+        "spellblockperlevel": 1.25,
+        "attackrange": 125,
+        "hpregen": 7.9,
+        "hpregenperlevel": 0.65,
+        "mpregen": 50,
+        "mpregenperlevel": 0,
+        "crit": 0,
+        "critperlevel": 0,
+        "attackdamage": 56.2,
+        "attackdamageperlevel": 0,
+        "attackspeedperlevel": 3.1,
+        "attackspeed": 0.694
+      },
+      "spells": [
+        {
+          "id": "Jade_AkaliQ",
+          "name": "Mark of the Assassin",
+          "description": "Akali spins her kama at a target enemy to deal magic damage and mark the target for 6 seconds. Akali's melee attacks against a marked target will trigger and consume the mark to cause additional damage and restore Energy.",
+          "tooltip": "Akali throws her kama at a target enemy to deal <magicDamage>{{ initialdamage }} magic damage</magicDamage> and mark the target for 6 seconds.<br /><br />Akali's melee attacks against a marked target will consume the mark to cause <magicDamage>{{ procdamage }} magic damage</magicDamage> and restore <keywordMajor>{{ energyreturn }} Energy</keywordMajor>.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Initial Damage",
+              "Secondary Damage",
+              "Energy Restore",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ initialdamagebase }} -> {{ initialdamagebaseNL }}",
+              "{{ procdamagebase }} -> {{ procdamagebaseNL }}",
+              "{{ energyreturn }} -> {{ energyreturnNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            6,
+            5.5,
+            5,
+            4.5,
+            4
+          ],
+          "cooldownBurn": "6/5.5/5/4.5/4",
+          "cost": [
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "costBurn": "60",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            550,
+            550,
+            550,
+            550,
+            550
+          ],
+          "rangeBurn": "550",
+          "image": {
+            "full": "Jade_AkaliQ.png",
+            "sprite": "spell0.png",
+            "group": "spell",
+            "x": 0,
+            "y": 96,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_AkaliW",
+          "name": "Twilight Shroud",
+          "description": "Akali throws down a cover of smoke. While inside the area, Akali gains Armor and Magic Resist and becomes invisible. Attacking or using abilities will briefly reveal her. Enemies inside the smoke have their Movement Speed reduced.",
+          "tooltip": "Akali throws down a cover of smoke that lasts for 8 seconds. While inside the area, Akali gains <scaleArmor>{{ totalresists }} Armor</scaleArmor> and <scaleMR>{{ totalresists }} Magic Resist</scaleMR> and becomes <keywordStealth>Invisible</keywordStealth>. Attacking or using abilities will briefly reveal her.<br /><br />Enemies inside the smoke are <status>Slowed</status> by {{ slowamount }}%.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Armor Bonus",
+              "Magic Resist Bonus",
+              "Slow Amount",
+              "@AbilityResourceName@ Cost"
+            ],
+            "effect": [
+              "{{ totalresists }} -> {{ totalresistsNL }}",
+              "{{ totalresists }} -> {{ totalresistsNL }}",
+              "{{ slowamount }}% -> {{ slowamountNL }}%",
+              "{{ cost }} -> {{ costNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "cooldownBurn": "20",
+          "cost": [
+            80,
+            75,
+            70,
+            65,
+            60
+          ],
+          "costBurn": "80/75/70/65/60",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              140,
+              140,
+              140,
+              140,
+              140
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              250,
+              250,
+              250,
+              250,
+              250
+            ],
+            [
+              60,
+              65,
+              70,
+              75,
+              80
+            ],
+            [
+              0.3,
+              0.35,
+              0.4,
+              0.45,
+              0.5
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              5,
+              5.5,
+              6,
+              6.5,
+              7
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "140",
+            "4",
+            "0",
+            "250",
+            "60/65/70/75/80",
+            "0.3/0.35/0.4/0.45/0.5",
+            "1",
+            "0",
+            "5/5.5/6/6.5/7",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            700,
+            700,
+            700,
+            700,
+            700
+          ],
+          "rangeBurn": "700",
+          "image": {
+            "full": "Jade_AkaliW.png",
+            "sprite": "spell0.png",
+            "group": "spell",
+            "x": 48,
+            "y": 96,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_AkaliE",
+          "name": "Crescent Slash",
+          "description": "Akali flourishes her kamas, dealing damage based on her Attack Damage and Ability Power.",
+          "tooltip": "Akali flourishes her kamas, slicing nearby enemies for <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. {{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Base Damage",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            7,
+            6,
+            5,
+            4,
+            3
+          ],
+          "cooldownBurn": "7/6/5/4/3",
+          "cost": [
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "costBurn": "60",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            325,
+            325,
+            325,
+            325,
+            325
+          ],
+          "rangeBurn": "325",
+          "image": {
+            "full": "Jade_AkaliE.png",
+            "sprite": "spell0.png",
+            "group": "spell",
+            "x": 96,
+            "y": 96,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_AkaliR",
+          "name": "Shadow Dance",
+          "description": "Akali moves through shadows to quickly strike her target, dealing damage and consuming an Essence of Shadow charge. Akali recharges Essence of Shadow charges both periodically and upon kills and assists, max 3 stacks.",
+          "tooltip": "Akali moves through shadows to quickly strike her target, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.<br /><br />Akali stores an <spellName>Essence of Shadow</spellName> on kills and assists as well as every {{ ammorechargetime }} seconds up to 3 total.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Damage",
+              "Essence Refresh Timer",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 3,
+          "cooldown": [
+            2,
+            1.5,
+            1
+          ],
+          "cooldownBurn": "2/1.5/1",
+          "cost": [
+            0,
+            0,
+            0
+          ],
+          "costBurn": "0",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              3,
+              3
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "3",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": "1 Essence Of Shadow",
+          "maxammo": "3",
+          "range": [
+            675,
+            675,
+            675
+          ],
+          "rangeBurn": "675",
+          "image": {
+            "full": "Jade_AkaliR.png",
+            "sprite": "spell0.png",
+            "group": "spell",
+            "x": 144,
+            "y": 96,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "1 Essence Of Shadow"
+        }
+      ],
+      "passive": {
+        "name": "Twin Disciplines",
+        "description": "Gain damage on hit based on ability power<br>Gain spell vamp based on attack damage",
+        "image": {
+          "full": "Jade_Akali_P.png",
+          "sprite": "passive0.png",
+          "group": "passive",
+          "x": 48,
+          "y": 0,
+          "w": 48,
+          "h": 48
+        }
+      },
+      "recommended": []
+    },
     "Jade_Alistar": {
       "id": "Jade_Alistar",
       "key": "60012",
@@ -839,7 +1617,7 @@
         "full": "Jade_Alistar.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 48,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -1249,7 +2027,7 @@
             "full": "Jade_AlistarQ.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -1392,7 +2170,7 @@
             "full": "Jade_AlistarW.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
@@ -1533,7 +2311,7 @@
             "full": "Jade_AlistarE.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
@@ -1650,7 +2428,7 @@
             "full": "Jade_AlistarR.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48
@@ -1665,7 +2443,7 @@
           "full": "Jade_Alistar_E.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 48,
+          "x": 96,
           "y": 0,
           "w": 48,
           "h": 48
@@ -1682,7 +2460,7 @@
         "full": "Jade_Amumu.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 96,
+        "x": 144,
         "y": 0,
         "w": 48,
         "h": 48
@@ -1961,25 +2739,25 @@
           "effect": [
             null,
             [
-              70,
-              95,
-              120,
-              145,
-              170
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1800,
-              1800,
-              1800,
-              1800,
-              1800
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -2033,9 +2811,9 @@
           ],
           "effectBurn": [
             null,
-            "70/95/120/145/170",
-            "1",
-            "1800",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -2059,7 +2837,7 @@
             "full": "Jade_AmumuBandageToss.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
@@ -2200,7 +2978,7 @@
             "full": "Jade_AmumuAuraofDespair.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48
@@ -2343,8 +3121,8 @@
             "full": "Jade_AmumuTantrum.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -2354,7 +3132,7 @@
           "id": "Jade_AmumuCurseoftheSadMummy",
           "name": "Curse of the Sad Mummy",
           "description": "Amumu entangles surrounding enemy units in bandages, applying his <keywordMajor>Curse</keywordMajor>, damaging and stunning them.",
-          "tooltip": "Amumu entangles surrounding enemy units, <status>Stunning</status> for {{ debuffduration }} seconds and dealing <magicDamage>{{ rcalculateddamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+          "tooltip": "Amumu entangles surrounding enemy units, dealing <magicDamage>{{ rcalculateddamage }} Magic Damage</magicDamage> and preventing attacks and movement for {{ debuffduration }} seconds.{{ spellmodifierdescriptionappend }}",
           "leveltip": {
             "label": [
               "Damage Dealt",
@@ -2460,8 +3238,8 @@
             "full": "Jade_AmumuCurseoftheSadMummy.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -2475,7 +3253,7 @@
           "full": "Jade_Amumu_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 96,
+          "x": 144,
           "y": 0,
           "w": 48,
           "h": 48
@@ -2492,7 +3270,7 @@
         "full": "Jade_Anivia.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 144,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -2828,8 +3606,8 @@
             "full": "Jade_AniviaFlashFrost.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -2969,8 +3747,8 @@
             "full": "Jade_AniviaCrystallize.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -3110,7 +3888,7 @@
             "full": "Jade_AniviaFrostbite.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 144,
             "w": 48,
             "h": 48
@@ -3225,7 +4003,7 @@
             "full": "Jade_AniviaGlacialStorm.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 144,
             "w": 48,
             "h": 48
@@ -3240,7 +4018,7 @@
           "full": "Jade_Anivia_P.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 144,
+          "x": 192,
           "y": 0,
           "w": 48,
           "h": 48
@@ -3257,7 +4035,7 @@
         "full": "Jade_Annie.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 192,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -3573,7 +4351,7 @@
             "full": "Jade_AnnieQ.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
@@ -3714,7 +4492,7 @@
             "full": "Jade_AnnieW.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48
@@ -3857,7 +4635,7 @@
             "full": "Jade_AnnieE.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
@@ -3976,7 +4754,7 @@
             "full": "Jade_AnnieR.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
@@ -3991,7 +4769,7 @@
           "full": "Jade_Annie_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 192,
+          "x": 240,
           "y": 0,
           "w": 48,
           "h": 48
@@ -4008,7 +4786,7 @@
         "full": "Jade_Ashe.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 240,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4179,7 +4957,7 @@
         "mpregenperlevel": 0.4,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 49,
+        "attackdamage": 49.15,
         "attackdamageperlevel": 0,
         "attackspeedperlevel": 4,
         "attackspeed": 0.658
@@ -4315,10 +5093,10 @@
           "rangeBurn": "400",
           "image": {
             "full": "Jade_AsheQ.png",
-            "sprite": "spell0.png",
+            "sprite": "spell1.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -4456,10 +5234,10 @@
           "rangeBurn": "1200",
           "image": {
             "full": "Jade_AsheVolley.png",
-            "sprite": "spell0.png",
+            "sprite": "spell1.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -4597,10 +5375,10 @@
           "rangeBurn": "2500/3250/4000/4750/5500",
           "image": {
             "full": "Jade_AsheSpiritOfTheHawk.png",
-            "sprite": "spell0.png",
+            "sprite": "spell1.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -4712,10 +5490,10 @@
           "rangeBurn": "25000",
           "image": {
             "full": "Jade_AsheEnchantedCrystalArrow.png",
-            "sprite": "spell0.png",
+            "sprite": "spell1.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -4729,7 +5507,7 @@
           "full": "Jade_Ashe_P.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 240,
+          "x": 288,
           "y": 0,
           "w": 48,
           "h": 48
@@ -4746,7 +5524,7 @@
         "full": "Jade_Blitzcrank.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 288,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4981,13 +5759,13 @@
           },
           "maxrank": 5,
           "cooldown": [
+            22,
+            21,
             20,
             19,
-            18,
-            17,
-            16
+            18
           ],
-          "cooldownBurn": "20/19/18/17/16",
+          "cooldownBurn": "22/21/20/19/18",
           "cost": [
             120,
             120,
@@ -5000,11 +5778,11 @@
           "effect": [
             null,
             [
-              90,
-              140,
-              190,
-              240,
-              290
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -5072,7 +5850,7 @@
           ],
           "effectBurn": [
             null,
-            "90/140/190/240/290",
+            "0",
             "0",
             "0",
             "0",
@@ -5098,7 +5876,7 @@
             "full": "Jade_BlitzcrankRocketGrab.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 0,
             "w": 48,
             "h": 48
@@ -5122,13 +5900,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            15,
-            15,
-            15,
-            15,
-            15
+            20,
+            20,
+            20,
+            20,
+            20
           ],
-          "cooldownBurn": "15",
+          "cooldownBurn": "20",
           "cost": [
             75,
             75,
@@ -5239,7 +6017,7 @@
             "full": "Jade_BlitzcrankOverdrive.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -5378,7 +6156,7 @@
             "full": "Jade_BlitzcrankPowerFist.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 0,
             "w": 48,
             "h": 48
@@ -5493,7 +6271,7 @@
             "full": "Jade_BlitzcrankStaticField.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 0,
             "w": 48,
             "h": 48
@@ -5508,7 +6286,7 @@
           "full": "Jade_Blitzcrank_ManaBarrier.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 288,
+          "x": 336,
           "y": 0,
           "w": 48,
           "h": 48
@@ -5525,7 +6303,7 @@
         "full": "Jade_Brand.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 336,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -5873,7 +6651,7 @@
             "full": "Jade_BrandQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -6014,7 +6792,7 @@
             "full": "Jade_BrandW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48
@@ -6157,8 +6935,8 @@
             "full": "Jade_BrandE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -6272,8 +7050,8 @@
             "full": "Jade_BrandR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -6287,7 +7065,7 @@
           "full": "Jade_BrandP.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 336,
+          "x": 384,
           "y": 0,
           "w": 48,
           "h": 48
@@ -6304,7 +7082,7 @@
         "full": "Jade_Chogath.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 384,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -6615,8 +7393,8 @@
             "full": "Jade_ChogathQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -6758,8 +7536,8 @@
             "full": "Jade_ChogathW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -6897,7 +7675,7 @@
             "full": "Jade_ChogathE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 48,
             "w": 48,
             "h": 48
@@ -7012,7 +7790,7 @@
             "full": "Jade_ChogathR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48
@@ -7027,7 +7805,7 @@
           "full": "GreenTerror_TailSpike.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 384,
+          "x": 432,
           "y": 0,
           "w": 48,
           "h": 48
@@ -7044,8 +7822,8 @@
         "full": "Jade_Corki.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 432,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -7440,7 +8218,7 @@
             "full": "Jade_CorkiQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 48,
             "w": 48,
             "h": 48
@@ -7581,7 +8359,7 @@
             "full": "Jade_CorkiW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 48,
             "w": 48,
             "h": 48
@@ -7724,7 +8502,7 @@
             "full": "Jade_CorkiE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 48,
             "w": 48,
             "h": 48
@@ -7839,7 +8617,7 @@
             "full": "Jade_CorkiR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 48,
             "w": 48,
             "h": 48
@@ -7854,8 +8632,8 @@
           "full": "Jade_Corki_RapidReload.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 432,
-          "y": 0,
+          "x": 0,
+          "y": 48,
           "w": 48,
           "h": 48
         }
@@ -7871,7 +8649,7 @@
         "full": "Jade_DrMundo.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 0,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
@@ -8186,8 +8964,8 @@
             "full": "Jade_DrMundoQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 288,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -8329,8 +9107,8 @@
             "full": "Jade_DrMundoW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -8472,8 +9250,8 @@
             "full": "Jade_DrMundoE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -8490,7 +9268,7 @@
               "Move Speed"
             ],
             "effect": [
-              "{{ factortt*100.000000 }}% -> {{ factorttnl*100.000000 }}%",
+              "{{ maxhealthregenpercent }}% -> {{ maxhealthregenpercentNL }}%",
               "{{ speedmod*100.000000 }}% -> {{ speedmodnl*100.000000 }}%"
             ]
           },
@@ -8587,8 +9365,8 @@
             "full": "Jade_DrMundoR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -8602,7 +9380,7 @@
           "full": "Jade_DrMundo_P.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 0,
+          "x": 48,
           "y": 48,
           "w": 48,
           "h": 48
@@ -8619,7 +9397,7 @@
         "full": "Jade_Evelynn.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 48,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -8958,7 +9736,7 @@
             "full": "Jade_EvelynnQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -9099,7 +9877,7 @@
             "full": "Jade_EvelynnW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
@@ -9242,7 +10020,7 @@
             "full": "Jade_EvelynnE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
@@ -9361,7 +10139,7 @@
             "full": "Jade_EvelynnR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48
@@ -9376,7 +10154,7 @@
           "full": "Jade_Evelynn_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 48,
+          "x": 96,
           "y": 48,
           "w": 48,
           "h": 48
@@ -9393,7 +10171,7 @@
         "full": "Jade_Ezreal.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 96,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9770,7 +10548,7 @@
             "full": "Jade_EzrealQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
@@ -9913,7 +10691,7 @@
             "full": "Jade_EzrealW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48
@@ -10054,8 +10832,8 @@
             "full": "Jade_EzrealE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -10167,8 +10945,8 @@
             "full": "Jade_EzrealR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -10182,7 +10960,7 @@
           "full": "Jade_Ezreal_RisingSpellForce.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 96,
+          "x": 144,
           "y": 48,
           "w": 48,
           "h": 48
@@ -10199,7 +10977,7 @@
         "full": "Jade_Fiddlesticks.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 144,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10619,8 +11397,8 @@
             "full": "Jade_FiddlesticksQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -10764,8 +11542,8 @@
             "full": "Jade_FiddlesticksW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -10907,7 +11685,7 @@
             "full": "Jade_FiddlesticksE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 144,
             "w": 48,
             "h": 48
@@ -11024,7 +11802,7 @@
             "full": "Jade_FiddlesticksR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 144,
             "w": 48,
             "h": 48
@@ -11039,7 +11817,7 @@
           "full": "Jade_FiddlesticksP.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 144,
+          "x": 192,
           "y": 48,
           "w": 48,
           "h": 48
@@ -11056,7 +11834,7 @@
         "full": "Jade_Gangplank.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 192,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -11369,7 +12147,7 @@
             "full": "Jade_GangplankQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
@@ -11510,7 +12288,7 @@
             "full": "Jade_GangplankW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48
@@ -11657,7 +12435,7 @@
             "full": "Jade_GangplankE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
@@ -11772,7 +12550,7 @@
             "full": "Jade_GangplankR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
@@ -11787,7 +12565,7 @@
           "full": "Jade_Gangplank_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 192,
+          "x": 240,
           "y": 48,
           "w": 48,
           "h": 48
@@ -11804,7 +12582,7 @@
         "full": "Jade_Garen.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 240,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -11962,7 +12740,7 @@
         "spellblock": 31.25,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
-        "hpregen": 8.2,
+        "hpregen": 9,
         "hpregenperlevel": 0.75,
         "mpregen": 0,
         "mpregenperlevel": 0,
@@ -12108,10 +12886,10 @@
           "rangeBurn": "300",
           "image": {
             "full": "Jade_GarenQ.png",
-            "sprite": "spell1.png",
+            "sprite": "spell2.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -12249,10 +13027,10 @@
           "rangeBurn": "0",
           "image": {
             "full": "Jade_GarenW.png",
-            "sprite": "spell1.png",
+            "sprite": "spell2.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -12392,10 +13170,10 @@
           "rangeBurn": "325",
           "image": {
             "full": "Jade_GarenE.png",
-            "sprite": "spell1.png",
+            "sprite": "spell2.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -12420,11 +13198,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            160,
-            120,
+            140,
+            110,
             80
           ],
-          "cooldownBurn": "160/120/80",
+          "cooldownBurn": "140/110/80",
           "cost": [
             0,
             0,
@@ -12509,10 +13287,10 @@
           "rangeBurn": "400",
           "image": {
             "full": "Jade_GarenR.png",
-            "sprite": "spell1.png",
+            "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -12526,7 +13304,7 @@
           "full": "Jade_Garen_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 240,
+          "x": 288,
           "y": 48,
           "w": 48,
           "h": 48
@@ -12543,7 +13321,7 @@
         "full": "Jade_Gragas.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 288,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -12818,7 +13596,7 @@
             "full": "Jade_GragasQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 0,
             "w": 48,
             "h": 48
@@ -12961,7 +13739,7 @@
             "full": "Jade_GragasW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -13102,7 +13880,7 @@
             "full": "Jade_GragasE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 0,
             "w": 48,
             "h": 48
@@ -13219,7 +13997,7 @@
             "full": "Jade_GragasR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 0,
             "w": 48,
             "h": 48
@@ -13234,7 +14012,7 @@
           "full": "Jade_GragasPassiveHeal.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 288,
+          "x": 336,
           "y": 48,
           "w": 48,
           "h": 48
@@ -13251,7 +14029,7 @@
         "full": "Jade_Heimerdinger.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 336,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -13274,62 +14052,6 @@
           "num": 6,
           "name": "Dragon Trainer Heimerdinger",
           "chromas": false
-        },
-        {
-          "id": "60074007",
-          "num": 7,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 6
-        },
-        {
-          "id": "60074008",
-          "num": 8,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 6
-        },
-        {
-          "id": "60074009",
-          "num": 9,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 6
-        },
-        {
-          "id": "60074010",
-          "num": 10,
-          "name": "",
-          "chromas": true,
-          "parentSkin": 6
-        },
-        {
-          "id": "60074011",
-          "num": 11,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 6
-        },
-        {
-          "id": "60074012",
-          "num": 12,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 6
-        },
-        {
-          "id": "60074013",
-          "num": 13,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 6
-        },
-        {
-          "id": "60074014",
-          "num": 14,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 6
         },
         {
           "id": "60074015",
@@ -13362,7 +14084,7 @@
           "id": "60074019",
           "num": 19,
           "name": "Pool Party Heimerdinger (Aquamarine)",
-          "chromas": true,
+          "chromas": false,
           "parentSkin": 15
         },
         {
@@ -13417,14 +14139,14 @@
           "id": "60074027",
           "num": 27,
           "name": "Heimerstinger (Tanzanite)",
-          "chromas": false,
+          "chromas": true,
           "parentSkin": 24
         },
         {
           "id": "60074028",
           "num": 28,
           "name": "Heimerstinger (Emerald)",
-          "chromas": true,
+          "chromas": false,
           "parentSkin": 24
         },
         {
@@ -13571,11 +14293,11 @@
               0
             ],
             [
-              900,
-              900,
-              900,
-              900,
-              900
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -13619,7 +14341,7 @@
             "0",
             "0",
             "0",
-            "900",
+            "0",
             "0",
             "0",
             "0",
@@ -13641,7 +14363,7 @@
             "full": "Jade_HeimerdingerQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -13655,12 +14377,12 @@
           "tooltip": "Heimerdinger fires 3 enemy seeking Micro-Rocket(s) (max 1 per person), hitting targets nearest to him. Each rocket deals <magicDamage>{{ totaldamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
           "leveltip": {
             "label": [
-              "@AbilityResourceName@ Cost",
-              "Base Damage"
+              "Base Damage",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ cost }} -> {{ costNL }}",
-              "{{ basedamage }} -> {{ basedamageNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -13684,53 +14406,53 @@
           "effect": [
             null,
             [
-              60,
-              90,
-              120,
-              150,
-              180
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              12,
-              18,
-              24,
-              30,
-              36
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              25,
-              25,
-              25,
-              25,
-              25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              20,
-              20,
-              20,
-              20,
-              20
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              30,
-              30,
-              30,
-              30,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              108,
-              162,
-              216,
-              270,
-              324
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -13756,13 +14478,13 @@
           ],
           "effectBurn": [
             null,
-            "60/90/120/150/180",
-            "12/18/24/30/36",
-            "25",
-            "20",
-            "30",
-            "108/162/216/270/324",
-            "5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0"
@@ -13782,7 +14504,7 @@
             "full": "Jade_HeimerdingerW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48
@@ -13810,13 +14532,13 @@
           },
           "maxrank": 5,
           "cooldown": [
+            14,
             13,
             12,
             11,
-            10,
-            9
+            10
           ],
-          "cooldownBurn": "13/12/11/10/9",
+          "cooldownBurn": "14/13/12/11/10",
           "cost": [
             80,
             90,
@@ -13927,8 +14649,8 @@
             "full": "Jade_HeimerdingerE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -14044,8 +14766,8 @@
             "full": "Jade_HeimerdingerR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -14059,7 +14781,7 @@
           "full": "Jade_Heimerdinger_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 336,
+          "x": 384,
           "y": 48,
           "w": 48,
           "h": 48
@@ -14076,7 +14798,7 @@
         "full": "Jade_Janna.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 384,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14304,7 +15026,7 @@
         "mpregenperlevel": 0.6,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 51.95,
+        "attackdamage": 49,
         "attackdamageperlevel": 0,
         "attackspeedperlevel": 2.61,
         "attackspeed": 0.625
@@ -14448,8 +15170,8 @@
             "full": "Jade_JannaHowlingGale.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -14595,8 +15317,8 @@
             "full": "Jade_JannaSowTheWind.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -14738,7 +15460,7 @@
             "full": "Jade_JannaEyeOfTheStorm.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 48,
             "w": 48,
             "h": 48
@@ -14770,11 +15492,11 @@
           ],
           "cooldownBurn": "150/135/120",
           "cost": [
-            100,
-            150,
-            200
+            200,
+            275,
+            350
           ],
-          "costBurn": "100/150/200",
+          "costBurn": "200/275/350",
           "datavalues": {},
           "effect": [
             null,
@@ -14784,44 +15506,44 @@
               0
             ],
             [
-              300,
-              450,
-              600
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3
+              0,
+              0,
+              0
             ],
             [
-              700,
-              700,
-              700
+              0,
+              0,
+              0
             ],
             [
-              875,
-              875,
-              875
+              0,
+              0,
+              0
             ],
             [
-              875,
-              875,
-              875
+              0,
+              0,
+              0
             ],
             [
-              1200,
-              1200,
-              1200
+              0,
+              0,
+              0
             ],
             [
-              10,
-              10,
-              10
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -14832,14 +15554,14 @@
           "effectBurn": [
             null,
             "0",
-            "300/450/600",
-            "3",
-            "700",
-            "875",
-            "875",
-            "1200",
-            "10",
-            "0.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0"
           ],
           "vars": [],
@@ -14855,7 +15577,7 @@
             "full": "Jade_JannaReapTheWhirlwind.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48
@@ -14870,7 +15592,7 @@
           "full": "Jade_JannaP.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 384,
+          "x": 432,
           "y": 48,
           "w": 48,
           "h": 48
@@ -14887,8 +15609,8 @@
         "full": "Jade_JarvanIV.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 432,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -15071,7 +15793,7 @@
         "mpperlevel": 40,
         "movespeed": 340,
         "armor": 21.6,
-        "armorperlevel": 3.6,
+        "armorperlevel": 3,
         "spellblock": 31.25,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
@@ -15101,7 +15823,7 @@
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ armorshredpercent }}% -> {{ armorshredpercentNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -15127,25 +15849,25 @@
           "effect": [
             null,
             [
-              80,
-              120,
-              160,
-              200,
-              240
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              10,
-              14,
-              18,
-              22,
-              26
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -15199,9 +15921,9 @@
           ],
           "effectBurn": [
             null,
-            "80/120/160/200/240",
-            "10/14/18/22/26",
-            "3",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -15225,7 +15947,7 @@
             "full": "Jade_JarvanIVDragonStrike.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 48,
             "w": 48,
             "h": 48
@@ -15274,46 +15996,46 @@
           "effect": [
             null,
             [
-              60,
-              80,
-              100,
-              120,
-              140
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              15,
-              20,
-              25,
-              30,
-              35
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              10,
-              20,
-              30,
-              40,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.013,
-              0.013,
-              0.013,
-              0.013,
-              0.013
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -15346,12 +16068,12 @@
           ],
           "effectBurn": [
             null,
-            "60/80/100/120/140",
-            "15/20/25/30/35",
-            "10/20/30/40/50",
-            "4",
-            "2",
-            "0.01",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -15372,7 +16094,7 @@
             "full": "Jade_JarvanIVGoldenAegis.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 48,
             "w": 48,
             "h": 48
@@ -15387,15 +16109,15 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Passive Attack Speed",
-              "Active Attack Speed",
-              "Passive Armor"
+              "Attack Speed",
+              "Armor",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ passiveattackspeed*100.000000 }}% -> {{ passiveattackspeednl*100.000000 }}%",
-              "{{ passiveattackspeed*100.000000 }}% -> {{ passiveattackspeednl*100.000000 }}%",
-              "{{ passivearmor }} -> {{ passivearmorNL }}"
+              "{{ passivearmor }} -> {{ passivearmorNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -15409,35 +16131,35 @@
           "cooldownBurn": "13",
           "cost": [
             55,
-            55,
-            55,
-            55,
-            55
+            60,
+            65,
+            70,
+            75
           ],
-          "costBurn": "55",
+          "costBurn": "55/60/65/70/75",
           "datavalues": {},
           "effect": [
             null,
             [
-              10,
-              13,
-              16,
-              19,
-              22
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              105,
-              150,
-              195,
-              240
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.2,
-              0.225,
-              0.25,
-              0.275,
-              0.3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               8,
@@ -15491,9 +16213,9 @@
           ],
           "effectBurn": [
             null,
-            "10/13/16/19/22",
-            "60/105/150/195/240",
-            "0.2/0.225/0.25/0.275/0.3",
+            "0",
+            "0",
+            "0",
             "8",
             "0",
             "0",
@@ -15517,7 +16239,7 @@
             "full": "Jade_JarvanIVDemacianStandard.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 48,
             "w": 48,
             "h": 48
@@ -15634,7 +16356,7 @@
             "full": "Jade_JarvanIVCataclysm.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 48,
             "w": 48,
             "h": 48
@@ -15649,8 +16371,8 @@
           "full": "Jade_JarvanIVP.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 432,
-          "y": 48,
+          "x": 0,
+          "y": 96,
           "w": 48,
           "h": 48
         }
@@ -15666,7 +16388,7 @@
         "full": "Jade_Jax.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 0,
+        "x": 48,
         "y": 96,
         "w": 48,
         "h": 48
@@ -15756,16 +16478,23 @@
           "chromas": false
         },
         {
+          "id": "60024043",
+          "num": 43,
+          "name": "Magma Chamber Jax (Vivid)",
+          "chromas": false,
+          "parentSkin": 42
+        },
+        {
           "id": "60024301",
           "num": 301,
           "name": "Classic Jax",
-          "chromas": false
+          "chromas": true
         },
         {
           "id": "60024302",
           "num": 302,
           "name": "Classic Jax (Vandal)",
-          "chromas": true,
+          "chromas": false,
           "parentSkin": 301
         }
       ],
@@ -15940,8 +16669,8 @@
             "full": "Jade_JaxQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 288,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -16081,8 +16810,8 @@
             "full": "Jade_JaxW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -16224,8 +16953,8 @@
             "full": "Jade_JaxE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -16339,8 +17068,8 @@
             "full": "Jade_JaxR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -16354,7 +17083,7 @@
           "full": "Armsmaster_MasterOfArms.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 0,
+          "x": 48,
           "y": 96,
           "w": 48,
           "h": 48
@@ -16371,7 +17100,7 @@
         "full": "Jade_Karthus.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 48,
+        "x": 96,
         "y": 96,
         "w": 48,
         "h": 48
@@ -16737,7 +17466,7 @@
             "full": "Jade_KarthusLayWaste.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -16878,7 +17607,7 @@
             "full": "Jade_KarthusWallOfPain.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
@@ -17021,7 +17750,7 @@
             "full": "Jade_KarthusDefile.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
@@ -17138,7 +17867,7 @@
             "full": "Jade_KarthusFallenOne.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48
@@ -17153,7 +17882,7 @@
           "full": "Jade_Karthus_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 48,
+          "x": 96,
           "y": 96,
           "w": 48,
           "h": 48
@@ -17170,7 +17899,7 @@
         "full": "Jade_Kassadin.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 96,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -17456,7 +18185,7 @@
             "full": "Jade_KassadinQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
@@ -17597,7 +18326,7 @@
             "full": "Jade_KassadinW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48
@@ -17738,8 +18467,8 @@
             "full": "Jade_KassadinE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -17853,8 +18582,8 @@
             "full": "Jade_KassadinR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -17868,7 +18597,7 @@
           "full": "Jade_Kassadin_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 96,
+          "x": 144,
           "y": 96,
           "w": 48,
           "h": 48
@@ -17885,7 +18614,7 @@
         "full": "Jade_Katarina.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 144,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -18227,8 +18956,8 @@
             "full": "Jade_KatarinaQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -18368,8 +19097,8 @@
             "full": "Jade_KatarinaW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -18509,7 +19238,7 @@
             "full": "Jade_KatarinaE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 144,
             "w": 48,
             "h": 48
@@ -18527,7 +19256,7 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ ttdamage }} -> {{ ttdamageNL }}",
+              "{{ damageinstance*10.000000 }} -> {{ damageinstancenl*10.000000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -18624,7 +19353,7 @@
             "full": "Jade_KatarinaR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 144,
             "w": 48,
             "h": 48
@@ -18639,7 +19368,7 @@
           "full": "Jade_Katarina_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 144,
+          "x": 192,
           "y": 96,
           "w": 48,
           "h": 48
@@ -18656,7 +19385,7 @@
         "full": "Jade_Kayle.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 192,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -19041,7 +19770,7 @@
             "full": "Jade_KayleQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
@@ -19182,7 +19911,7 @@
             "full": "Jade_KayleW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48
@@ -19325,7 +20054,7 @@
             "full": "Jade_KayleE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
@@ -19440,7 +20169,7 @@
             "full": "Jade_KayleR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
@@ -19455,7 +20184,806 @@
           "full": "Jade_Kayle_P.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 192,
+          "x": 240,
+          "y": 96,
+          "w": 48,
+          "h": 48
+        }
+      },
+      "recommended": []
+    },
+    "Jade_Kennen": {
+      "id": "Jade_Kennen",
+      "key": "60085",
+      "name": "Kennen",
+      "title": "The Heart of the Tempest",
+      "image": {
+        "full": "Jade_Kennen.png",
+        "sprite": "champion0.png",
+        "group": "champion",
+        "x": 288,
+        "y": 96,
+        "w": 48,
+        "h": 48
+      },
+      "skins": [
+        {
+          "id": "60085000",
+          "num": 0,
+          "name": "default",
+          "chromas": false
+        },
+        {
+          "id": "60085004",
+          "num": 4,
+          "name": "Kennen M.D.",
+          "chromas": false
+        },
+        {
+          "id": "60085006",
+          "num": 6,
+          "name": "Blood Moon Kennen",
+          "chromas": false
+        },
+        {
+          "id": "60085008",
+          "num": 8,
+          "name": "Infernal Kennen",
+          "chromas": false
+        },
+        {
+          "id": "60085009",
+          "num": 9,
+          "name": "Kennen M.D. (Rose Quartz)",
+          "chromas": true,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085010",
+          "num": 10,
+          "name": "Kennen M.D. (Ruby)",
+          "chromas": false,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085011",
+          "num": 11,
+          "name": "Kennen M.D. (Aquamarine)",
+          "chromas": false,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085012",
+          "num": 12,
+          "name": "Kennen M.D. (Citrine)",
+          "chromas": false,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085013",
+          "num": 13,
+          "name": "Kennen M.D. (Amethyst)",
+          "chromas": true,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085014",
+          "num": 14,
+          "name": "Kennen M.D. (Sapphire)",
+          "chromas": false,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085015",
+          "num": 15,
+          "name": "Kennen M.D. (Obsidian)",
+          "chromas": false,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085016",
+          "num": 16,
+          "name": "Kennen M.D. (Rainbow)",
+          "chromas": false,
+          "parentSkin": 4
+        },
+        {
+          "id": "60085017",
+          "num": 17,
+          "name": "Infernal Kennen (Emerald)",
+          "chromas": false,
+          "parentSkin": 8
+        },
+        {
+          "id": "60085018",
+          "num": 18,
+          "name": "Infernal Kennen (Catseye)",
+          "chromas": false,
+          "parentSkin": 8
+        },
+        {
+          "id": "60085019",
+          "num": 19,
+          "name": "Infernal Kennen (Ruby)",
+          "chromas": false,
+          "parentSkin": 8
+        },
+        {
+          "id": "60085020",
+          "num": 20,
+          "name": "Infernal Kennen (Rose Quartz)",
+          "chromas": false,
+          "parentSkin": 8
+        },
+        {
+          "id": "60085021",
+          "num": 21,
+          "name": "Infernal Kennen (Amethyst)",
+          "chromas": false,
+          "parentSkin": 8
+        },
+        {
+          "id": "60085022",
+          "num": 22,
+          "name": "Infernal Kennen (Rainbow)",
+          "chromas": false,
+          "parentSkin": 8
+        },
+        {
+          "id": "60085025",
+          "num": 25,
+          "name": "Astronaut Kennen",
+          "chromas": false
+        },
+        {
+          "id": "60085026",
+          "num": 26,
+          "name": "Astronaut Kennen (Ruby)",
+          "chromas": false,
+          "parentSkin": 25
+        },
+        {
+          "id": "60085027",
+          "num": 27,
+          "name": "Astronaut Kennen (Catseye)",
+          "chromas": false,
+          "parentSkin": 25
+        },
+        {
+          "id": "60085028",
+          "num": 28,
+          "name": "Astronaut Kennen (Aquamarine)",
+          "chromas": false,
+          "parentSkin": 25
+        },
+        {
+          "id": "60085029",
+          "num": 29,
+          "name": "Astronaut Kennen (Emerald)",
+          "chromas": false,
+          "parentSkin": 25
+        },
+        {
+          "id": "60085030",
+          "num": 30,
+          "name": "Astronaut Kennen (Obsidian)",
+          "chromas": false,
+          "parentSkin": 25
+        },
+        {
+          "id": "60085031",
+          "num": 31,
+          "name": "Astronaut Kennen (Amethyst)",
+          "chromas": false,
+          "parentSkin": 25
+        },
+        {
+          "id": "60085032",
+          "num": 32,
+          "name": "Astronaut Kennen (Rose Quartz)",
+          "chromas": true,
+          "parentSkin": 25
+        },
+        {
+          "id": "60085033",
+          "num": 33,
+          "name": "Astronaut Kennen (Turquoise)",
+          "chromas": false,
+          "parentSkin": 25
+        }
+      ],
+      "lore": "- Kennen's E provides defensive bonuses instead of Attack Speed\\n- Kennen's R randomly strikes nearby champions",
+      "blurb": "- Kennen's E provides defensive bonuses instead of Attack Speed\\n- Kennen's R randomly strikes nearby champions",
+      "allytips": [],
+      "enemytips": [],
+      "tags": [
+        "Mage"
+      ],
+      "partype": "Energy",
+      "info": {
+        "attack": 6,
+        "defense": 4,
+        "magic": 7,
+        "difficulty": 4
+      },
+      "stats": {
+        "hp": 482,
+        "hpperlevel": 79,
+        "mp": 200,
+        "mpperlevel": 0,
+        "movespeed": 335,
+        "armor": 17.75,
+        "armorperlevel": 3.75,
+        "spellblock": 30,
+        "spellblockperlevel": 0,
+        "attackrange": 550,
+        "hpregen": 5.15,
+        "hpregenperlevel": 0.65,
+        "mpregen": 50,
+        "mpregenperlevel": 0,
+        "crit": 0,
+        "critperlevel": 0,
+        "attackdamage": 50.3,
+        "attackdamageperlevel": 0,
+        "attackspeedperlevel": 3.4,
+        "attackspeed": 0.69
+      },
+      "spells": [
+        {
+          "id": "Jade_KennenQ",
+          "name": "Thundering Shuriken",
+          "description": "Kennen throws a fast moving shuriken towards a location, causing damage and adding a Mark of Storm to any opponent that it hits.",
+          "tooltip": "Kennen throws a shuriken that damages the first enemy hit dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Damage",
+              "@AbilityResourceName@ Cost",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ cost }} -> {{ costNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            8,
+            7,
+            6,
+            5,
+            4
+          ],
+          "cooldownBurn": "8/7/6/5/4",
+          "cost": [
+            65,
+            60,
+            55,
+            50,
+            45
+          ],
+          "costBurn": "65/60/55/50/45",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "rangeBurn": "1000",
+          "image": {
+            "full": "Jade_KennenQ.png",
+            "sprite": "spell3.png",
+            "group": "spell",
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_KennenW",
+          "name": "Electrical Surge",
+          "description": "Kennen passively deals extra damage and adds a Mark of the Storm to his target every few attacks, and he can activate this ability to damage and add another Mark of the Storm to targets who are already marked.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Every {{ passivehitsrequired }} attacks, Kennen deals <magicDamage>{{ totaldamagepassive }} magic damage</magicDamage> and adds a <spellName>Mark of the Storm</spellName> to his target.<br /><br /><spellActive>Active:</spellActive> Surges electricity through all nearby targets afflicted by <spellName>Mark of the Storm</spellName>, dealing <magicDamage>{{ totaldamageactive }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Damage",
+              "Passive Total AD Scaling",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ basedamageactive }} -> {{ basedamageactiveNL }}",
+              "{{ passiveonhitadratio*100.000000 }}% -> {{ passiveonhitadrationl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            14,
+            12,
+            10,
+            8,
+            6
+          ],
+          "cooldownBurn": "14/12/10/8/6",
+          "cost": [
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "costBurn": "40",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              70,
+              95,
+              120,
+              145,
+              170
+            ],
+            [
+              25,
+              25,
+              25,
+              25,
+              25
+            ],
+            [
+              0.7,
+              0.7,
+              0.7,
+              0.7,
+              0.7
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "70/95/120/145/170",
+            "25",
+            "0.7",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            725,
+            725,
+            725,
+            725,
+            725
+          ],
+          "rangeBurn": "725",
+          "image": {
+            "full": "Jade_KennenW.png",
+            "sprite": "spell3.png",
+            "group": "spell",
+            "x": 48,
+            "y": 0,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_KennenE",
+          "name": "Lightning Rush",
+          "description": "Kennen morphs into a lightning form, enabling him to pass through units.  Any enemy unit he runs through takes damage and gets a Mark of the Storm.",
+          "tooltip": "Kennen turns into a ball of lightning gaining <speed>{{ movementspeed*100 }}% Move Speed</speed>, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to any enemy he passes through, and becomes Ghosted for {{ durationasball }} seconds. Additionally, Kennen will gain <scaleArmor>{{ resists }} Armor</scaleArmor> and <scaleMR>{{ resists }} Magic Resist</scaleMR> for {{ resistancesduration }} seconds. <br /><br />Kennen is refunded <keywordMajor>{{ energyrefund }} Energy</keywordMajor> if he passes through an enemy, but can only gain this effect once. This ability deals half damage to minions (<magicDamage>{{ totalminiondamage }}</magicDamage>).{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Damage",
+              "Defensive Bonus",
+              "Cooldown",
+              "@AbilityResourceName@ Cost"
+            ],
+            "effect": [
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ resists }} -> {{ resistsNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            10,
+            9,
+            8,
+            7,
+            6
+          ],
+          "cooldownBurn": "10/9/8/7/6",
+          "cost": [
+            100,
+            95,
+            90,
+            85,
+            80
+          ],
+          "costBurn": "100/95/90/85/80",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              85,
+              125,
+              165,
+              205,
+              245
+            ],
+            [
+              40,
+              40,
+              40,
+              40,
+              40
+            ],
+            [
+              10,
+              20,
+              30,
+              40,
+              50
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "85/125/165/205/245",
+            "40",
+            "10/20/30/40/50",
+            "1",
+            "2",
+            "0",
+            "4",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            170,
+            170,
+            170,
+            170,
+            170
+          ],
+          "rangeBurn": "170",
+          "image": {
+            "full": "Jade_KennenE.png",
+            "sprite": "spell3.png",
+            "group": "spell",
+            "x": 96,
+            "y": 0,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_KennenR",
+          "name": "Slicing Maelstrom",
+          "description": "Kennen summons a storm that strikes at random nearby enemy champions for magical damage.",
+          "tooltip": "Summons a magical storm for {{ jade_kennenrduration }} seconds, dealing <magicDamage>{{ pertickdamagecalculated }} magic damage</magicDamage> to a random enemy champion near Kennen every {{ jade_kennenrtickrate }} seconds. This storm cannot hit the same target more than {{ maximumhitspercast }} times.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Damage",
+              "Time Between Procs"
+            ],
+            "effect": [
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ jade_kennenrtickrate }} -> {{ jade_kennenrtickrateNL }}"
+            ]
+          },
+          "maxrank": 3,
+          "cooldown": [
+            120,
+            120,
+            120
+          ],
+          "cooldownBurn": "120",
+          "cost": [
+            0,
+            0,
+            0
+          ],
+          "costBurn": "0",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            550,
+            550,
+            550
+          ],
+          "rangeBurn": "550",
+          "image": {
+            "full": "Jade_KennenR.png",
+            "sprite": "spell3.png",
+            "group": "spell",
+            "x": 144,
+            "y": 0,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        }
+      ],
+      "passive": {
+        "name": "Mark of the Storm",
+        "description": "Kennen marks enemies when hitting them with abilities. Once three marks are applied the target is stunned.",
+        "image": {
+          "full": "Jade_Kennen_Passive.png",
+          "sprite": "passive0.png",
+          "group": "passive",
+          "x": 288,
           "y": 96,
           "w": 48,
           "h": 48
@@ -19472,7 +21000,7 @@
         "full": "Jade_KogMaw.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 240,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
@@ -19918,10 +21446,10 @@
           "rangeBurn": "625",
           "image": {
             "full": "Jade_KogMawQ.png",
-            "sprite": "spell2.png",
+            "sprite": "spell3.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 192,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -20059,10 +21587,10 @@
           "rangeBurn": "530",
           "image": {
             "full": "Jade_KogMawW.png",
-            "sprite": "spell2.png",
+            "sprite": "spell3.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 240,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -20202,10 +21730,10 @@
           "rangeBurn": "1200",
           "image": {
             "full": "Jade_KogMawE.png",
-            "sprite": "spell2.png",
+            "sprite": "spell3.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 288,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -20319,10 +21847,10 @@
           "rangeBurn": "1400/1700/2000",
           "image": {
             "full": "Jade_KogMawR.png",
-            "sprite": "spell2.png",
+            "sprite": "spell3.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 336,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -20336,7 +21864,7 @@
           "full": "Jade_KogMaw_IcathianSurprise.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 240,
+          "x": 336,
           "y": 96,
           "w": 48,
           "h": 48
@@ -20353,7 +21881,7 @@
         "full": "Jade_LeeSin.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 288,
+        "x": 384,
         "y": 96,
         "w": 48,
         "h": 48
@@ -20645,7 +22173,7 @@
             "full": "Jade_LeeSinQOne.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 0,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -20788,7 +22316,7 @@
             "full": "Jade_LeeSinWOne.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 48,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48
@@ -20929,8 +22457,8 @@
             "full": "Jade_LeeSinEOne.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -21044,8 +22572,8 @@
             "full": "Jade_LeeSinR.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -21059,7 +22587,7 @@
           "full": "Jade_LeeSinPassive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 288,
+          "x": 384,
           "y": 96,
           "w": 48,
           "h": 48
@@ -21076,7 +22604,7 @@
         "full": "Jade_Leona.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 336,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -21419,8 +22947,8 @@
             "full": "Jade_LeonaShieldOfDaybreak.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -21560,8 +23088,8 @@
             "full": "Jade_LeonaSolarBarrier.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -21701,8 +23229,8 @@
             "full": "Jade_LeonaZenithBlade.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -21818,8 +23346,8 @@
             "full": "Jade_LeonaSolarFlare.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -21833,7 +23361,7 @@
           "full": "Jade_LeonaSunlight.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 336,
+          "x": 432,
           "y": 96,
           "w": 48,
           "h": 48
@@ -21848,10 +23376,10 @@
       "title": "The Fae Sorceress",
       "image": {
         "full": "Jade_Lulu.png",
-        "sprite": "champion0.png",
+        "sprite": "champion1.png",
         "group": "champion",
-        "x": 384,
-        "y": 96,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -22038,6 +23566,68 @@
           "num": 55,
           "name": "Arcana Lulu",
           "chromas": false
+        },
+        {
+          "id": "60117056",
+          "num": 56,
+          "name": "Faerie Court Lulu",
+          "chromas": false
+        },
+        {
+          "id": "60117057",
+          "num": 57,
+          "name": "Faerie Court Lulu (Ruby)",
+          "chromas": false,
+          "parentSkin": 56
+        },
+        {
+          "id": "60117058",
+          "num": 58,
+          "name": "Faerie Court Lulu (Emerald)",
+          "chromas": false,
+          "parentSkin": 56
+        },
+        {
+          "id": "60117059",
+          "num": 59,
+          "name": "Faerie Court Lulu (Catseye)",
+          "chromas": false,
+          "parentSkin": 56
+        },
+        {
+          "id": "60117060",
+          "num": 60,
+          "name": "Faerie Court Lulu (Pearl)",
+          "chromas": false,
+          "parentSkin": 56
+        },
+        {
+          "id": "60117061",
+          "num": 61,
+          "name": "Faerie Court Lulu (Turqouise)",
+          "chromas": false,
+          "parentSkin": 56
+        },
+        {
+          "id": "60117062",
+          "num": 62,
+          "name": "Faerie Court Lulu (Obsidian)",
+          "chromas": false,
+          "parentSkin": 56
+        },
+        {
+          "id": "60117063",
+          "num": 63,
+          "name": "Faerie Court Lulu (Rose Quartz)",
+          "chromas": false,
+          "parentSkin": 56
+        },
+        {
+          "id": "60117064",
+          "num": 64,
+          "name": "Faerie Court Lulu (Sapphire)",
+          "chromas": false,
+          "parentSkin": 56
         }
       ],
       "lore": "- Glitterdance (Q) bolts can not deal damage to the same target",
@@ -22214,8 +23804,8 @@
             "full": "Jade_LuluQ.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -22359,8 +23949,8 @@
             "full": "Jade_LuluW.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -22504,7 +24094,7 @@
             "full": "Jade_LuluE.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 0,
+            "x": 384,
             "y": 48,
             "w": 48,
             "h": 48
@@ -22621,7 +24211,7 @@
             "full": "Jade_LuluR.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 48,
+            "x": 432,
             "y": 48,
             "w": 48,
             "h": 48
@@ -22634,10 +24224,10 @@
         "description": "Pix fires magical bolts of energy whenever the champion he's following attacks another enemy unit. These bolts are homing, but can be intercepted by other units.",
         "image": {
           "full": "Jade_Lulu_PixFaerieCompanion.png",
-          "sprite": "passive0.png",
+          "sprite": "passive1.png",
           "group": "passive",
-          "x": 384,
-          "y": 96,
+          "x": 0,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -22651,10 +24241,10 @@
       "title": "The Lady of Luminosity",
       "image": {
         "full": "Jade_Lux.png",
-        "sprite": "champion0.png",
+        "sprite": "champion1.png",
         "group": "champion",
-        "x": 432,
-        "y": 96,
+        "x": 48,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -22828,7 +24418,7 @@
         "hpperlevel": 79,
         "mp": 300,
         "mpperlevel": 50,
-        "movespeed": 330,
+        "movespeed": 340,
         "armor": 16,
         "armorperlevel": 4,
         "spellblock": 30,
@@ -22982,8 +24572,8 @@
             "full": "Jade_LuxLightBinding.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 96,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -23025,32 +24615,32 @@
           "effect": [
             null,
             [
-              2,
-              4,
-              6,
-              8,
-              10
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              40,
-              55,
-              70,
-              85,
-              100
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2.5,
-              2.5,
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              100,
-              100,
-              100,
-              100,
-              100
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -23097,10 +24687,10 @@
           ],
           "effectBurn": [
             null,
-            "2/4/6/8/10",
-            "40/55/70/85/100",
-            "2.5",
-            "100",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -23123,8 +24713,8 @@
             "full": "Jade_LuxPrismaticWave.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 144,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -23266,8 +24856,8 @@
             "full": "Jade_LuxLightStrikeKugel.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 192,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -23291,10 +24881,10 @@
           "maxrank": 3,
           "cooldown": [
             80,
-            65,
-            50
+            60,
+            40
           ],
-          "cooldownBurn": "80/65/50",
+          "cooldownBurn": "80/60/40",
           "cost": [
             100,
             100,
@@ -23381,8 +24971,8 @@
             "full": "Jade_LuxR.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -23394,10 +24984,10 @@
         "description": "Lux's damaging spells charge the target with energy for 6 seconds. Lux's next attack ignites the energy, dealing bonus magic damage (depending on Lux's level) to the target.",
         "image": {
           "full": "Jade_LuxIlluminatingFraulein.png",
-          "sprite": "passive0.png",
+          "sprite": "passive1.png",
           "group": "passive",
-          "x": 432,
-          "y": 96,
+          "x": 48,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -23413,7 +25003,7 @@
         "full": "Jade_Malphite.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 0,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -23754,8 +25344,8 @@
             "full": "Jade_MalphiteSeismicShard.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 288,
-            "y": 48,
+            "x": 192,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -23899,8 +25489,8 @@
             "full": "Jade_MalphiteObduracy.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 240,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -24042,8 +25632,8 @@
             "full": "Jade_MalphiteLandslide.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 288,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -24157,8 +25747,8 @@
             "full": "Jade_MalphiteUFSlash.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 336,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -24172,7 +25762,7 @@
           "full": "Jade_Malphite_GraniteShield.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 0,
+          "x": 96,
           "y": 0,
           "w": 48,
           "h": 48
@@ -24189,7 +25779,7 @@
         "full": "Jade_Malzahar.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 48,
+        "x": 144,
         "y": 0,
         "w": 48,
         "h": 48
@@ -24468,7 +26058,7 @@
             "full": "Jade_MalzaharQ.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 0,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
@@ -24609,7 +26199,7 @@
             "full": "Jade_MalzaharW.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 48,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48
@@ -24752,8 +26342,8 @@
             "full": "Jade_MalzaharE.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -24867,8 +26457,8 @@
             "full": "Jade_MalzaharR.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -24882,7 +26472,7 @@
           "full": "Jade_Malzahar_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 48,
+          "x": 144,
           "y": 0,
           "w": 48,
           "h": 48
@@ -24899,7 +26489,7 @@
         "full": "Jade_MasterYi.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 96,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -25235,8 +26825,8 @@
             "full": "Jade_MasterYiAlphaStrike.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -25378,8 +26968,8 @@
             "full": "Jade_MasterYiMeditate.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -25519,8 +27109,8 @@
             "full": "Jade_MasterYiWujuStyle.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -25634,8 +27224,8 @@
             "full": "Jade_MasterYiHighlander.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -25649,7 +27239,7 @@
           "full": "Jade_MasterYi_Passive1.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 96,
+          "x": 192,
           "y": 0,
           "w": 48,
           "h": 48
@@ -25666,7 +27256,7 @@
         "full": "Jade_MissFortune.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 144,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -25749,6 +27339,19 @@
           "name": "Battle Bunny Miss Fortune (Nightwire)",
           "chromas": false,
           "parentSkin": 31
+        },
+        {
+          "id": "60021301",
+          "num": 301,
+          "name": "Classic Miss Fortune ",
+          "chromas": false
+        },
+        {
+          "id": "60021302",
+          "num": 302,
+          "name": "Classic Miss Fortune (Waterloo)",
+          "chromas": false,
+          "parentSkin": 301
         }
       ],
       "lore": "- Strut (P) moved from W<br>- Impure Shots (W) passive deals magic damage on each hit with active increasing attack speed and applying grievous wounds",
@@ -25834,11 +27437,18 @@
               0
             ],
             [
-              20,
-              45,
-              70,
-              95,
-              120
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -25855,39 +27465,32 @@
               0
             ],
             [
-              20,
-              20,
-              20,
-              20,
-              20
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              10,
-              10,
-              10,
-              10,
-              10
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              20,
-              20,
-              20,
-              20,
-              20
-            ],
-            [
-              45,
-              45,
-              45,
-              45,
-              45
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -25900,14 +27503,14 @@
           "effectBurn": [
             null,
             "0",
-            "20/45/70/95/120",
             "0",
             "0",
-            "20",
-            "5",
-            "10",
-            "20",
-            "45",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0"
           ],
           "vars": [],
@@ -25925,8 +27528,8 @@
             "full": "Jade_MissFortuneRicochetShot.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -25945,7 +27548,7 @@
             ],
             "effect": [
               "{{ damageonhitperstack }} -> {{ damageonhitperstackNL }}",
-              "{{ maximumdamageonhitperstack }} -> {{ maximumdamageonhitperstackNL }}",
+              "{{ damageonhitperstack*4.000000 }} -> {{ damageonhitperstacknl*4.000000 }}",
               "{{ asmod }}% -> {{ asmodNL }}%"
             ]
           },
@@ -26068,8 +27671,8 @@
             "full": "Jade_MissFortuneViciousStrikes.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -26209,7 +27812,7 @@
             "full": "Jade_MissFortuneScattershot.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 0,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
@@ -26324,7 +27927,7 @@
             "full": "Jade_MissFortuneBulletTime.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 48,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
@@ -26339,7 +27942,7 @@
           "full": "Jade_MissFortune_W.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 144,
+          "x": 240,
           "y": 0,
           "w": 48,
           "h": 48
@@ -26356,7 +27959,7 @@
         "full": "Jade_Morgana.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 192,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -26399,7 +28002,7 @@
           "id": "60025011",
           "num": 11,
           "name": "Bewitching Morgana",
-          "chromas": true
+          "chromas": false
         },
         {
           "id": "60025017",
@@ -26636,13 +28239,6 @@
           "parentSkin": 50
         },
         {
-          "id": "60025069",
-          "num": 69,
-          "name": "",
-          "chromas": false,
-          "parentSkin": 5
-        },
-        {
           "id": "60025301",
           "num": 301,
           "name": "Classic Morgana",
@@ -26828,10 +28424,10 @@
           "rangeBurn": "1175",
           "image": {
             "full": "Jade_MorganaQ.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 96,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -26971,10 +28567,10 @@
           "rangeBurn": "900",
           "image": {
             "full": "Jade_MorganaW.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 144,
-            "y": 144,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -27112,10 +28708,10 @@
           "rangeBurn": "750",
           "image": {
             "full": "Jade_MorganaE.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 192,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -27227,10 +28823,10 @@
           "rangeBurn": "625",
           "image": {
             "full": "Jade_MorganaR.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 240,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -27244,7 +28840,7 @@
           "full": "FallenAngel_Empathize.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 192,
+          "x": 288,
           "y": 0,
           "w": 48,
           "h": 48
@@ -27261,7 +28857,7 @@
         "full": "Jade_Nasus.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 240,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -27578,10 +29174,10 @@
           "rangeBurn": "255",
           "image": {
             "full": "Jade_NasusQ.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 192,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -27612,13 +29208,13 @@
           ],
           "cooldownBurn": "15/14/13/12/11",
           "cost": [
-            80,
-            80,
-            80,
-            80,
-            80
+            100,
+            100,
+            100,
+            100,
+            100
           ],
-          "costBurn": "80",
+          "costBurn": "100",
           "datavalues": {},
           "effect": [
             null,
@@ -27719,10 +29315,10 @@
           "rangeBurn": "700",
           "image": {
             "full": "Jade_NasusW.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 240,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -27864,10 +29460,10 @@
           "rangeBurn": "650",
           "image": {
             "full": "Jade_NasusE.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 288,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -27877,7 +29473,7 @@
           "id": "Jade_NasusR",
           "name": "Fury of the Sands",
           "description": "Nasus unleashes a mighty sandstorm that batters nearby enemies. While the storm rages, he gains increased Health, Attack Range, cast ranges, and drains nearby enemies' max Health converting into bonus damage for the duration.",
-          "tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <scaleHealth>Maximum Health by {{ bonushealth }}</scaleHealth>, Attack Range by {{ attackrangeincrease }}, and Cast Ranges by 100.<br /><br />While the storm rages, he deals <magicDamage>{{ damagecalc }} of enemy Maxiumum Health magic damage</magicDamage> ({{ maxdamagecap }} damage max per second) and converts 5% into bonus <physicalDamage>Attack Damage</physicalDamage>.</mainText>{{ spellmodifierdescriptionappend }}",
+          "tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <scaleHealth>Maximum Health by {{ bonushealth }}</scaleHealth>, Attack Range by {{ attackrangeincrease }}, and Cast Ranges by 100.<br /><br />While the storm rages, he deals <magicDamage>{{ damagecalc }} of enemy Maximum Health magic damage</magicDamage> ({{ maxdamagecap }} damage max per second) and converts 5% into bonus <physicalDamage>Attack Damage</physicalDamage>.</mainText>{{ spellmodifierdescriptionappend }}",
           "leveltip": {
             "label": [
               "Bonus Health",
@@ -27979,10 +29575,10 @@
           "rangeBurn": "400",
           "image": {
             "full": "Jade_NasusR.png",
-            "sprite": "spell3.png",
+            "sprite": "spell4.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 336,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -27996,7 +29592,7 @@
           "full": "Jade_Nasus_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 240,
+          "x": 336,
           "y": 0,
           "w": 48,
           "h": 48
@@ -28013,7 +29609,7 @@
         "full": "Jade_Nidalee.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 288,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -28346,7 +29942,7 @@
             "full": "Jade_NidaleeJavelinToss.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 0,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -28487,7 +30083,7 @@
             "full": "Jade_NidaleeBushwhack.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 48,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48
@@ -28630,8 +30226,8 @@
             "full": "Jade_NidaleePrimalSurge.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -28747,8 +30343,8 @@
             "full": "Jade_NidaleeAspectOfTheCougar.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -28762,7 +30358,7 @@
           "full": "Jade_Nidalee_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 288,
+          "x": 384,
           "y": 0,
           "w": 48,
           "h": 48
@@ -28779,7 +30375,7 @@
         "full": "Jade_Nunu.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 336,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -29124,8 +30720,8 @@
             "full": "Jade_NunuQ.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -29265,8 +30861,8 @@
             "full": "Jade_NunuW.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -29408,8 +31004,8 @@
             "full": "Jade_NunuE.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -29523,8 +31119,8 @@
             "full": "Jade_NunuR.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -29538,7 +31134,7 @@
           "full": "Jade_NunuPassive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 336,
+          "x": 432,
           "y": 0,
           "w": 48,
           "h": 48
@@ -29555,8 +31151,8 @@
         "full": "Jade_Olaf.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 384,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -29746,7 +31342,7 @@
           "id": "Jade_OlafQ",
           "name": "Undertow",
           "description": "Olaf throws an axe into the ground at a target location, dealing damage to units it passes through and slowing their movement speed. If Olaf picks up the axe, the ability's cooldown is reduced.",
-          "tooltip": "Olaf throws an axe to a target location, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to units it passes through and <status>Slowing</status> them by {{ slowamount*100 }}% decaying over {{ debuffduration }} seconds. <br /><br />If Olaf picks up the axe, the ability's cooldown is reduced by {{ cooldownrefund }} seconds.{{ spellmodifierdescriptionappend }}",
+          "tooltip": "Olaf throws an axe to a target location, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to units it passes through and <status>Slowing</status> them by {{ slowamount*100 }}% over {{ debuffduration }} seconds. <br /><br />If Olaf picks up the axe, the ability's cooldown is reduced by {{ cooldownrefund }} seconds.{{ spellmodifierdescriptionappend }}",
           "leveltip": {
             "label": [
               "Damage",
@@ -29878,8 +31474,8 @@
             "full": "Jade_OlafQ.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -29904,13 +31500,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            16,
-            16,
-            16,
-            16,
-            16
+            12,
+            12,
+            12,
+            12,
+            12
           ],
-          "cooldownBurn": "16",
+          "cooldownBurn": "12",
           "cost": [
             40,
             45,
@@ -30021,8 +31617,8 @@
             "full": "Jade_OlafW.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -30164,7 +31760,7 @@
             "full": "Jade_OlafE.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 0,
+            "x": 384,
             "y": 48,
             "w": 48,
             "h": 48
@@ -30175,7 +31771,7 @@
           "id": "Jade_OlafR",
           "name": "Ragnarok",
           "description": "Olaf temporarily becomes immune to disables and gains bonus Armor, Magic Resist, and Lethality.",
-          "tooltip": "Olaf cleanses all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and becomes immune to them the next {{ duration }} seconds. During this time, Olaf gains <scaleArmor>{{ resists }} Armor</scaleArmor>, <scaleMR>{{ resists }} Magic Resist</scaleMR>, and {{ armorpen }} Lethality.<br /><br />{{ spellmodifierdescriptionappend }}",
+          "tooltip": "<spellActive>Active:</spellActive> Olaf cleanses all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and becomes immune to them the next {{ duration }} seconds. During this time, Olaf gains <scaleArmor>{{ resists }} Armor</scaleArmor> and <scaleMR>{{ resists }} Magic Resist</scaleMR>.<br /><br /><spellPassive>Passive:</spellPassive> Olaf gains an additional {{ armorpen }} Lethality.{{ spellmodifierdescriptionappend }}",
           "leveltip": {
             "label": [
               "Armor and Magic Resist",
@@ -30281,7 +31877,7 @@
             "full": "Jade_OlafR.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 48,
+            "x": 432,
             "y": 48,
             "w": 48,
             "h": 48
@@ -30296,8 +31892,8 @@
           "full": "Jade_Olaf_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 384,
-          "y": 0,
+          "x": 0,
+          "y": 48,
           "w": 48,
           "h": 48
         }
@@ -30313,8 +31909,8 @@
         "full": "Jade_Pantheon.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 432,
-        "y": 0,
+        "x": 48,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -30713,8 +32309,8 @@
             "full": "Jade_PantheonQ.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 96,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -30854,8 +32450,8 @@
             "full": "Jade_PantheonW.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 144,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -30997,8 +32593,8 @@
             "full": "Jade_PantheonE.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 192,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -31112,8 +32708,8 @@
             "full": "Jade_PantheonR.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -31122,13 +32718,13 @@
       ],
       "passive": {
         "name": "Aegis Protection",
-        "description": "After attacking or casting spells 4 times, Pantheon will block the next incoming basic attack or turret attack.",
+        "description": "After every 4 attacks or spell casts, Pantheon gains protection from the next attack.",
         "image": {
           "full": "Jade_Pantheon_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 432,
-          "y": 0,
+          "x": 48,
+          "y": 48,
           "w": 48,
           "h": 48
         }
@@ -31144,7 +32740,7 @@
         "full": "Jade_Rammus.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 0,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -31478,8 +33074,8 @@
             "full": "Jade_RammusQ.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 288,
-            "y": 48,
+            "x": 192,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -31621,8 +33217,8 @@
             "full": "Jade_RammusW.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 240,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -31764,8 +33360,8 @@
             "full": "Jade_RammusE.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 288,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -31877,8 +33473,8 @@
             "full": "Jade_RammusR.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 336,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -31892,7 +33488,7 @@
           "full": "Armordillo_ScavengeArmor.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 0,
+          "x": 96,
           "y": 48,
           "w": 48,
           "h": 48
@@ -31909,7 +33505,7 @@
         "full": "Jade_Ryze.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 48,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -32260,7 +33856,7 @@
             "full": "Jade_RyzeQ.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 0,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
@@ -32403,7 +33999,7 @@
             "full": "Jade_RyzeW.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 48,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48
@@ -32546,8 +34142,8 @@
             "full": "Jade_RyzeE.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -32665,8 +34261,8 @@
             "full": "Jade_RyzeR.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -32680,7 +34276,7 @@
           "full": "Jade_Ryze_P.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 48,
+          "x": 144,
           "y": 48,
           "w": 48,
           "h": 48
@@ -32697,7 +34293,7 @@
         "full": "Jade_Shaco.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 96,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -33016,8 +34612,8 @@
             "full": "Jade_ShacoDeceive.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -33159,8 +34755,8 @@
             "full": "Jade_ShacoJackInTheBox.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -33304,8 +34900,8 @@
             "full": "Jade_ShacoTwoShivPoison.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -33419,8 +35015,8 @@
             "full": "Jade_ShacoHallucinateFull.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -33434,7 +35030,840 @@
           "full": "Jester_CarefulStrikes.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 96,
+          "x": 192,
+          "y": 48,
+          "w": 48,
+          "h": 48
+        }
+      },
+      "recommended": []
+    },
+    "Jade_Shen": {
+      "id": "Jade_Shen",
+      "key": "60098",
+      "name": "Shen",
+      "title": "Eye of Twilight",
+      "image": {
+        "full": "Jade_Shen.png",
+        "sprite": "champion1.png",
+        "group": "champion",
+        "x": 240,
+        "y": 48,
+        "w": 48,
+        "h": 48
+      },
+      "skins": [
+        {
+          "id": "60098000",
+          "num": 0,
+          "name": "default",
+          "chromas": false
+        },
+        {
+          "id": "60098003",
+          "num": 3,
+          "name": "Surgeon Shen",
+          "chromas": false
+        },
+        {
+          "id": "60098005",
+          "num": 5,
+          "name": "Warlord Shen",
+          "chromas": false
+        },
+        {
+          "id": "60098007",
+          "num": 7,
+          "name": "Warlord Shen (Catseye)",
+          "chromas": true,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098008",
+          "num": 8,
+          "name": "Warlord Shen (Pearl)",
+          "chromas": false,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098009",
+          "num": 9,
+          "name": "Warlord Shen (Tanzanite)",
+          "chromas": true,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098010",
+          "num": 10,
+          "name": "Warlord Shen (Obsidian)",
+          "chromas": false,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098011",
+          "num": 11,
+          "name": "Warlord Shen (Ruby)",
+          "chromas": false,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098012",
+          "num": 12,
+          "name": "Warlord Shen (Sapphire)",
+          "chromas": false,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098013",
+          "num": 13,
+          "name": "Warlord Shen (Emerald)",
+          "chromas": false,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098014",
+          "num": 14,
+          "name": "Warlord Shen (Amethyst)",
+          "chromas": false,
+          "parentSkin": 5
+        },
+        {
+          "id": "60098015",
+          "num": 15,
+          "name": "Pulsefire Shen",
+          "chromas": false
+        },
+        {
+          "id": "60098023",
+          "num": 23,
+          "name": "Surgeon Shen (Obsidian)",
+          "chromas": false,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098024",
+          "num": 24,
+          "name": "Surgeon Shen (Emerald)",
+          "chromas": false,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098025",
+          "num": 25,
+          "name": "Surgeon Shen (Sapphire)",
+          "chromas": false,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098026",
+          "num": 26,
+          "name": "Surgeon Shen (Rose Quartz)",
+          "chromas": true,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098027",
+          "num": 27,
+          "name": "Surgeon Shen (Ruby)",
+          "chromas": false,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098028",
+          "num": 28,
+          "name": "Surgeon Shen (Pearl)",
+          "chromas": false,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098029",
+          "num": 29,
+          "name": "Surgeon Shen (Sandstone)",
+          "chromas": false,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098030",
+          "num": 30,
+          "name": "Surgeon Shen (Rainbow)",
+          "chromas": false,
+          "parentSkin": 3
+        },
+        {
+          "id": "60098031",
+          "num": 31,
+          "name": "Pulsefire Shen (Chrono)",
+          "chromas": false,
+          "parentSkin": 15
+        },
+        {
+          "id": "60098040",
+          "num": 40,
+          "name": "Shockblade Shen",
+          "chromas": false
+        },
+        {
+          "id": "60098041",
+          "num": 41,
+          "name": "Shockblade Shen (Ruby)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098042",
+          "num": 42,
+          "name": "Shockblade Shen (Catseye)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098043",
+          "num": 43,
+          "name": "Shockblade Shen (Emerald)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098044",
+          "num": 44,
+          "name": "Shockblade Shen (Aquamarine)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098045",
+          "num": 45,
+          "name": "Shockblade Shen (Amethyst)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098046",
+          "num": 46,
+          "name": "Shockblade Shen (Rose Quartz)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098047",
+          "num": 47,
+          "name": "Shockblade Shen (Obsidian)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098048",
+          "num": 48,
+          "name": "Shockblade Shen (Turquoise)",
+          "chromas": false,
+          "parentSkin": 40
+        },
+        {
+          "id": "60098051",
+          "num": 51,
+          "name": "Three Honors Shen",
+          "chromas": false
+        },
+        {
+          "id": "60098301",
+          "num": 301,
+          "name": "Classic Shen",
+          "chromas": false
+        },
+        {
+          "id": "60098302",
+          "num": 302,
+          "name": "Classic Shen (Yellowjacket)",
+          "chromas": false,
+          "parentSkin": 301
+        }
+      ],
+      "lore": "- Ki Strike (Passive) and Vorpal Blade (Q) are different abilities<br>- Ki Barirer (W) grants a shield for a short duration<br>- Shadow Dash (E) only hits champions",
+      "blurb": "- Ki Strike (Passive) and Vorpal Blade (Q) are different abilities<br>- Ki Barirer (W) grants a shield for a short duration<br>- Shadow Dash (E) only hits champions",
+      "allytips": [],
+      "enemytips": [],
+      "tags": [
+        "Tank"
+      ],
+      "partype": "Energy",
+      "info": {
+        "attack": 3,
+        "defense": 9,
+        "magic": 3,
+        "difficulty": 4
+      },
+      "stats": {
+        "hp": 513,
+        "hpperlevel": 85,
+        "mp": 200,
+        "mpperlevel": 0,
+        "movespeed": 335,
+        "armor": 19,
+        "armorperlevel": 4,
+        "spellblock": 30,
+        "spellblockperlevel": 0,
+        "attackrange": 125,
+        "hpregen": 8,
+        "hpregenperlevel": 0.55,
+        "mpregen": 50,
+        "mpregenperlevel": 0,
+        "crit": 0,
+        "critperlevel": 0,
+        "attackdamage": 57.875,
+        "attackdamageperlevel": 0,
+        "attackspeedperlevel": 3.4,
+        "attackspeed": 0.651
+      },
+      "spells": [
+        {
+          "id": "Jade_ShenQ",
+          "name": "Vorpal Blade",
+          "description": "Damages target unit and life taps him, healing allies that attack the target.",
+          "tooltip": "Shen throws a vorpal blade, dealing <magicDamage>{{ totalmagicdamage_jade }} magic damage</magicDamage> to target unit, marking them for {{ markduration_jade }} seconds. Allied spells and attacks against this target heal them for <healing>{{ totalhealovertimeamount_jade }}</healing> over {{ healduration_jade }} seconds. Killing an enemy with this Ability restores <healing>{{ totalheal_jade }} Health</healing> instantly instead.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Damage",
+              "Base Heal Amount",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ basedamage_jade }} -> {{ basedamage_jadeNL }}",
+              "{{ basehealamount_jade }} -> {{ basehealamount_jadeNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            6,
+            5.5,
+            5,
+            4.5,
+            4
+          ],
+          "cooldownBurn": "6/5.5/5/4.5/4",
+          "cost": [
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "costBurn": "60",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            475,
+            475,
+            475,
+            475,
+            475
+          ],
+          "rangeBurn": "475",
+          "image": {
+            "full": "Jade_ShenQ.png",
+            "sprite": "spell4.png",
+            "group": "spell",
+            "x": 288,
+            "y": 144,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_ShenW",
+          "name": "Feint",
+          "description": "Shen shields himself, absorbing incoming damage for a few seconds.",
+          "tooltip": "Shen grants himself <shield>{{ totalshieldamount }} Shield</shield> for {{ shieldduration }} seconds. While this Ability holds, his attacks reduce <keywordMajor>Ki Strike's</keywordMajor> Cooldown by an additional 1 second.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Damage Blocked",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ baseshieldamount }} -> {{ baseshieldamountNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            9,
+            8,
+            7,
+            6,
+            5
+          ],
+          "cooldownBurn": "9/8/7/6/5",
+          "cost": [
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "costBurn": "50",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "rangeBurn": "20",
+          "image": {
+            "full": "Jade_ShenW.png",
+            "sprite": "spell4.png",
+            "group": "spell",
+            "x": 336,
+            "y": 144,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_ShenE",
+          "name": "Shadow Dash",
+          "description": "Shen dashes rapidly toward a target location, taunting enemy champions he encounters and dealing minor damage.",
+          "tooltip": "Shen dashes, <status>Taunting</status> for {{ tauntduration }} second(s) and dealing <magicDamage>{{ totaldashdamage }} magic damage</magicDamage> on collision with enemy champions. <status>Taunted</status> champions are forced to attack Shen and deal {{ physdamagereductionratio*100 }}% reduced physical damage. Restores <keywordMajor>{{ energyrestore }} Energy</keywordMajor> per champion affected.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Cooldown",
+              "Damage Dealt"
+            ],
+            "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            16,
+            14,
+            12,
+            10,
+            8
+          ],
+          "cooldownBurn": "16/14/12/10/8",
+          "cost": [
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "costBurn": "120",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            575,
+            575,
+            575,
+            575,
+            575
+          ],
+          "rangeBurn": "575",
+          "image": {
+            "full": "Jade_ShenE.png",
+            "sprite": "spell4.png",
+            "group": "spell",
+            "x": 384,
+            "y": 144,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "Jade_ShenR",
+          "name": "Stand United",
+          "description": "Shen shields target allied champion from incoming damage, and soon after teleports to their location.",
+          "tooltip": "Shen grants an allied champion <shield>{{ totalshield }} Shield</shield> for {{ shieldduration }} seconds. After channeling for {{ channelduration }} seconds, Shen Teleports to his ally's location.{{ spellmodifierdescriptionappend }}",
+          "leveltip": {
+            "label": [
+              "Shield Health",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ baseshieldamount }} -> {{ baseshieldamountNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 3,
+          "cooldown": [
+            200,
+            180,
+            160
+          ],
+          "cooldownBurn": "200/180/160",
+          "cost": [
+            0,
+            0,
+            0
+          ],
+          "costBurn": "0",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            25000,
+            25000,
+            25000
+          ],
+          "rangeBurn": "25000",
+          "image": {
+            "full": "Jade_ShenR.png",
+            "sprite": "spell4.png",
+            "group": "spell",
+            "x": 432,
+            "y": 144,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        }
+      ],
+      "passive": {
+        "name": "Ki Strike",
+        "description": "Every 9 seconds, Shen's next attack deals bonus damage. Each time Shen attacks, Ki Strike's cooldown is reduced.",
+        "image": {
+          "full": "Jade_Shen_Passive.png",
+          "sprite": "passive1.png",
+          "group": "passive",
+          "x": 240,
           "y": 48,
           "w": 48,
           "h": 48
@@ -33451,7 +35880,7 @@
         "full": "Jade_Singed.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 144,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -33724,10 +36153,10 @@
           "rangeBurn": "20",
           "image": {
             "full": "Jade_SingedPoisonTrail.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -33865,10 +36294,10 @@
           "rangeBurn": "1000",
           "image": {
             "full": "Jade_SingedMegaAdhesive.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -34006,10 +36435,10 @@
           "rangeBurn": "125",
           "image": {
             "full": "Jade_SingedFling.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 0,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -34119,10 +36548,10 @@
           "rangeBurn": "20",
           "image": {
             "full": "Jade_SingedInsanityPotion.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 48,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -34136,7 +36565,7 @@
           "full": "Jade_Singed_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 144,
+          "x": 288,
           "y": 48,
           "w": 48,
           "h": 48
@@ -34153,7 +36582,7 @@
         "full": "Jade_Sion.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 192,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -34541,10 +36970,10 @@
           "rangeBurn": "550",
           "image": {
             "full": "Jade_SionQ.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 96,
-            "y": 144,
+            "x": 192,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -34682,10 +37111,10 @@
           "rangeBurn": "100",
           "image": {
             "full": "Jade_SionW.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 144,
-            "y": 144,
+            "x": 240,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -34825,10 +37254,10 @@
           "rangeBurn": "0",
           "image": {
             "full": "Jade_SionE.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 192,
-            "y": 144,
+            "x": 288,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -34940,10 +37369,10 @@
           "rangeBurn": "100",
           "image": {
             "full": "Jade_SionR.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 240,
-            "y": 144,
+            "x": 336,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -34957,7 +37386,7 @@
           "full": "Jade_Sion_Passive1.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 192,
+          "x": 336,
           "y": 48,
           "w": 48,
           "h": 48
@@ -34974,7 +37403,7 @@
         "full": "Jade_Sivir.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 240,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -35325,10 +37754,10 @@
           "rangeBurn": "1200",
           "image": {
             "full": "Jade_SivirQ.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 384,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -35464,10 +37893,10 @@
           "rangeBurn": "20",
           "image": {
             "full": "Jade_SivirW.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 432,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -35603,10 +38032,10 @@
           "rangeBurn": "20",
           "image": {
             "full": "Jade_SivirE.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -35718,10 +38147,10 @@
           "rangeBurn": "1000",
           "image": {
             "full": "Jade_SivirR.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -35735,7 +38164,7 @@
           "full": "Jade_Sivir_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 240,
+          "x": 384,
           "y": 48,
           "w": 48,
           "h": 48
@@ -35752,7 +38181,7 @@
         "full": "Jade_Skarner.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 288,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -35900,7 +38329,7 @@
           "id": "Jade_SkarnerQ",
           "name": "Crystal Slash",
           "description": "Skarner lashes out with his claws, dealing physical damage to all nearby enemies and charging himself with Crystal Energy for several seconds if a unit is struck.  If he casts Crystal Slash again while powered by Crystal Energy, he deals bonus magic damage and slows all targets hit.",
-          "tooltip": "Skarner deals <physicalDamage>{{ totalbasedamage }} physical damage</physicalDamage> to all nearby enemies and charges himself with <keywordMajor>Crystal Energy</keywordMajor> for 5 seconds if a unit is struck.<br /><br />While Skarner is charged, <spellName>Crystal Slash</spellName> and basic attacks deals <magicDamage>{{ totalprocdamage }} bonus magic damage</magicDamage> and <status>Slows</status> by {{ slowpercent*-100 }}% for 2 seconds.{{ spellmodifierdescriptionappend }}",
+          "tooltip": "Skarner deals <physicalDamage>{{ totalbasedamage }} physical damage</physicalDamage> to all nearby enemies and charges himself with <keywordMajor>Crystal Energy</keywordMajor> for 5 seconds if a unit is struck.<br /><br />While Skarner is charged, <spellName>Crystal Slash</spellName> deals <magicDamage>{{ totalprocdamage }} bonus magic damage</magicDamage> and <status>Slows</status> by {{ slowpercent*-100 }}% for 2 seconds.{{ spellmodifierdescriptionappend }}",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -36034,8 +38463,8 @@
             "full": "Jade_SkarnerQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 0,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -36060,13 +38489,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            18,
-            18,
-            18,
-            18,
-            18
+            14,
+            14,
+            14,
+            14,
+            14
           ],
-          "cooldownBurn": "18",
+          "cooldownBurn": "14",
           "cost": [
             60,
             60,
@@ -36177,8 +38606,8 @@
             "full": "Jade_SkarnerW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 48,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -36320,8 +38749,8 @@
             "full": "Jade_SkarnerE.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -36437,8 +38866,8 @@
             "full": "Jade_SkarnerR.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -36452,7 +38881,7 @@
           "full": "Jade_Skarner_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 288,
+          "x": 432,
           "y": 48,
           "w": 48,
           "h": 48
@@ -36469,8 +38898,8 @@
         "full": "Jade_Sona.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 336,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -36861,8 +39290,8 @@
             "full": "Jade_SonaQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -37004,8 +39433,8 @@
             "full": "Jade_SonaW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -37147,8 +39576,8 @@
             "full": "Jade_SonaE.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 384,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -37262,8 +39691,8 @@
             "full": "Jade_SonaR.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 432,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -37277,8 +39706,8 @@
           "full": "Jade_Sona_Passive_Charged.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 336,
-          "y": 48,
+          "x": 0,
+          "y": 96,
           "w": 48,
           "h": 48
         }
@@ -37294,8 +39723,8 @@
         "full": "Jade_Soraka.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 384,
-        "y": 48,
+        "x": 48,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -37622,8 +40051,8 @@
             "full": "Jade_SorakaQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -37765,8 +40194,8 @@
             "full": "Jade_SorakaW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -37908,8 +40337,8 @@
             "full": "Jade_SorakaE.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 0,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -38025,8 +40454,8 @@
             "full": "Jade_SorakaR.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 48,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -38040,8 +40469,8 @@
           "full": "Jade_Soraka_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 384,
-          "y": 48,
+          "x": 48,
+          "y": 96,
           "w": 48,
           "h": 48
         }
@@ -38057,8 +40486,8 @@
         "full": "Jade_Taric.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 432,
-        "y": 48,
+        "x": 96,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -38427,8 +40856,8 @@
             "full": "Jade_TaricQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 96,
-            "y": 48,
+            "x": 192,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -38570,8 +40999,8 @@
             "full": "Jade_TaricW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 144,
-            "y": 48,
+            "x": 240,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -38713,8 +41142,8 @@
             "full": "Jade_TaricE.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 192,
-            "y": 48,
+            "x": 288,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -38830,8 +41259,8 @@
             "full": "Jade_TaricR.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 336,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -38845,8 +41274,8 @@
           "full": "Jade_Taric_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 432,
-          "y": 48,
+          "x": 96,
+          "y": 96,
           "w": 48,
           "h": 48
         }
@@ -38862,7 +41291,7 @@
         "full": "Jade_Teemo.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 0,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -39272,8 +41701,8 @@
             "full": "Jade_TeemoQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 288,
-            "y": 48,
+            "x": 384,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -39413,8 +41842,8 @@
             "full": "Jade_TeemoW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 432,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -39554,8 +41983,8 @@
             "full": "Jade_TeemoE.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -39673,8 +42102,8 @@
             "full": "Jade_TeemoR.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -39688,7 +42117,7 @@
           "full": "Jade_TeemoPassive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 0,
+          "x": 144,
           "y": 96,
           "w": 48,
           "h": 48
@@ -39705,7 +42134,7 @@
         "full": "Jade_Tristana.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 48,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -40120,8 +42549,8 @@
             "full": "Jade_TristanaQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 0,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -40261,8 +42690,8 @@
             "full": "Jade_TristanaW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 48,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -40404,8 +42833,8 @@
             "full": "Jade_TristanaE.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -40519,8 +42948,8 @@
             "full": "Jade_TristanaR.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -40534,7 +42963,7 @@
           "full": "Jade_Tristana_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 48,
+          "x": 192,
           "y": 96,
           "w": 48,
           "h": 48
@@ -40551,7 +42980,7 @@
         "full": "Jade_Tryndamere.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 96,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -40824,13 +43253,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            12,
+            14,
+            12.5,
             11,
-            10,
-            9,
+            9.5,
             8
           ],
-          "cooldownBurn": "12/11/10/9/8",
+          "cooldownBurn": "14/12.5/11/9.5/8",
           "cost": [
             0,
             0,
@@ -40941,8 +43370,8 @@
             "full": "Jade_TryndamereQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -41082,8 +43511,8 @@
             "full": "Jade_TryndamereW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -41106,13 +43535,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            8,
-            8,
-            8,
-            8,
-            8
+            9,
+            9,
+            9,
+            9,
+            9
           ],
-          "cooldownBurn": "8",
+          "cooldownBurn": "9",
           "cost": [
             0,
             0,
@@ -41223,8 +43652,8 @@
             "full": "Jade_TryndamereE.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 384,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -41338,8 +43767,8 @@
             "full": "Jade_TryndamereUndyingRage.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 432,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -41353,7 +43782,7 @@
           "full": "Jade_Tryndamere_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 96,
+          "x": 240,
           "y": 96,
           "w": 48,
           "h": 48
@@ -41370,7 +43799,7 @@
         "full": "Jade_TwistedFate.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 144,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
@@ -41729,10 +44158,10 @@
           "rangeBurn": "10000",
           "image": {
             "full": "Jade_TwistedFateWildCards.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -41880,10 +44309,10 @@
           "rangeBurn": "200",
           "image": {
             "full": "Jade_TwistedFatePickACard.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -42019,10 +44448,10 @@
           "rangeBurn": "20000",
           "image": {
             "full": "Jade_TwistedFateE.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 0,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -42136,10 +44565,10 @@
           "rangeBurn": "20000",
           "image": {
             "full": "Jade_TwistedFateDestiny.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 48,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -42153,7 +44582,7 @@
           "full": "Cardmaster_SealFate.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 144,
+          "x": 288,
           "y": 96,
           "w": 48,
           "h": 48
@@ -42170,7 +44599,7 @@
         "full": "Jade_Twitch.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 192,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
@@ -42195,38 +44624,10 @@
           "chromas": false
         },
         {
-          "id": "60029018",
-          "num": 18,
-          "name": "Medieval Twitch",
-          "chromas": true,
-          "parentSkin": 3
-        },
-        {
-          "id": "60029019",
-          "num": 19,
-          "name": "Medieval Twitch",
-          "chromas": false,
-          "parentSkin": 3
-        },
-        {
-          "id": "60029020",
-          "num": 20,
-          "name": "Medieval Twitch",
-          "chromas": false,
-          "parentSkin": 3
-        },
-        {
           "id": "60029021",
           "num": 21,
           "name": "Medieval Twitch (Sapphire)",
-          "chromas": false,
-          "parentSkin": 3
-        },
-        {
-          "id": "60029022",
-          "num": 22,
-          "name": "Medieval Twitch",
-          "chromas": false,
+          "chromas": true,
           "parentSkin": 3
         },
         {
@@ -42240,20 +44641,6 @@
           "id": "60029024",
           "num": 24,
           "name": "Medieval Twitch (Obsidian)",
-          "chromas": false,
-          "parentSkin": 3
-        },
-        {
-          "id": "60029025",
-          "num": 25,
-          "name": "Medieval Twitch",
-          "chromas": false,
-          "parentSkin": 3
-        },
-        {
-          "id": "60029026",
-          "num": 26,
-          "name": "Medieval Twitch",
           "chromas": false,
           "parentSkin": 3
         },
@@ -42364,7 +44751,7 @@
           "id": "60029042",
           "num": 42,
           "name": "Dragonslayer Twitch (Obsidian)",
-          "chromas": true,
+          "chromas": false,
           "parentSkin": 36
         },
         {
@@ -42405,7 +44792,7 @@
           "id": "60029048",
           "num": 48,
           "name": "High Noon Twitch (Turquoise)",
-          "chromas": false,
+          "chromas": true,
           "parentSkin": 45
         },
         {
@@ -42426,7 +44813,7 @@
           "id": "60029051",
           "num": 51,
           "name": "High Noon Twitch (Rose Quartz)",
-          "chromas": true,
+          "chromas": false,
           "parentSkin": 45
         },
         {
@@ -42464,8 +44851,8 @@
           "parentSkin": 301
         }
       ],
-      "lore": "- Deliberating Poison (W) is an AoE spell around him<br>- Ambush (Q) can last up to 50 seconds<br>- Expunge (E) removes poison stacks on enemies",
-      "blurb": "- Deliberating Poison (W) is an AoE spell around him<br>- Ambush (Q) can last up to 50 seconds<br>- Expunge (E) removes poison stacks on enemies",
+      "lore": "- Ambush (Q) has changed from camouflage to invisibility<br>- Venom Cask (W) does not linger on the ground",
+      "blurb": "- Ambush (Q) has changed from camouflage to invisibility<br>- Venom Cask (W) does not linger on the ground",
       "allytips": [],
       "enemytips": [],
       "tags": [
@@ -42496,7 +44883,7 @@
         "mpregenperlevel": 0.45,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 52,
+        "attackdamage": 50,
         "attackdamageperlevel": 0,
         "attackspeedperlevel": 3.38,
         "attackspeed": 0.679
@@ -42634,10 +45021,10 @@
           "rangeBurn": "20",
           "image": {
             "full": "Jade_TwitchQ.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 96,
-            "y": 144,
+            "x": 192,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -42775,10 +45162,10 @@
           "rangeBurn": "950",
           "image": {
             "full": "Jade_TwitchW.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 144,
-            "y": 144,
+            "x": 240,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -42813,13 +45200,13 @@
           ],
           "cooldownBurn": "12/11/10/9/8",
           "cost": [
-            50,
-            60,
             70,
+            75,
             80,
+            85,
             90
           ],
-          "costBurn": "50/60/70/80/90",
+          "costBurn": "70/75/80/85/90",
           "datavalues": {},
           "effect": [
             null,
@@ -42920,10 +45307,10 @@
           "rangeBurn": "1200",
           "image": {
             "full": "Jade_TwitchE.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 192,
-            "y": 144,
+            "x": 288,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -43037,10 +45424,10 @@
           "rangeBurn": "1200",
           "image": {
             "full": "Jade_TwitchR.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 240,
-            "y": 144,
+            "x": 336,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -43054,7 +45441,7 @@
           "full": "Jade_Twitch_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 192,
+          "x": 336,
           "y": 96,
           "w": 48,
           "h": 48
@@ -43071,7 +45458,7 @@
         "full": "Jade_Vayne.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 240,
+        "x": 384,
         "y": 96,
         "w": 48,
         "h": 48
@@ -43354,10 +45741,10 @@
           "rangeBurn": "300",
           "image": {
             "full": "Jade_VayneQ.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 384,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -43495,10 +45882,10 @@
           "rangeBurn": "750",
           "image": {
             "full": "Jade_VayneW.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 432,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -43636,10 +46023,10 @@
           "rangeBurn": "550",
           "image": {
             "full": "Jade_VayneE.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -43753,10 +46140,10 @@
           "rangeBurn": "1",
           "image": {
             "full": "Jade_VayneR.png",
-            "sprite": "spell5.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -43770,7 +46157,7 @@
           "full": "Jade_Vayne_NightHunter.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 240,
+          "x": 384,
           "y": 96,
           "w": 48,
           "h": 48
@@ -43787,7 +46174,7 @@
         "full": "Jade_Veigar.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 288,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -44009,13 +46396,13 @@
           ],
           "cooldownBurn": "8/7/6/5/4",
           "cost": [
+            50,
+            55,
             60,
             65,
-            70,
-            75,
-            80
+            70
           ],
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "50/55/60/65/70",
           "datavalues": {},
           "effect": [
             null,
@@ -44027,18 +46414,18 @@
               0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -44093,8 +46480,8 @@
           "effectBurn": [
             null,
             "0",
-            "1",
-            "2",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -44118,8 +46505,8 @@
             "full": "Jade_VeigarBalefulStrike.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 0,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -44259,8 +46646,8 @@
             "full": "Jade_VeigarDarkMatter.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 48,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -44402,8 +46789,8 @@
             "full": "Jade_VeigarEventHorizon.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -44519,8 +46906,8 @@
             "full": "Jade_VeigarR.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -44534,7 +46921,7 @@
           "full": "Jade_VeigarEntropy.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 288,
+          "x": 432,
           "y": 96,
           "w": 48,
           "h": 48
@@ -44549,10 +46936,10 @@
       "title": "The Blood Hunter",
       "image": {
         "full": "Jade_Warwick.png",
-        "sprite": "champion1.png",
+        "sprite": "champion2.png",
         "group": "champion",
-        "x": 336,
-        "y": 96,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -44809,7 +47196,7 @@
         "attackdamage": 60.135,
         "attackdamageperlevel": 0,
         "attackspeedperlevel": 2.88,
-        "attackspeed": 0.679
+        "attackspeed": 0.644
       },
       "spells": [
         {
@@ -44950,8 +47337,8 @@
             "full": "Jade_WarwickQ.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -45091,8 +47478,8 @@
             "full": "Jade_WarwickW.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -45232,8 +47619,8 @@
             "full": "Jade_WarwickE.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 384,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -45349,8 +47736,8 @@
             "full": "Jade_WarwickR.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 432,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -45362,10 +47749,10 @@
         "description": "Each of Warwick's attacks will heal him. Each successive attack against the same target will steal more and more Health.",
         "image": {
           "full": "Jade_WarwickP.png",
-          "sprite": "passive1.png",
+          "sprite": "passive2.png",
           "group": "passive",
-          "x": 336,
-          "y": 96,
+          "x": 0,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -45379,10 +47766,10 @@
       "title": "The Monkey King",
       "image": {
         "full": "Jade_Wukong.png",
-        "sprite": "champion1.png",
+        "sprite": "champion2.png",
         "group": "champion",
-        "x": 384,
-        "y": 96,
+        "x": 48,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -45709,8 +48096,8 @@
             "full": "Jade_WukongQ.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -45852,8 +48239,8 @@
             "full": "Jade_WukongW.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -45995,8 +48382,8 @@
             "full": "Jade_WukongE.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 0,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -46110,8 +48497,8 @@
             "full": "Jade_WukongR.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 48,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -46123,10 +48510,10 @@
         "description": "Increases Wukong's armor and magic resistance for each nearby enemy champion.",
         "image": {
           "full": "Jade_WukongStoneSkin.png",
-          "sprite": "passive1.png",
+          "sprite": "passive2.png",
           "group": "passive",
-          "x": 384,
-          "y": 96,
+          "x": 48,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -46140,10 +48527,10 @@
       "title": "The Chronokeeper",
       "image": {
         "full": "Jade_Zilean.png",
-        "sprite": "champion1.png",
+        "sprite": "champion2.png",
         "group": "champion",
-        "x": 432,
-        "y": 96,
+        "x": 96,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -46519,8 +48906,8 @@
             "full": "Jade_ZileanQ.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 96,
-            "y": 48,
+            "x": 192,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -46658,8 +49045,8 @@
             "full": "Jade_ZileanW.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 144,
-            "y": 48,
+            "x": 240,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -46797,8 +49184,8 @@
             "full": "Jade_ZileanE.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 192,
-            "y": 48,
+            "x": 288,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -46912,8 +49299,8 @@
             "full": "Jade_ZileanR.png",
             "sprite": "spell6.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 336,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -46925,10 +49312,10 @@
         "description": "Zilean and his allies gain additional experience.",
         "image": {
           "full": "Jade_Zilean_Passive.png",
-          "sprite": "passive1.png",
+          "sprite": "passive2.png",
           "group": "passive",
-          "x": 432,
-          "y": 96,
+          "x": 96,
+          "y": 0,
           "w": 48,
           "h": 48
         }
